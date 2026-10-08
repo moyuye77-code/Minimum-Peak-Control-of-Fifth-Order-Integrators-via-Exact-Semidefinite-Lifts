@@ -1,0 +1,7 @@
+# Versions recorded by the original fifth-order experimental manifests.
+# This is not a transitive lockfile or a claim of a freshly tested solve environment.
+numpy==2.3.5
+scipy==1.17.1
+sympy==1.14.0
+cvxpy==1.7.5
+clarabel==0.11.1

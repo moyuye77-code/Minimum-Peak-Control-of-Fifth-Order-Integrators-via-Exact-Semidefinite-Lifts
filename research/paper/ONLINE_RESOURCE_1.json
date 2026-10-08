@@ -1,0 +1,16 @@
+{
+  "online_resource": "Reproducibility archive",
+  "filename": "ESM_1.zip",
+  "delivery": "public GitHub repository release, not a journal-uploaded supplement",
+  "repository_url": "https://github.com/moyuye77-code/Minimum-Peak-Control-of-Fifth-Order-Integrators-via-Exact-Semidefinite-Lifts",
+  "archive_version": "2026-10-09",
+  "release_tag": "reproducibility-2026-10-09",
+  "archive_url": "https://github.com/moyuye77-code/Minimum-Peak-Control-of-Fifth-Order-Integrators-via-Exact-Semidefinite-Lifts/releases/tag/reproducibility-2026-10-09",
+  "article_title": "Minimum-Peak Control of Fifth-Order Integrators via Exact Semidefinite Lifts",
+  "journal": "Applied Mathematics & Optimization",
+  "authors": ["Zihan Yang"],
+  "corresponding_author": "Zihan Yang",
+  "affiliation": "School of Information and Communication Engineering, University of Electronic Science and Technology of China, Chengdu, China",
+  "email": "768216265@qq.com",
+  "caption": "Source code, numerical records, rational verification scripts and a reproducibility guide for the exact semidefinite formulation and its computational studies, including warnings, failed cases and boundary diagnostics."
+}

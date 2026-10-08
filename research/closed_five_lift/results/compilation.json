@@ -1,0 +1,34 @@
+{
+  "compilation": {
+    "variables": 39,
+    "equalities": 0,
+    "nonnegative_rows": 2,
+    "PSD_blocks": [
+      3,
+      3,
+      3,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      4,
+      4,
+      3,
+      3,
+      3,
+      2,
+      2,
+      4,
+      4,
+      3,
+      3,
+      3
+    ],
+    "SOC_blocks": [],
+    "dcp": true
+  },
+  "construction_seconds": 0.2600170999940019,
+  "canonicalization_seconds": 0.0722793000168167
+}

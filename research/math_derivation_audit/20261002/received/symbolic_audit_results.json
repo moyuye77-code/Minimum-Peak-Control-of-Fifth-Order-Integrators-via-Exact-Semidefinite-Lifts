@@ -1,0 +1,257 @@
+{
+  "sympy_version": "1.14.0",
+  "checks": [
+    {
+      "name": "Eq. (11), polynomial first-order identity",
+      "passed": true
+    },
+    {
+      "name": "Eq. (14), rational first-order identity after clearing denominators",
+      "passed": true
+    },
+    {
+      "name": "Eq. (6), q-plus minus q-minus",
+      "passed": true
+    },
+    {
+      "name": "Eq. (6), complementary fourth-boundary factorization",
+      "passed": true
+    },
+    {
+      "name": "Theorem 2 atomic witness, block 1",
+      "passed": true
+    },
+    {
+      "name": "Theorem 2 atomic witness, block 2",
+      "passed": true
+    },
+    {
+      "name": "Theorem 2 atomic witness, block 3",
+      "passed": true
+    },
+    {
+      "name": "Theorem 2 atomic witness, block 4",
+      "passed": true
+    },
+    {
+      "name": "Theorem 2 atomic witness, block 5",
+      "passed": true
+    },
+    {
+      "name": "Theorem 2 atomic witness, block 6",
+      "passed": true
+    },
+    {
+      "name": "Theorem 2 atomic witness, block 7",
+      "passed": true
+    },
+    {
+      "name": "Theorem 2, complemented Q-minus is Q-plus",
+      "passed": true
+    },
+    {
+      "name": "Lemma 4, all 9 Hankel congruence entries",
+      "passed": true
+    },
+    {
+      "name": "Remark 3, all 4 Hankel congruence entries",
+      "passed": true
+    },
+    {
+      "name": "Eq. (16), all coefficients with 8 independent indeterminates",
+      "passed": true
+    },
+    {
+      "name": "Eq. (20), homogeneous apex identity",
+      "passed": true
+    },
+    {
+      "name": "Lemma 4, Schur complement determinant",
+      "passed": true
+    },
+    {
+      "name": "Section 3.2.1 affine coefficient interface block 1",
+      "passed": true
+    },
+    {
+      "name": "Section 3.2.1 affine coefficient interface block 2",
+      "passed": true
+    },
+    {
+      "name": "Section 3.2.1 affine coefficient interface block 3",
+      "passed": true
+    },
+    {
+      "name": "Section 3.2.1 affine coefficient interface block 4",
+      "passed": true
+    },
+    {
+      "name": "Section 3.2.1 affine coefficient interface block 5",
+      "passed": true
+    },
+    {
+      "name": "Section 3.2.1 affine coefficient interface block 6",
+      "passed": true
+    },
+    {
+      "name": "Section 3.2.1 affine coefficient interface block 7",
+      "passed": true
+    },
+    {
+      "name": "Eq. (16) square 1 lies in retained feature space",
+      "passed": true
+    },
+    {
+      "name": "Eq. (16) square 2 lies in retained feature space",
+      "passed": true
+    },
+    {
+      "name": "Eq. (16) square 3 lies in retained feature space",
+      "passed": true
+    },
+    {
+      "name": "Eq. (16) square 4 lies in retained feature space",
+      "passed": true
+    },
+    {
+      "name": "Eq. (16) square 5 lies in retained feature space",
+      "passed": true
+    },
+    {
+      "name": "Eq. (16) square 6 lies in retained feature space",
+      "passed": true
+    },
+    {
+      "name": "Eq. (16) square 7 lies in retained feature space",
+      "passed": true
+    },
+    {
+      "name": "Eq. (16) square 8 lies in retained feature space",
+      "passed": true
+    },
+    {
+      "name": "Boundary: kappa(center) = 1/32",
+      "passed": true
+    },
+    {
+      "name": "Boundary: determinant of (m,z) Hessian of kappa = 1",
+      "passed": true
+    },
+    {
+      "name": "Boundary: single-interval Delta vanishes",
+      "passed": true
+    },
+    {
+      "name": "Boundary: single-interval N vanishes",
+      "passed": true
+    },
+    {
+      "name": "Boundary: single-interval H equals physical fifth moment",
+      "passed": true
+    },
+    {
+      "name": "Boundary zero path: Delta exact order 2",
+      "passed": true
+    },
+    {
+      "name": "Boundary zero path: N equals Delta",
+      "passed": true
+    },
+    {
+      "name": "Boundary zero path: p exact order 3",
+      "passed": true
+    },
+    {
+      "name": "Boundary symbolic interval witness block 1",
+      "passed": true
+    },
+    {
+      "name": "Boundary symbolic interval witness block 2",
+      "passed": true
+    },
+    {
+      "name": "Boundary symbolic interval witness block 3",
+      "passed": true
+    },
+    {
+      "name": "Boundary symbolic interval witness block 4",
+      "passed": true
+    },
+    {
+      "name": "Boundary symbolic interval witness block 5",
+      "passed": true
+    },
+    {
+      "name": "Boundary symbolic interval witness block 6",
+      "passed": true
+    },
+    {
+      "name": "Boundary symbolic interval witness block 7",
+      "passed": true
+    },
+    {
+      "name": "Section 3.5 quartic Bernstein middle coefficient",
+      "passed": true
+    },
+    {
+      "name": "Section 4.4 stated dual absolute kernel integral equals 1",
+      "passed": true
+    }
+  ],
+  "matrix_entries_checked": 67,
+  "basis_rank": 19,
+  "coefficient_matrix_shape": [
+    46,
+    19
+  ],
+  "zero_path_basis_limits": [
+    "1",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0"
+  ],
+  "full_path_basis_limits": [
+    "1",
+    "1",
+    "1/2",
+    "1/3",
+    "1/4",
+    "1/5",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "1/9",
+    "1/3",
+    "1/6",
+    "1",
+    "1",
+    "1/2",
+    "1/4",
+    "1/4"
+  ],
+  "fourth_order_rest_to_rest_anchor": [
+    "1",
+    "0",
+    "0",
+    "0"
+  ],
+  "all_checks_passed": true,
+  "number_of_named_checks": 49
+}

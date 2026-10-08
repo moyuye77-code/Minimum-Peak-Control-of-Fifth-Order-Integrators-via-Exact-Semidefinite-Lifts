@@ -1,0 +1,510 @@
+{
+  "schema": 1,
+  "manifest_sha256": "26100c87869f0821ed5c49494a7e4cc9065f8c135403aa91e3f37e0aeef32121",
+  "trial_files": {
+    "000.json": "04cfb187bfa4e95bb91d134e05f24db2663a1c75883522fa41330e66c566c2c5",
+    "001.json": "912c462ff41ef978fc647b659c2ef086d30c80537b199e9ad3b3aeda652ec323",
+    "002.json": "d87ac3a4f051f8f7e832cc5a2fd987a63fb4921785d798aa63e0d460a4c296e1",
+    "003.json": "fff594b5bb267d5ccfad4dc4e79d766e155af80795f4fbc6ca77f0ba056f1273",
+    "004.json": "f47d492add4e9ffa0686015041da1df37d4f2560583429304740775efe6c92fa",
+    "005.json": "65f383468f37d95b7642861705ec525984c4fb05444a9610bbf8b2bb8a83095b",
+    "006.json": "6407add436be280d4f8dc514d5ca8d8f1cbd0e999d72a5180d2e497d2f411030",
+    "007.json": "932c0acb0cffcd2c1f44774540e09fa7edf67fe60a478d30135192954b066da6",
+    "008.json": "df06c898d730a37e387061cb733c8db984892acb0c366d2ad70cc2e15862c463",
+    "009.json": "7ec6e9e4ceb89a9a210bfc75739a045afe04b6f441ff9a1df38ebc22993c722e",
+    "010.json": "f24474ee50fe216b31005bc5b303a2baf3de75ac3673360137f054b402d09190",
+    "011.json": "22c350cc73ae1b0e3cf1b53576b4f34d80f92b075ff37371083734c5dda924fb",
+    "012.json": "7080232d420a1d030d62c210abc729526f6aabe7b07ad6c5f52fc6aabb7cd4f9",
+    "013.json": "2b707ed49d6d66a791ca43121456caa61bea48d019906bdb22e1139ef334fc52",
+    "014.json": "b42854fb53d38abfbc14e9f0cb41f8998e09cbf63279909b6f31a4201d61f537",
+    "015.json": "50c7015f009057d6514ebf153973ddc907b6611fc4b72317e98959fe49ea0658",
+    "016.json": "449b3424f06a877a22d2bb943a3be0f37ab7e2f19429092218e3a15d47f87449",
+    "017.json": "39bb1e3c571d017b9f344c8086fd71a9404aa6bcb5d771e3fbcf7c6a1e9ff553",
+    "018.json": "5e07f712729d15585502547bbec2c4f589edec82f3a60d1bbc36599506c7a4e1",
+    "019.json": "8e5f996b85ec64bb36f67e28b80ee70c9fb0258e4a74bc11bd04387d4407459a",
+    "020.json": "c67b2e5e39e64ab31e60ce9113f745b3ca2556c13263b204736544ecd494f417",
+    "021.json": "eb9c95f41d3c926e810291bef7fbba6cab9ba4662c845d6b2970aa1b6d48f614",
+    "022.json": "c1e814ca6ce385248e47d51690e348abf95867af74676df6b26227eb77b5b3da",
+    "023.json": "a2213009f2cba0a93a53fbabf6eb957586c51b125bd8284641837a1384ca956e",
+    "024.json": "dc6b1115d4db73c54ff1ad99d073eec75b7b0a01ffb81fe2016d0e2a157b6169",
+    "025.json": "bbbc43226b9b1a3d4f4a35ca56a8e731de0c51c4a45796a7d239106495edee22",
+    "026.json": "c00e966bc49f4692cf10805458efd756444a3ef2e13d4904391e6d61a86ad795",
+    "027.json": "8d5396da821f36fcb75c83d3c12f31ce0f954eb022315bad795a05190fe0a40b",
+    "028.json": "982a45fab08882417ab006b988e469e7886cebc72bf97b10d0f9f4bc3c5e0d1d",
+    "029.json": "0b767575a700882901fb7546bc680c32db4ec53d0177544482f965d6fe06126e",
+    "030.json": "06118779391ed7de2429cff3ff41ad8e41c9e6eb492c6d252af0d5c2d589e9e0",
+    "031.json": "ca175211b6a7ca20ed10f13e1f61456ad52b8036ae77f811f42ace459211bd2b",
+    "032.json": "fbc2ea19aad16dae339b0f060bf2c1d5b3f0ea1519015dac7ba7aedaee992a62",
+    "033.json": "ce8c213ecf438a0921569b7763316430d9583a7f3e4de7d92088c54161e2f076",
+    "034.json": "2b480458b0f28ef0b231f18b40999750a04024f283c0d013f36591d9a9435345",
+    "035.json": "296e86de136dc0b2fb251c77fa84cc3bdb148fd768735b6e8cb6a252cc1430cb",
+    "036.json": "d7703340d5af37068d5d23be4ddd902f6935a1b2caa28dc173c10009172ffb22",
+    "037.json": "017f4b3929ea55b7f7c7cbde657a77b5ebbba83e66bbf9cbd62d858c81d4e0fc",
+    "038.json": "015961179dbf65bd026a46e32712a082e2246f86215c0df69a196e58e76f71a6",
+    "039.json": "fba391f666a6dad523db059621be8c4b155078a6ac112b6a481107d1ac313744",
+    "040.json": "d6b752b59e6db58ce3f21ed35ed6357562cfb8731ee77321a9586bec80696b22",
+    "041.json": "a49db732f7e3da266d7b449cdb167aacfb2a5d295c4a0304b3ebb10412ee7f07",
+    "042.json": "95170d4ba0a049f57e399e46236024308c89648ea300a08991fae269684e9720",
+    "043.json": "f1a89f68f69c3f94abf3006dd1da7bd00c5ebf75e57c91b7d87b099d853ba121",
+    "044.json": "530d0076a43379280d277afd98f45ed9ce3f41df54e9a958959adb7d8001615e",
+    "045.json": "0c2fa4db58ad65bd75627f4ad43047f01a9e8ed39828357c7f1a14ed2c74b955",
+    "046.json": "438e921ddc511f11612af0294e127f5b46ced1ae7b96a0bbc830bbe40642a77f",
+    "047.json": "cc01a75557d6d9d1039a4cb1efc85f91fffa99333269159a39684df47c2327bf",
+    "048.json": "5a9edf195403a65e7b70882a07a99abc566487c0ae0133ab029cebb6cde7dab2",
+    "049.json": "9e36f5d80201673be4d20be574f3689fe5e8d54fc3c465081c1e312ef4fa6444",
+    "050.json": "7b5f6bdeeb8bd675fd1c08a8e71fdcd893f476307a7e019fedf510ab0758813b",
+    "051.json": "f759a99e5e6efa255600ef9eb8fc7e7b083c7a0ae1923162db2ce10ff87f96c4",
+    "052.json": "500891d81d2223731bc5217429b4c5ba035ff9b1a71e441987f019cf72698fcc",
+    "053.json": "25d151caed635bde4a4b5136ca509b6768b556b73a00f52b30c35e3b6a036312",
+    "054.json": "fef27b1b1e6e139d6eb1ad40e73dc8042e5678f46514afa3d3649a155db491cc",
+    "055.json": "ad1fd18e6a9f2a9affdf9b4a6ee0b0a6a64344ceb8486ab317a85509873f05de",
+    "056.json": "2f2bbbb1651c334b458c8959c5781316586976e8c407c3f37c81dfe3abbb7171",
+    "057.json": "eb6f53b0977186115edb45c23877a0d0c0d8318d7179839ee16057e8c214b6c0",
+    "058.json": "a9815df43ca703ddca452491e3de9c044472c843454a883ad4812b73cf911f4a",
+    "059.json": "f127eb687866fb567deeae53bb128b0fbf347fde8512782f9ba11f0b9dccb286",
+    "060.json": "5207892948d75794c7113906786024e12e994f7f52923453cf3b055faf0b2723",
+    "061.json": "eb1e70b943925becc9b13cf62d4f698c169a3b66ca5831f2b10df981dd0e1909",
+    "062.json": "958c9f8263638a04d00d84d4edb66d25c5bb51f395828e04819056936fa5a6a1",
+    "063.json": "f30e2cae2a8bb972401ce381e935a41eb74896933a7cb613e17c70ec22fbb819",
+    "064.json": "1c4efbd2912505d0fe22f25bd8e5f2a05fba170c85e79fda74696c744bbf8985",
+    "065.json": "b9d88ddcfa26e2fcce309f203e7a00fa2570720dae3a76d690d86efa7963697e",
+    "066.json": "132c3cdbca9bb9ccbfda46f4263bb8bcc59e2d669ec939c3395efe0fffe7ff0c",
+    "067.json": "7c1ef8d5ba5d44600f6db834ed09d2cfc38dcfb305aa33c927ba4544274716e4",
+    "068.json": "850237fb78394249fc8a985032d5eec713535d1edfd5610f48255f3dc94baf2e",
+    "069.json": "ac94feb7ce50ac81b7dc7574ac31592704283a5be16e88c2b3e45424306eee5f",
+    "070.json": "57fe7ac4ea47abb07429f247427bdad910ad10591085519a1faf10fb211418c0",
+    "071.json": "f347f8f5db407410137f2ad53f5678f2d783a320d82696abdd8d016f891326c9",
+    "072.json": "b74cdb077956406dcae476758921e5ad7ee5b93367b3a1c0c6bde2a814207836",
+    "073.json": "5c2939393f2f0b5a3a5ac067aaebb429244e10d5946dda347c2295a651810a9f",
+    "074.json": "d0094de9c2e46545e453fb6dd4f3bd43dc45b2bfb1c2198be1caa191b3a9bea7",
+    "075.json": "0970f544f3c728dd438af50af58f2ef9583086f48414682af05665c2efdcded4",
+    "076.json": "e93c2b5b4413c366026ef35b282bf81891329716ea9dbf77717efbbc73ac2f5b",
+    "077.json": "0ff0eef704f5489fffccef5f3185390953cdaa17ebb27bd410d0abdae362629a",
+    "078.json": "aeef9599a64352270bd2708f6b33e92a2b85ec121dd2e821ce3c92330aae912d",
+    "079.json": "205c84b7349897a2e01ff2656c4cb82a7fb99de3480fed3ac9dcee7e5461d2ad",
+    "080.json": "585f4b3c51d36d2f75e46cce91c036e6f79c620461d4caa7d4f1c89f672c167e",
+    "081.json": "2b576e1f7242cc3de02e8b4017f5732613a801f7eb78127e279d68c45c052818",
+    "082.json": "609815e3aae2d9e1eaaea735c13d234cf5b9450e804f2e511576c07d77989361",
+    "083.json": "7e9290f4ee1767cbea6c1f538c012af9571b77e96d304d7f8f6a18dca22da65a",
+    "084.json": "e1a89c80cb33001d3cc963d6b9ea42e52583654a8c74c782d2cfc7460c327afb",
+    "085.json": "95bf0ccc098c63588533e8a6e526433689808d03253561e7ff18cbe8ebb80a0c",
+    "086.json": "fa884a9f0d353ced0efebbbf37e7a7093d4a3676a89f7ad8b25ef1bcd21b4e8f",
+    "087.json": "1281b2b656238b050a0763fa17f3584fa3ca1a0668a426f1c9e89930d94f6559",
+    "088.json": "15bf625e320cc6dd3785a583fbc6acb944032d7837fae1e25a4bc76b98efc338",
+    "089.json": "769489c984f21d5bd04137e2597a04df81ee8b8e721fd8a46624ab4f587c7664",
+    "090.json": "d085975c1c9412fd34a93b13ac4623a597301b2dc3eba21c87b816e392f6d1b6",
+    "091.json": "04d2f46eb661d5800b0722a2d4d73b6cb0ed47af5b5fb556342b5e210528587b",
+    "092.json": "9b161724423c497b747b92875025312dd095264ee7a2422ab7e23a5c18ccb10d",
+    "093.json": "e06f92d878bcf6f42e01adc9609101879f9cba92f22388ad82b0493f7cfa2e3f",
+    "094.json": "5ecb63a7f934d0cbb9f14ca69963c21a4b25c40ebe57bf1cbb4cc43fee4a8347",
+    "095.json": "f3b4c448dedb4fc300f1fc4c4184b062d6b8cbb0d353f032c7865dc6ca2bca5c",
+    "096.json": "381fd8c302032928c51f6a908711c99d8ac8f47dadfdb2b5de7dded64f22aa6b",
+    "097.json": "c73d7c9a8b39f4731cfd5552e919495f65404186c3ef6060786f1d79f678f402",
+    "098.json": "f90ee0caba50d9bb53938961e0dda914cbaa757e157687282d574b81a1f303d6",
+    "099.json": "5516297a29ba57100eb17532792c5859a0beef3559a4b6e475c93e10da201a80",
+    "100.json": "55b888b539c545330f5c5b7b3d9288961739296784251374579facc6e2af3fd5",
+    "101.json": "8d4ea7684a0e81e045563675bfae4038b81fb7022aa00f0e936e2d18fa37d9ad",
+    "102.json": "b8ddee0d4b90331ed820d7f23fbde957b6bc5a6ea2a7771422553721a82f7153",
+    "103.json": "55b42afb9415df6cde51f03e67e381953e6b6a3bdc0580cee95d50b441d1dfee",
+    "104.json": "a5b75f9ef9b5242c9df5898c5a13a9821ce374f572a175834ca6d52b3f933b15",
+    "105.json": "cd4609d46c50c5469f4d5cfb24d9e444515e5ed828499c313a929ef000acd4ee",
+    "106.json": "f4c9905ab3f1f1dc120524060021efa88677af753ae1e3420dbb24611b304c8b",
+    "107.json": "1c1b8b75c02a496c2d200b58cdcd4849aeb66a6f014a6f2736cdedba2e5d9e58",
+    "108.json": "2c1f2bff65b0250cfe9eed5ff66221b11872362997e18cd5e0d11e98d34dbd0e",
+    "109.json": "f95c5b32fc048dcc134f934c50f99c9cf9704512dd1422f6f2e96470a285c35a",
+    "110.json": "20ae804a7ce16121e077dd9a7e8034e015743959810262e1f736f4cb6a832f5c",
+    "111.json": "1707338f46faede7ee20a6857f5d5189eea47d65ce49554a4ec7ffc5f9fb027f",
+    "112.json": "c201f4ef4ea30d2eb5292e368dea6f3bf67d8c4b17a669aa85e6f47f2bf8402e",
+    "113.json": "ff18efaaca2c6890c9ed35995a2072ab8d02f5b116f77d52361487c7e15ea403",
+    "114.json": "dc4755f0a5bcdc907e218fb525824e5b1f07569b4393fc9146e3c6d609c82d20",
+    "115.json": "209f25c9d0459294fc8d3b7c97eec32feadfac2d4b7ad397eea69e844b7ef0c6",
+    "116.json": "ceaaab38c1ca4d826c8c2fce3eea84e955fa9e65f5543f24641774d54f7f5693",
+    "117.json": "f2b11e3e24ac574c5412a0bc198c64703e6464343f4ac322e1f47bd30bda1405",
+    "118.json": "a74a0c9fe074a5f874280f56bc7498ee87e4707bad4437a45a5429c917bdf4da",
+    "119.json": "93f433c228fedf273dc9f0eaa75d82f37760b27d65a46270feee1e81f2c26c46",
+    "120.json": "521634e56f2adc57289433d784cc0260acab91198ae58080963f4b6deb21b75c",
+    "121.json": "e29c842ed9b896f1f83cac04ef8b3cd4472b3e00478609583ad6ac976698458f",
+    "122.json": "e945437234dfe1a81bfcf596d68bb504259215ecaa8a391ebe263bec99537dfb",
+    "123.json": "96d0b0265f6623172d5334a7f90d7df0c33bd1e389606d22f0b833feba3f0747",
+    "124.json": "b3cb29154980fdbb69578d8183521776cb697396bb8bd8272ebdc85fae9d6966",
+    "125.json": "cacfbd82067c74daa4e23e6007afa768c7e7b216e3841928b1c186dda72b5e8e"
+  },
+  "summary": {
+    "seven_block": {
+      "queries": 42,
+      "valid": 42,
+      "suite_converged": 24,
+      "legacy_converged": 24,
+      "warnings": 21,
+      "statuses": {
+        "optimal": 21,
+        "optimal_inaccurate": 21
+      },
+      "recovery_lp_calls": 102,
+      "max_scaled_gap": 0.00016939658435133478,
+      "medians_seconds": {
+        "construction_seconds": 0.08911480000824668,
+        "canonicalization_seconds": 0.1982327500008978,
+        "solve_call_seconds": 0.0051865499845007434,
+        "proposal_seconds": 0.27500860001600813
+      },
+      "recovery_median": 0.482901800001855,
+      "full_median": 0.9271959499892546
+    },
+    "generic_polynomial": {
+      "queries": 42,
+      "valid": 42,
+      "suite_converged": 24,
+      "legacy_converged": 21,
+      "warnings": 30,
+      "statuses": {
+        "optimal": 12,
+        "optimal_inaccurate": 30
+      },
+      "recovery_lp_calls": 108,
+      "max_scaled_gap": 0.0012414229349091794,
+      "medians_seconds": {
+        "construction_seconds": 0.10973620000004303,
+        "canonicalization_seconds": 0.2519518000044627,
+        "solve_call_seconds": 0.006685600004857406,
+        "proposal_seconds": 0.3556104999879608
+      },
+      "recovery_median": 0.6681092499929946,
+      "full_median": 1.324767799989786
+    },
+    "continuous_root_dual": {
+      "queries": 42,
+      "valid": 42,
+      "suite_converged": 27,
+      "legacy_converged": 24,
+      "warnings": 0,
+      "statuses": {
+        "Iteration limit reached": 6,
+        "Optimization terminated successfully": 27,
+        "Positive directional derivative for linesearch": 9
+      },
+      "recovery_lp_calls": 81,
+      "max_scaled_gap": 0.015221870728414792,
+      "medians_seconds": {
+        "construction_seconds": 0.00375509999867063,
+        "canonicalization_seconds": 0.0,
+        "solve_call_seconds": 0.2425321999908192,
+        "proposal_seconds": 0.24917314999038354
+      },
+      "recovery_median": 0.4483057000034023,
+      "full_median": 0.9372702500113519
+    },
+    "cases": [
+      {
+        "case_id": 0,
+        "case": "scale_a1_n2",
+        "methods": {
+          "seven_block": {
+            "suite_converged": 3,
+            "full_median": 0.22809719998622313,
+            "solve_median": 0.002223200019216165
+          },
+          "generic_polynomial": {
+            "suite_converged": 3,
+            "full_median": 0.24504290000186302,
+            "solve_median": 0.003324999997857958
+          },
+          "continuous_root_dual": {
+            "suite_converged": 3,
+            "full_median": 0.18149059999268502,
+            "solve_median": 0.019213899999158457
+          }
+        }
+      },
+      {
+        "case_id": 1,
+        "case": "scale_a1_n4",
+        "methods": {
+          "seven_block": {
+            "suite_converged": 3,
+            "full_median": 0.7256772000109777,
+            "solve_median": 0.003822099999524653
+          },
+          "generic_polynomial": {
+            "suite_converged": 0,
+            "full_median": 1.3351043000002392,
+            "solve_median": 0.004711300018243492
+          },
+          "continuous_root_dual": {
+            "suite_converged": 3,
+            "full_median": 0.4362803999974858,
+            "solve_median": 0.07047409997903742
+          }
+        }
+      },
+      {
+        "case_id": 2,
+        "case": "scale_a1_n8",
+        "methods": {
+          "seven_block": {
+            "suite_converged": 3,
+            "full_median": 1.152934899990214,
+            "solve_median": 0.00822280001011677
+          },
+          "generic_polynomial": {
+            "suite_converged": 3,
+            "full_median": 1.310075000015786,
+            "solve_median": 0.010841200011782348
+          },
+          "continuous_root_dual": {
+            "suite_converged": 3,
+            "full_median": 1.3754536000196822,
+            "solve_median": 0.5802018000103999
+          }
+        }
+      },
+      {
+        "case_id": 3,
+        "case": "scale_a2_n2",
+        "methods": {
+          "seven_block": {
+            "suite_converged": 3,
+            "full_median": 0.46086209997884,
+            "solve_median": 0.0036269999982323498
+          },
+          "generic_polynomial": {
+            "suite_converged": 3,
+            "full_median": 0.5172714000218548,
+            "solve_median": 0.005371300008846447
+          },
+          "continuous_root_dual": {
+            "suite_converged": 3,
+            "full_median": 0.5645484999986365,
+            "solve_median": 0.2406085999973584
+          }
+        }
+      },
+      {
+        "case_id": 4,
+        "case": "scale_a2_n4",
+        "methods": {
+          "seven_block": {
+            "suite_converged": 3,
+            "full_median": 1.7214497000095434,
+            "solve_median": 0.007138999993912876
+          },
+          "generic_polynomial": {
+            "suite_converged": 3,
+            "full_median": 1.7938157999888062,
+            "solve_median": 0.009690899983979762
+          },
+          "continuous_root_dual": {
+            "suite_converged": 0,
+            "full_median": 3.4920531999960076,
+            "solve_median": 0.6597697999968659
+          }
+        }
+      },
+      {
+        "case_id": 5,
+        "case": "scale_a2_n8",
+        "methods": {
+          "seven_block": {
+            "suite_converged": 0,
+            "full_median": 7.3478795000119135,
+            "solve_median": 0.015385599981527776
+          },
+          "generic_polynomial": {
+            "suite_converged": 0,
+            "full_median": 7.622979600011604,
+            "solve_median": 0.022949100006371737
+          },
+          "continuous_root_dual": {
+            "suite_converged": 0,
+            "full_median": 5.216936299984809,
+            "solve_median": 1.021001300017815
+          }
+        }
+      },
+      {
+        "case_id": 6,
+        "case": "time_T1/4",
+        "methods": {
+          "seven_block": {
+            "suite_converged": 3,
+            "full_median": 1.4623323999985587,
+            "solve_median": 0.006965699983993545
+          },
+          "generic_polynomial": {
+            "suite_converged": 3,
+            "full_median": 1.5814123000018299,
+            "solve_median": 0.009407200006535277
+          },
+          "continuous_root_dual": {
+            "suite_converged": 0,
+            "full_median": 2.061072200012859,
+            "solve_median": 0.24598939999123104
+          }
+        }
+      },
+      {
+        "case_id": 7,
+        "case": "time_T4",
+        "methods": {
+          "seven_block": {
+            "suite_converged": 3,
+            "full_median": 3.1911546000046656,
+            "solve_median": 0.006222600000910461
+          },
+          "generic_polynomial": {
+            "suite_converged": 3,
+            "full_median": 2.3725388000020757,
+            "solve_median": 0.008134500007145107
+          },
+          "continuous_root_dual": {
+            "suite_converged": 3,
+            "full_median": 2.1360492999956477,
+            "solve_median": 0.8052767000044696
+          }
+        }
+      },
+      {
+        "case_id": 8,
+        "case": "saturation_e1/10",
+        "methods": {
+          "seven_block": {
+            "suite_converged": 3,
+            "full_median": 0.2472010999917984,
+            "solve_median": 0.0033628999954089522
+          },
+          "generic_polynomial": {
+            "suite_converged": 3,
+            "full_median": 0.3479594999807887,
+            "solve_median": 0.003641499992227182
+          },
+          "continuous_root_dual": {
+            "suite_converged": 3,
+            "full_median": 0.05687030000262894,
+            "solve_median": 0.0037492000265046954
+          }
+        }
+      },
+      {
+        "case_id": 9,
+        "case": "saturation_e1/100",
+        "methods": {
+          "seven_block": {
+            "suite_converged": 0,
+            "full_median": 0.6306858999887481,
+            "solve_median": 0.003179199993610382
+          },
+          "generic_polynomial": {
+            "suite_converged": 0,
+            "full_median": 0.6072109999950044,
+            "solve_median": 0.003716600011102855
+          },
+          "continuous_root_dual": {
+            "suite_converged": 0,
+            "full_median": 0.40646109997760504,
+            "solve_median": 0.006679500016616657
+          }
+        }
+      },
+      {
+        "case_id": 10,
+        "case": "saturation_e1/1000",
+        "methods": {
+          "seven_block": {
+            "suite_converged": 0,
+            "full_median": 0.6732905000098981,
+            "solve_median": 0.0034469999955035746
+          },
+          "generic_polynomial": {
+            "suite_converged": 0,
+            "full_median": 0.7252328000031412,
+            "solve_median": 0.004154299997026101
+          },
+          "continuous_root_dual": {
+            "suite_converged": 3,
+            "full_median": 0.11238690000027418,
+            "solve_median": 0.005542300001252443
+          }
+        }
+      },
+      {
+        "case_id": 11,
+        "case": "saturation_e1/10000",
+        "methods": {
+          "seven_block": {
+            "suite_converged": 0,
+            "full_median": 0.6247405999747571,
+            "solve_median": 0.0030647999956272542
+          },
+          "generic_polynomial": {
+            "suite_converged": 0,
+            "full_median": 0.7499290000123437,
+            "solve_median": 0.003593599976738915
+          },
+          "continuous_root_dual": {
+            "suite_converged": 3,
+            "full_median": 0.11815689998911694,
+            "solve_median": 0.016589000006206334
+          }
+        }
+      },
+      {
+        "case_id": 12,
+        "case": "amplitude_A1/10000",
+        "methods": {
+          "seven_block": {
+            "suite_converged": 0,
+            "full_median": 2.507642999989912,
+            "solve_median": 0.021345999994082376
+          },
+          "generic_polynomial": {
+            "suite_converged": 0,
+            "full_median": 2.8292265000054613,
+            "solve_median": 0.011308699991786852
+          },
+          "continuous_root_dual": {
+            "suite_converged": 0,
+            "full_median": 2.493692199990619,
+            "solve_median": 0.24279739998746663
+          }
+        }
+      },
+      {
+        "case_id": 13,
+        "case": "amplitude_A1000",
+        "methods": {
+          "seven_block": {
+            "suite_converged": 0,
+            "full_median": 2.716555499995593,
+            "solve_median": 0.006298199994489551
+          },
+          "generic_polynomial": {
+            "suite_converged": 3,
+            "full_median": 2.4569655999948736,
+            "solve_median": 0.008668499998748302
+          },
+          "continuous_root_dual": {
+            "suite_converged": 3,
+            "full_median": 2.4629496000125073,
+            "solve_median": 0.6529103000066243
+          }
+        }
+      }
+    ],
+    "paired_comparison": {
+      "generic_polynomial": {
+        "common_cases": 7,
+        "seven_faster": 6,
+        "median_full_cost_ratio": 0.924700282144553
+      },
+      "continuous_root_dual": {
+        "common_cases": 6,
+        "seven_faster": 2,
+        "median_full_cost_ratio": 1.3753753647289622
+      }
+    },
+    "optimizer_calls": 417,
+    "new_closed_loop_runs": 0
+  },
+  "novelty_cleared": false,
+  "new_closed_loop_runs": 0
+}

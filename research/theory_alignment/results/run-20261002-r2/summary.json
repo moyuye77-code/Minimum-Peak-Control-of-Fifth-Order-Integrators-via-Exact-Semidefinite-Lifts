@@ -1,0 +1,72 @@
+{
+  "boundary": {
+    "cases": 48,
+    "exact_passes": 48,
+    "numerical_passes": 48,
+    "warnings": 48,
+    "max_selected_norm": 1.0,
+    "errors_at_smallest_epsilon": {
+      "zero": 1.499999999925e-10,
+      "full": 1.499999999925e-10,
+      "left": 1.7e-11,
+      "right": 1.7373333332733332e-11,
+      "central": 5.664062499980469e-12,
+      "two_intervals": 6.7708333332552084e-12
+    }
+  },
+  "membership": {
+    "1/1000": {
+      "inside": {
+        "cases": 3,
+        "numeric_accepts": 3
+      },
+      "outside": {
+        "cases": 3,
+        "numeric_accepts": 0
+      }
+    },
+    "1/1000000": {
+      "inside": {
+        "cases": 3,
+        "numeric_accepts": 3
+      },
+      "outside": {
+        "cases": 3,
+        "numeric_accepts": 0
+      }
+    },
+    "1/1000000000": {
+      "inside": {
+        "cases": 3,
+        "numeric_accepts": 3
+      },
+      "outside": {
+        "cases": 3,
+        "numeric_accepts": 3
+      }
+    }
+  },
+  "synthesis": {
+    "raw_diagnostic_passes": 15,
+    "sdp_seed": {
+      "cases": 15,
+      "certified": 15,
+      "converged": 14,
+      "initial_gap_passes": 14,
+      "improved_lower": 0,
+      "recovered_lift_checks": 53,
+      "zero_apex_checks": 2
+    },
+    "zero_seed": {
+      "cases": 15,
+      "certified": 15,
+      "converged": 4,
+      "initial_gap_passes": 2,
+      "improved_lower": 13,
+      "recovered_lift_checks": 53,
+      "zero_apex_checks": 2
+    }
+  },
+  "fresh_sdp_calls": 81,
+  "recovery_lp_calls": 67
+}

@@ -1,0 +1,226 @@
+{
+  "index": 3,
+  "case": {
+    "order": 5,
+    "label": "total_J1000",
+    "horizon": "1",
+    "initial": [
+      "0",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    "waypoints": [
+      {
+        "time": "1",
+        "weights": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "1"
+        ],
+        "value": "1000",
+        "error": "0"
+      }
+    ]
+  },
+  "known_peak": "1000",
+  "proposal": {
+    "method": "closed_five_sdp",
+    "status": "optimal_inaccurate",
+    "failure": null,
+    "warnings": [
+      "Solution may be inaccurate. Try another solver, adjusting the solver settings, or solve with verbose=True for more information."
+    ],
+    "optimization_calls": 1,
+    "construction_seconds": 0.013473500002874061,
+    "canonicalization_seconds": 0.0790374000207521,
+    "solve_call_seconds": 0.0029408999835141003,
+    "elapsed_seconds": 0.09545180000714026,
+    "variables": 40,
+    "PSD_blocks": [
+      3,
+      3,
+      3,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      4,
+      4,
+      3,
+      3,
+      3,
+      2,
+      2,
+      4,
+      4,
+      3,
+      3,
+      3
+    ],
+    "value": 1000.0000030130922,
+    "lam": [
+      1.000000004274508
+    ],
+    "moments": [
+      [
+        1000.0000015065458,
+        500.0000005928174,
+        333.3333335866631,
+        250.00000003713254,
+        199.99999962978785
+      ]
+    ],
+    "auxiliaries": [
+      [
+        1000.0000002868012,
+        999.9999993513502,
+        999.9999973877756,
+        499.99999985958567,
+        499.99999928529684,
+        250.00000017573345,
+        200.00000020000945,
+        1.8465855404133032e-07,
+        1.4012290513247615e-07,
+        1.7413090370631854e-07,
+        2.4378393741496357e-06,
+        -8.053544958998189e-07,
+        111.11111106578811,
+        333.33333311733196,
+        166.6666667143338,
+        999.9999996212766,
+        1000.0000018289417,
+        499.9999993476442,
+        249.99999878414653,
+        249.9999994422087,
+        1.5430519474250042e-06,
+        1.3872000555407e-07,
+        7.277321973095224e-08,
+        8.209592696605444e-08,
+        2.205750824411783e-06,
+        -6.184533336327657e-07,
+        3.36924437743278e-07,
+        6.129611523273165e-07,
+        4.2931073409410646e-07,
+        8.248513913339583e-07,
+        4.232065249941221e-06,
+        2.722959610171477e-07,
+        6.491305478901265e-07,
+        1.8158835272601722e-07
+      ]
+    ],
+    "minimum_eigenvalue": -7.046970705480263e-07,
+    "minimum_scalar_slack": -5.702216014924488e-07
+  },
+  "recovery": {
+    "certificate": {
+      "case": {
+        "order": 5,
+        "label": "total_J1000",
+        "horizon": "1",
+        "initial": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "waypoints": [
+          {
+            "time": "1",
+            "weights": [
+              "0",
+              "0",
+              "0",
+              "0",
+              "1"
+            ],
+            "value": "1000",
+            "error": "0"
+          }
+        ]
+      },
+      "mesh": [
+        "0",
+        "1/4",
+        "1/2",
+        "3/4",
+        "1"
+      ],
+      "controls": [
+        "1000",
+        "1000",
+        "1000",
+        "1000"
+      ],
+      "upper": "1000",
+      "certified": true,
+      "tolerance": "1/100000",
+      "scale": "1000",
+      "dual": {
+        "lam": [
+          "1"
+        ],
+        "leaves": [
+          [
+            0,
+            "0",
+            "1",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        ],
+        "numerator": "1000",
+        "norm_upper": "1",
+        "lower": "1000"
+      },
+      "lower": "1000",
+      "gap": "0",
+      "converged": true
+    },
+    "initial_dual": {
+      "lam": [
+        "1"
+      ],
+      "leaves": [
+        [
+          0,
+          "0",
+          "1",
+          "1",
+          "0",
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "numerator": "1000",
+      "norm_upper": "1",
+      "lower": "1000"
+    },
+    "attempts": [
+      {
+        "iteration": 0,
+        "cells": 4,
+        "status": 0,
+        "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+        "warnings": [
+          "Unrecognized options detected: {'threads': 1}. These will be passed to HiGHS verbatim."
+        ],
+        "primal_recovered": true,
+        "gap": "0"
+      }
+    ],
+    "repair_lp_calls": 1,
+    "elapsed_seconds": 0.004137299983995035
+  },
+  "elapsed_seconds": 0.1031844999815803
+}

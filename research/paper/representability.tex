@@ -1,0 +1,1727 @@
+\documentclass[pdflatex,sn-mathphys-num]{sn-jnl}
+% Official Springer Nature template, December 2024 package; class unmodified.
+\usepackage{amsmath,amssymb,amsthm,mathtools,booktabs,array}
+\usepackage{xcolor}
+\usepackage[T1]{fontenc}
+\hypersetup{hidelinks,bookmarksdepth=2}
+\theoremstyle{thmstyleone}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{thmstyletwo}\newtheorem{remark}[theorem]{Remark}
+\newcommand{\R}{\mathbb R}
+\newcommand{\K}{\mathcal K}
+\newcommand{\PSD}{\mathbb S_+}
+\newcommand{\sxdeg}{\operatorname{sxdeg}}
+\newcommand{\esssup}{\operatorname*{ess\,sup}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\spn}{\operatorname{span}}
+\newcommand{\ip}[2]{\langle #1,#2\rangle}
+\allowdisplaybreaks
+\setlength{\emergencystretch}{2em}
+\raggedbottom
+\AddToHook{env/thebibliography/after}{\clearpage}
+\begin{document}
+\title[Minimum-Peak Control via Exact Semidefinite Lifts]{Minimum-Peak Control
+of Fifth-Order Integrators via Exact Semidefinite Lifts}
+\author*[1]{\fnm{Zihan} \sur{Yang}}\email{768216265@qq.com}
+\affil[1]{\orgdiv{School of Information and Communication Engineering},
+\orgname{University of Electronic Science and Technology of China},
+\orgaddress{\city{Chengdu}, \country{China}}}
+
+\abstract{
+We study minimum-peak control of fifth-order integrator chains with known
+initial states and linear state constraints at prescribed times. An exact
+finite model allows these constraints to be assembled while leaving the
+input waveform unrestricted within each time segment. We establish such a
+semidefinite programming (SDP) formulation without an outer input-time mesh.
+Its main ingredient is an explicit affine
+lift of the complete fifth-order bounded-density moment body, using 34
+auxiliary scalars and 21 positive semidefinite (PSD) blocks of order at most four.
+A domain-weighted first-order identity and finite witnesses cover singular
+boundaries; homogenization and segment concatenation preserve equivalence,
+including zero peak. An application of existing cone-complexity theory also
+excludes finite affine second-order-cone lifts of the full reach set in
+orders five and above. The fifth-order semidefinite extension degree lies
+between three and four. Synthesis tests compare the SDP implementation with
+a continuous-dual solver using shared rational recovery and certification.
+Both return valid bounds on all tested tasks, although some bounds miss
+the requested accuracy. The SDP is slower on every jointly successful task,
+and feedback replay activates no SDP plan under a half-second deadline.
+The results support an exact finite interface for auditable offline synthesis;
+certification is shared by both methods, and no real-time advantage is claimed.}
+
+\keywords{Minimum-peak control, integrator chains, semidefinite lifts,
+bounded-density moments, extension degree}
+\pacs[Mathematics Subject Classification (2020)]{93B03, 90C22, 44A60}
+\maketitle
+
+\section{Introduction}
+Minimum-peak control with fixed-time linear state constraints is an
+infinite-dimensional convex problem over measurable inputs. This paper
+constructs an equivalent finite affine semidefinite programming (SDP) model
+for fourth- and fifth-order integrator chains with componentwise input bounds.
+The contribution concerns exact representation, including singular boundaries
+and zero peak, rather than a new control objective or a faster planner.
+
+Integrator reach-set geometry and support-function methods are well studied
+\cite{hh,intersection}. Boundary parameterizations do not by themselves provide
+affine conic constraints in the original state coordinates. The SOCP intersection
+tests in \cite{intersection} address a support-function decision problem with
+numerical quadrature, not an exact finite lift of the complete reach set.
+Likewise, classical
+Markov-moment transforms \cite{gr} are nonlinear coordinate descriptions, and
+full-sequence domination conditions (Lasserre, 2007 preprint,
+\href{https://arxiv.org/abs/math/0607463v2}{arXiv:math/0607463v2})
+quantify over all polynomial degrees. Lasserre's later density-existence
+hierarchy \cite{lasserredensity} likewise does not by itself identify a fixed
+finite exact level for the five-moment body. First-order polynomial and rational lifting
+\cite{nie,nierational} and closure of spectrahedral shadows \cite{gn} supply
+established tools. The specific construction below supplies the weighted
+certificate, common coefficient space and finite boundary witnesses needed
+for an explicit fifth-order realization.
+
+Minimum-maximum-derivative interpolation and perfect splines also have
+classical precedents \cite{mcclure}. Our fixed-time state constraints differ
+from continuous collision-free polynomial planning with integral-squared costs
+and nonconvex relaxations (Graesdal et al., 2026 preprint,
+\href{https://arxiv.org/abs/2606.14063v1}{arXiv:2606.14063v1}). No vehicle dynamics, unknown arrival
+times or inter-knot obstacle constraints are included.
+
+The main results are:
+\begin{enumerate}
+\item An affine lift of the complete five-moment body with 34 auxiliary
+scalars and 21 positive-semidefinite (PSD) blocks of maximum order four,
+including singular boundaries (Theorem~\ref{thm:five-lift}).
+\item Exact homogenization and segment concatenation, including zero peak,
+yield a finite SDP for fixed-time minimum-peak synthesis
+(Corollary~\ref{cor:five-synthesis}).
+\item A normal-cone argument using established lift duality \cite{gpt} and
+cone-complexity theory \cite{averkov} gives
+$3\le\sxdeg(\K_5)\le4$ and excludes finite second-order-cone (SOC) lifts
+of full reach sets in orders at least five (Theorem~\ref{thm:lower}).
+\end{enumerate}
+The fifth-order case is a low-order setting where an explicit finite SDP
+and a non-SOC lower bound coexist. The exact block order three versus four
+and SOC representability of the fourth-order body remain open here.
+The lower bound concerns representations, not the speed of specialized
+algorithms. The continuous-dual reference accepts the same linear task rows
+and shares the rational recovery and checking procedure; neither capability
+is exclusive to SDP.
+
+Section~\ref{sec:control-problem} defines the system and moment coordinates.
+Section~\ref{sec:theory} gives the lifts, representation bound and synthesis
+equivalence. Section~\ref{sec:validation} tests their numerical realization
+and implementation limits, retaining accuracy failures and missed deadlines.
+
+\section{System modeling}\label{sec:control-problem}
+\subsection{Dynamics, constraints and objective}
+Consider $A$ independent chains of length $n\in\{4,5\}$, with state
+$x_{a,j}$ for axis $a=1,\ldots,A$ and derivative index $j=0,\ldots,n-1$:
+\[
+ \dot x_{a,j}=x_{a,j+1}\quad (0\le j<n-1),\qquad
+ \dot x_{a,n-1}=u_a.
+\]
+Stack all states into $x$. Initial states and the horizon $T>0$ are known.
+Given finitely many fixed times $t_i$, row vectors $w_i$, targets $b_i$ and
+tolerances $\epsilon_i$, require
+\begin{equation}\label{eq:waypoints}
+ |w_i^\top x(t_i)-b_i|\le\epsilon_i,\qquad 0<t_i\le T,
+ \quad\epsilon_i\ge0.
+\end{equation}
+Rows may couple axes and derivatives. Minimize
+$J=\esssup_{0\le t\le T}\max_a|u_a(t)|$ over
+$u\in L^\infty([0,T];\R^A)$.
+The bound is componentwise, and no path constraint between the listed
+times is imposed.
+
+The finite model must preserve all feasible peak values, including zero.
+Partitioning at row times leaves the input waveform unrestricted inside each
+segment; Section~\ref{sec:synthesis} proves equivalence using complete moment
+bodies rather than an input-time grid.
+
+The scope is offline synthesis for independent chains with fixed observation
+times. Unknown arrival times, coupled input balls, continuous obstacle
+avoidance and nonlinear plant dynamics are excluded. Relating the highest
+derivative peak to physical actuator loads requires a separate plant model.
+
+\subsection{Moment coordinates and affine lifts}\label{sec:moments}
+For an integer $d\ge1$, let
+\begin{equation}\label{eq:body}
+ \K_d=\left\{y\in\R^d:y_j=\int_0^1 t^j\rho(t)\,dt,
+ \quad 0\le\rho\le1\ \text{a.e.},\quad j=0,\ldots,d-1\right\}.
+\end{equation}
+The order interval of densities is weak-star compact in $L^\infty$, so
+$\K_d$ is compact and convex. With $v_j=1/(j+1)$ and $c=v/2$, its centered
+support function is
+\begin{equation}\label{eq:support}
+ h_{\K_d-c}(\lambda)=\frac12\int_0^1
+ \left|\sum_{j=0}^{d-1}\lambda_jt^j\right|\,dt.
+\end{equation}
+It is positive for every nonzero $\lambda$, hence $\K_d$ is full-dimensional.
+
+We first fix a candidate peak $J>0$ to describe its reach set; the
+minimum-peak formulation subsequently optimizes this same parameter.
+Consider $\dot x_1=x_2,\ldots,\dot x_{d-1}=x_d,\dot x_d=u$,
+with known $x(0)$, $T>0$ and $|u|\le J$, where $J>0$ is fixed.
+Set $u(Tt)=J(2\rho(t)-1)$. The input contribution to $x_{d-k}(T)$ is
+\begin{equation}\label{eq:affine}
+ \frac{JT^{k+1}}{k!}\left[
+ 2\sum_{j=0}^k(-1)^j\binom{k}{j}y_j-\frac1{k+1}\right],
+ \qquad k=0,\ldots,d-1.
+\end{equation}
+This is an invertible triangular affine map: its diagonal is
+$2JT^{k+1}(-1)^k/k!$. Adding the known zero-input flow therefore gives an
+affine equivalence between the reach set and $\K_d$. For $A$ independent
+chains with componentwise input bounds, the full reach set is the Cartesian
+product of their $d$-dimensional single-axis reach sets. Coupled Euclidean
+input balls do not follow from this product argument.
+
+A convex set has an affine SDP lift if it is the projection of a set defined
+by finitely many linear matrix inequalities and linear equations. Following
+\cite{averkov}, $\sxdeg(C)$ is the least possible maximum PSD block order,
+allowing arbitrarily many finite blocks and auxiliaries; it is infinity
+if no finite lift exists. A nonlinear change of the output coordinates is
+not an affine lift.
+
+\section{Theoretical derivation}\label{sec:theory}
+We first construct the four-moment prefix, then the complete fifth-order
+lift and its coefficient interface. A lower bound distinguishes its cone
+class. Homogenization and concatenation finally connect the representation
+to the system model.
+
+\subsection{Four-moment prefix lift}\label{sec:four}
+Write $y=(m,z,q,r)$ and
+$\bar y=(1-m,\tfrac12-z,\tfrac13-q,\tfrac14-r)$. Define
+\begin{align}
+ D&=z-m^2/2,& E&=m-z-m^2/2,\notag\\
+ B&=q-mz/2-m^3/12,& F_0&=z^2/2+m^2z/4,\notag\\
+ G(y)&=\begin{pmatrix}D&B\\B&r-F_0\end{pmatrix}.\label{eq:nonlinear}
+\end{align}
+
+\begin{lemma}[Classical boundary condition in convenient coordinates]\label{lem:G}
+ $y\in\K_4$ if and only if $G(y)\succeq0$ and $G(\bar y)\succeq0$.
+\end{lemma}
+\begin{proof}
+Section~\ref{app:boundary} gives an interval-extremizer derivation,
+including all zero-denominator cases. To see why the prefix cannot be
+silently omitted, when $0<m<1$ and $D,E>0$, put
+\[
+ q_- = z^2/m+m^3/12,\qquad
+ q_+ =1/3-(1/2-z)^2/(1-m)-(1-m)^3/12.
+\]
+The lower fourth-moment boundary is
+$L(y)=F_0+B^2/D$. Direct expansion gives
+\begin{align}
+ q_+-q_-&=\frac{DE}{m(1-m)},\notag\\
+ L(y)+L(\bar y)-1/4
+ &=\frac{m(1-m)(q-q_-)(q-q_+)}{DE}.\label{eq:prefix}
+\end{align}
+The two PSD conditions imply $D,E\ge0$ and $0\le m\le1$.
+Their Schur complements and \eqref{eq:prefix} imply $q_-\le q\le q_+$,
+the feasible three-moment prefix. The lower and complementary upper
+fourth-moment bounds are then necessary and sufficient.
+If $0<m<1$ and $D=0$, PSD forces $B=0$, hence
+$z=m^2/2,q=m^3/3$; the two last diagonal/Schur bounds force $r=m^4/4$.
+The case $E=0$ follows by complementation. If $m=0$, the matrices force
+$z=q=r=0$; $m=1$ follows by complementation. Conversely each feasible
+density satisfies the same extremal bounds.
+\end{proof}
+
+The matrices in Lemma~\ref{lem:G} are nonlinear in $y$. To obtain an
+affine lift, introduce six auxiliary scalars $a,b,c,d,e,f$ and the pencils
+\begin{align}
+ H&=\begin{pmatrix}1&m&a\\m&a&b\\a&b&c\end{pmatrix},\label{eq:H}\\
+ J_\sigma&=\begin{pmatrix}
+ 1&m&z+\sigma a/6\\m&a&d+\sigma b/6\\
+ z+\sigma a/6&d+\sigma b/6&f+\sigma e/3+c/36
+ \end{pmatrix},\qquad \sigma\in\{-1,1\},\label{eq:J}\\
+ T_-&=\begin{pmatrix}z-a/2&d-b/2\\d-b/2&e-c/2\end{pmatrix},\notag\\
+ T_+&=\begin{pmatrix}m-z-a/2&a-d-b/2\\a-d-b/2&b-e-c/2\end{pmatrix},\label{eq:T}\\
+ Q_-&=\begin{pmatrix}z-a/2&q-d/2-b/12\\q-d/2-b/12&r-f/2-e/4\end{pmatrix},\notag\\
+ Q_+&=\begin{pmatrix}m-z-a/2&B_+\\ B_+&C_+\end{pmatrix},\label{eq:Q}\\
+ B_+&=-a/4+b/12-d/2+m/2-q+z/2,\notag\\
+ C_+&=-a/8-d/2+e/4-f/2+m/4-r+3z/4.\notag
+\end{align}
+
+\begin{theorem}[Four-moment affine lift]\label{thm:lift}
+ A vector $y\in\R^4$ belongs to $\K_4$ if and only if there exist
+ $a,b,c,d,e,f\in\R$ making all seven matrices
+ $H,J_+,J_-,T_-,T_+,Q_-,Q_+$ positive semidefinite.
+ In particular, $\sxdeg(\K_4)\le3$.
+\end{theorem}
+
+\begin{proof}
+For $g\in\R$, define
+\[
+ F_g(s,t)=t^2/2+s^2t/4-g(s^3/12+st/2)
+             +g^2(s^2/8-t/4).
+\]
+Set $u=s-M$, $w=t-Z$, $D(s,t)=t-s^2/2$, $D_0=Z-M^2/2$.
+The following polynomial identity follows by expansion, or by integrating
+the Hessian along the line segment from $(M,Z)$ to $(s,t)$:
+\begin{align}
+ &F_g(s,t)-F_g(M,Z)-\nabla F_g(M,Z)^\top(u,w)\notag\\
+ &\quad=\frac12\left[w+\frac{M-g}{2}u+\frac{u^2}{6}\right]^2
+       +\frac{D(s,t)u^2}{12}+\frac{D_0u^2}{6}+\frac{u^4}{36}.
+       \label{eq:remainder}
+\end{align}
+This is a domain-weighted first-order certificate, not an invocation of
+global SOS-convexity.
+
+Given a feasible lifted tuple, define a linear functional $\Lambda$ by the
+assignments
+\[
+\begin{array}{c|rrrrrrrrr}
+g&1&s&t&s^2&s^3&s^4&st&s^2t&t^2\\
+\Lambda(g)&1&m&z&a&b&c&d&e&f
+\end{array}
+\]
+No representing measure for $\Lambda$ is assumed. The matrices $H$ and $J_+$
+certify nonnegativity of $\Lambda$
+on squares in $\spn\{1,s,s^2\}$ and $\spn\{1,s,t+s^2/6\}$, respectively.
+The matrix $T_-$ certifies $\Lambda[D(s,t)h^2]\ge0$ for
+$h\in\spn\{1,s\}$.
+
+From $H\succeq0$ we obtain $a\ge m^2$. The leading entries of $T_\pm$
+give $a\le m$ and $z,m-z\ge a/2$. Thus $0\le m\le1$ and
+$D_0=z-m^2/2\ge0$. Apply $\Lambda$ to \eqref{eq:remainder} with
+$(M,Z)=(m,z)$. The linear Taylor term vanishes, and each term on the right
+is nonnegative by the three named matrices and $D_0\ge0$. Hence
+\begin{equation}\label{eq:jensen}
+ \Lambda(F_g)\ge F_g(m,z),\qquad g\in\R.
+\end{equation}
+The quadratic form of $Q_-$ at $(-g/2,1)$ yields
+\begin{equation}\label{eq:allg}
+ r\ge gq+\Lambda(F_g)\ge gq+F_g(m,z),\qquad g\in\R.
+\end{equation}
+If $D_0>0$, maximizing the last expression over $g$ gives
+$r\ge F_0+B^2/D_0$. If $D_0=0$, its finiteness forces $B=0$ and
+$r\ge F_0$. In both cases $G(y)\succeq0$.
+
+For the complementary coordinates $\bar s=1-s$, $\bar t=1/2-t$, one has
+\begin{align*}
+ \spn\{1,\bar s,\bar s^2\}&=\spn\{1,s,s^2\},\\
+ \spn\{1,\bar s,\bar t+\bar s^2/6\}&=\spn\{1,s,t-s^2/6\},\\
+ D(\bar s,\bar t)&=s-t-s^2/2.
+\end{align*}
+Thus $H,J_-,T_+$ give the same argument. In detail, their transformed
+auxiliaries are
+\begin{align*}
+ \bar a&=1-2m+a,&\bar b&=1-3m+3a-b,\\
+ \bar c&=1-4m+6a-4b+c,&\bar d&=1/2-z-m/2+d,\\
+ \bar e&=1/2-m+a/2-z+2d-e,&\bar f&=1/4-z+f.
+\end{align*}
+Substitution in $Q_-$ gives exactly $Q_+$. Consequently
+$G(\bar y)\succeq0$. Lemma~\ref{lem:G} proves sufficiency, including the
+singular faces.
+
+For necessity take any $y\in\K_4$ and choose
+\[
+ (a,b,c,d,e,f)=(m^2,m^3,m^4,mz,m^2z,z^2).
+\]
+Then $H$ and $J_\sigma$ are outer products,
+$T_-=D(1,m)^\top(1,m)$ and $T_+=E(1,m)^\top(1,m)$.
+The last two matrices are $G(y)$ and $G(\bar y)$, so all constraints hold.
+\end{proof}
+
+\begin{remark}[Attribution and the role of the auxiliaries]
+The boundary condition is classical; its affine lift is the constructive object.
+For example, the first four coefficients in
+$1-\exp[-(m w+z w^2+q w^3+r w^4+\cdots)]$ are
+\[
+ m,\quad z-m^2/2,\quad q-mz+m^3/6,\quad
+ r-mq-z^2/2+m^2z/2-m^4/24.
+\]
+If the last three are denoted $a_1,a_2,a_3$, then
+\[
+ \begin{pmatrix}1&0\\m/2&1\end{pmatrix}
+ \begin{pmatrix}a_1&a_2\\a_2&a_3\end{pmatrix}
+ \begin{pmatrix}1&m/2\\0&1\end{pmatrix}=G(y).
+\]
+This congruence links Lemma~\ref{lem:G} to the classical transform.
+The auxiliaries are coordinate-polynomial functional values, not extra time
+moments. Standard first-order lifting \cite{nie} motivates the construction.
+A generic polynomial-coordinate lift, defined below, has block orders
+$6,3,3,2,2$ and twelve auxiliaries with the same projection;
+Section~\ref{sec:matched} compares it with the seven-block model.
+Section~\ref{app:rational} records a separate
+rational-lifting existence route, which does not supply the seven-block bound.
+\end{remark}
+
+\noindent\textit{Full definition of the generic baseline.}
+Let $\Lambda(s^it^j)=\mu_{ij}$ for $i+j\le4$, with
+$\mu_{00}=1$, $\mu_{10}=m$ and $\mu_{01}=z$. The other twelve values are
+free auxiliary scalars; $q,r$ remain output coordinates. Set
+\[
+ V_2=(1,s,t,s^2,st,t^2)^\top,\qquad V_1=(1,s,t)^\top,
+ \qquad D=t-s^2/2,\quad E=s-t-s^2/2.
+\]
+The five affine PSD constraints are
+\[
+ \Lambda(V_2V_2^\top)\succeq0,\quad
+ \Lambda(DV_1V_1^\top)\succeq0,\quad
+ \Lambda(EV_1V_1^\top)\succeq0,\quad Q_-\succeq0,\quad Q_+\succeq0,
+\]
+where $Q_\pm$ are exactly \eqref{eq:Q}, with
+$(a,b,c,d,e,f)=(\mu_{20},\mu_{30},\mu_{40},\mu_{11},\mu_{21},\mu_{02})$.
+All functional evaluations are entrywise on polynomials of degree at most four.
+Restricting the first Gram block to $(1,s,s^2)$ and
+$(1,s,t\pm s^2/6)$ gives $H,J_\pm$; restricting the two localizing
+blocks to $(1,s)$ gives $T_\pm$. Hence generic feasibility implies
+the seven-block constraints. Conversely, for every $y\in\K_4$,
+$\mu_{ij}=m^iz^j$ gives weighted outer products and the two physical
+$G$ matrices, including boundary points. This proves equality of the two
+output projections. Homogenize the already linearized pencils by replacing
+the constant one by $J$ and using homogeneous output and auxiliary values.
+The same restrictions hold at $J=0$, so Lemma~\ref{lem:homogeneous}
+excludes additional output directions there.
+
+\subsubsection{Interval-extremizer construction}\label{app:boundary}
+Here we provide the classical interval-extremizer argument in the coordinates
+used above. For fixed $0<m<1$ and $m^2/2\le z\le m-m^2/2$, the density
+$\mathbf1_{[a,a+m]}$ with $a=z/m-m/2$ minimizes the second moment, giving
+$q_-=z^2/m+m^3/12$. Indeed $(t-a)(t-a-m)$ is nonpositive on that interval
+and nonnegative outside; multiplying by the difference from this density
+and integrating gives the lower bound because the first two moments cancel.
+Apply the same argument to the complementary density for $q_+$.
+Convex combinations of the two extremizers realize every intermediate $q$.
+
+For a feasible prefix $(m,z,q)$ put $D=z-m^2/2$ and $Q=q-m^3/3$.
+The prefix bounds become
+\[
+ 0\le D\le m(1-m),\qquad
+ mD+D^2/m\le Q\le(m+1)D-D^2/(1-m).
+\]
+If $D>0$, set $b=Q/D-m$ and
+\[
+ \Delta=(m-b)^2+4D,\qquad
+ a=(m+b-\sqrt\Delta)/2,\qquad
+ c=(m+b+\sqrt\Delta)/2.
+\]
+The bounds imply $D/m\le b\le1-D/(1-m)$, whence
+$0\le a\le b\le c\le1$. In particular $mb\ge D$ and
+$(1-m)(1-b)\ge D$ imply the endpoint inequalities by comparing
+$\Delta$ with $(m+b)^2$ and $(2-m-b)^2$.
+The density $\rho_- =\mathbf1_{[0,a]}+\mathbf1_{[b,c]}$ realizes the prefix:
+\begin{align*}
+ a+c-b&=m,\\
+ (a^2+c^2-b^2)/2&=m^2/2+D=z,\\
+ (a^3+c^3-b^3)/3&=m^3/3+D(m+b)=q.
+\end{align*}
+For any competing density with this prefix, the product
+$W(t)=(t-a)(t-b)(t-c)$ satisfies $W(\rho-\rho_-)\ge0$ pointwise.
+Its lower-degree terms integrate to zero. Therefore the fourth moment is
+at least that of $\rho_-$, namely
+\[
+ L=Q^2/D-mQ+m^2D+D^2/2+m^4/4=F_0+B^2/D.
+\]
+The complementary construction attains $1/4-L(\bar y)$ as the upper bound.
+Their convex combinations fill the interval of feasible fourth moments.
+If $D=0$, the sign argument with $t-m$ forces
+$\rho=\mathbf1_{[0,m]}$ almost everywhere, hence
+$(q,r)=(m^3/3,m^4/4)$. The cases $m=0$ and $m=1$ are the zero and full
+densities. This proves the necessary boundary formulas without assuming
+nondegeneracy of a representing density.
+
+\subsubsection{Relationship to rational first-order lifting}\label{app:rational}
+This alternative fourth-order route clarifies the relationship to existing tools.
+Use $x=(s,t,v)$ and a reference $X=(S,T,V)$, and put
+\[
+ D=t-s^2/2,\quad B=v-st/2-s^3/12,\quad
+ F_0=t^2/2+s^2t/4,\quad L=F_0+B^2/D.
+\]
+Write $D_0=D(X)>0$, $B_0=B(X)$, $u=s-S$, $w=t-T$ and
+$R_L=L(x)-L(X)-\nabla L(X)^\top(x-X)$. Direct cancellation gives
+\begin{align}
+ DD_0^2R_L
+ &= (D_0B-B_0D)^2
+ +\frac D2\left[D_0(w+Su/2+u^2/6)-B_0u\right]^2\notag\\
+ &\quad+\frac{(DD_0u)^2}{12}
+ +\frac{DD_0(D_0u)^2}{6}
+ +\frac{D(D_0u^2)^2}{36}.\label{eq:rational-remainder}
+\end{align}
+This is a q-module certificate of the rational first-order type developed
+in \cite{nierational}, with denominator multipliers $D(x)$ and $D(X)^2$.
+The concave domain generator $D$ has negative Taylor remainder $u^2/2$.
+
+For a direct construction, let $Z$ be a linear functional on polynomials
+in $(s,t,v)$ of degree at most six, and let $V_j$ be the monomial vector
+through degree $j$. Consider
+\begin{align*}
+ &Z(V_3V_3^\top)\succeq0,\quad Z(DV_2V_2^\top)\succeq0,\quad Z(D)=1,\\
+ &(m,z,q)=(Z(Ds),Z(Dt),Z(Dv)),\quad r\ge Z(DF_0+B^2).
+\end{align*}
+There are 84 raw functional values and Gram blocks of orders 20 and 10.
+Its projection is precisely $D(m,z)>0$, $r\ge L(m,z,q)$.
+Indeed, writing $a=Z(Ds^2)$, the second Gram block gives $a\ge m^2$.
+The first, restricted to $(1,D)$, gives
+\[
+ \begin{pmatrix}Z(1)&1\\1&Z(D^2)\end{pmatrix}\succeq0,
+ \qquad D(m,z)=Z(D^2)+(a-m^2)/2>0.
+\]
+Apply $Z$ to \eqref{eq:rational-remainder} with the reference equal to
+the output coordinates. The affine Taylor terms vanish after defining $\Lambda(h)=Z(Dh)$ for
+polynomial $h$ with $\deg(Dh)\le6$. Here the notation
+$\Lambda(L):=Z(DF_0+B^2)$ is defined by the polynomial $DL$;
+it does not extend $Z$ to arbitrary rational functions. The two Gram
+blocks make every remaining term nonnegative, yielding
+$r\ge\Lambda(L)\ge L(m,z,q)$.
+Conversely, $Z(P)=P(m,z,q)/D(m,z)$ supplies feasible rank-one Gram blocks
+for every point of that strict-domain epigraph.
+
+The strict inequality matters: this rational lift has no finite auxiliary
+solution at $D=0$. Its closure is the full set $G(y)\succeq0$; at $D=0$
+the added points satisfy $B=0,r\ge F_0$ and are limits with $D>0,B=0$.
+The established closure theorem for spectrahedral shadows
+\cite[Corollary 3.4, author version]{gn} therefore gives a finite SDP
+existence route for this closed set and its intersection with the affine
+complementary copy, namely $\K_4$. Closure is not being identified with
+the original rational projection, and this argument does not supply the
+seven-block bound by itself. We retain the direct polynomial proof in
+Theorem~\ref{thm:lift} for that explicit size and boundary statement.
+
+\subsection{Complete fifth-order lift}\label{sec:five}
+Write $y=(m,z,q,r,v)$, $x=(m,z,q,r)$ and
+$\bar y=(1,\tfrac12,\tfrac13,\tfrac14,\tfrac15)-y$. In this section put
+\begin{align}
+ \Delta&=mq-z^2-m^4/12,& N&=mr-zq-m^3z/6,& p&=m\Delta,\notag\\
+ H(x)&=q^2/m+m^2q/12+mz^2/4-m^5/720,&
+ F(x)&=H(x)+N^2/(m\Delta).\label{eq:five-boundary}
+\end{align}
+The product $pF=pH+N^2$ is polynomial: multiplication by $p=m\Delta$
+clears the denominators in $F$. The functionals below act on this polynomial.
+
+The distinction from a direct use of rational-epigraph results is
+checkable. The automatic univariate case in \cite[Theorem 3.6, 2009 author
+revision]{nierational} does not apply to a function of four prefix moments.
+The original integration variable being scalar does not make those moments
+one decision variable. The general multivariate framework requires
+domain-weighted first-order certificates and additional domain and boundary
+hypotheses; convexity of the moment body alone does not verify them.
+Nor can the determinant used below be inserted as
+a concave polynomial domain constraint: the $(m,q)$ Hessian block of
+$\Delta=mq-z^2-m^4/12$ is
+$\left(\begin{smallmatrix}-m^2&1\\1&0\end{smallmatrix}\right)$, with determinant
+$-1$. This excludes that direct substitution, not all possible applications
+of established methods. The functional construction below is proved
+directly, including finite boundary witnesses.
+
+\begin{lemma}[Classical interior fifth-moment boundary]\label{lem:five-boundary}
+For $x\in\operatorname{int}\K_4$, both $p(x),p(\bar x)>0$, and
+$(x,v)\in\K_5$ exactly when $F(x)\le v\le1/5-F(\bar x)$.
+\end{lemma}
+\begin{proof}
+Define $f(x)=\min\{v:(x,v)\in\K_5\}$. Compactness of $\K_5$ and its
+projection onto $\K_4$ give attainment on every feasible fiber. Convexity
+of $\K_5$ makes $f$ convex and finite on $\operatorname{int}\K_4$;
+therefore a subgradient $\lambda$ exists at each such prefix. Its supporting
+inequality makes a minimizing density a global minimizer of
+$\int_0^1(t^4-\sum_{j=0}^3\lambda_jt^j)\rho(t)\,dt$ over $0\le\rho\le1$.
+It equals the quartic's negative-set indicator almost everywhere.
+If this density had $k\le3$ genuine interior switches $a_i$, choose the
+sign of $W(t)=\pm\prod_{i=1}^k(t-a_i)$ to be positive exactly where the
+density is one. For $k=0$, take the appropriate nonzero constant.
+The nonzero coefficient vector of $W$ would support $\K_4$ at $x$,
+contradicting interiority. A quartic has at most four switches, so it has
+four distinct simple roots in $(0,1)$. Since it is monic, its negative set
+consists of two strictly interior, disjoint intervals.
+
+For intervals $[a_i,b_i]$, the classical exponential transform is
+\[
+ 1-\exp\left(-\sum_{j\ge0}y_jw^{j+1}\right)
+ =1-\prod_i\frac{1-b_iw}{1-a_iw}
+ =w\sum_i\frac{c_i}{1-a_iw},\qquad c_i>0.
+\]
+For $a_1<b_1<a_2<b_2$, the residues are explicitly
+\[
+ c_1=\frac{(b_1-a_1)(b_2-a_1)}{a_2-a_1}>0,\qquad
+ c_2=\frac{(a_2-b_1)(b_2-a_2)}{a_2-a_1}>0.
+\]
+This is standard Markov-moment algebra \cite{gr}. Consequently the three-by-three Hankel
+matrix of the first five transformed coefficients has rank two, with
+positive definite leading two-by-two block. Its congruence by
+\[
+ T=\begin{pmatrix}1&0&0\\m/2&1&0\\z/2+m^2/12&m/2&1\end{pmatrix}
+\]
+is
+\[
+ \begin{pmatrix}
+ m&z&q\\
+ z&q-m^3/12&r-m^2z/6\\
+ q&r-m^2z/6&v-m^2q/12-mz^2/4+m^5/720
+ \end{pmatrix}.
+\]
+Eliminating the first row and column gives entries $\Delta/m$, $N/m$ and
+$v-H$, so the rank equality gives $v=F(x)$. The leading determinant is
+$\Delta>0$. Complementation gives the upper extremum and its positive
+denominator. Convex combinations of the two extremizers fill the fiber.
+\end{proof}
+
+For a reference $u=(M,Z,Q,R)$ put $h=m-M$, $\Delta_0=\Delta(u)$,
+$N_0=N(u)$ and
+\begin{align*}
+ A_*&=\Delta_0N-N_0\Delta,\\
+ B_*&=\Delta_0(Mq-mQ+mM^2h/12)-N_0(Mz-mZ),\\
+ C_*&=\Delta_0(Mz+(m-2M)Z)-N_0Mh,\\
+ D_*&=\Delta_0((2m-M)z-mZ)-N_0mh.
+\end{align*}
+Writing $R_F(x,u)=F(x)-F(u)-\nabla F(u)^\top(x-u)$, the joint identity is
+\begingroup\interdisplaylinepenalty=10000
+\begin{align}
+ p(x)p(u)^2R_F(x,u)
+ &=(MA_*)^2+\Delta B_*^2+\frac{pM}{6}C_*^2
+       +\frac{\Delta}{12}(MD_*)^2\notag\\
+ &\quad+\frac{(\Delta M\Delta_0h)^2}{12}
+       +\frac{p(M\Delta_0)}6(\Delta_0h)^2\notag\\
+ &\quad+\frac{pM}{120}(M\Delta_0h^2)^2
+       +\frac{\Delta}{180}(mM\Delta_0h^2)^2.\label{eq:five-certificate}
+\end{align}
+\endgroup
+Coefficient expansion proves this identity with independent $x,u$. It is a
+specific domain-weighted first-order certificate in the established rational
+lifting framework \cite{nierational}, not a claim to invent that framework.
+
+For a linear functional $\ell$, impose the following seven PSD matrices.
+Each row denotes $\ell(gbb^\top)\succeq0$.
+\begin{center}
+\begin{tabular}{clc}
+\toprule
+Weight $g$ & Polynomial feature vector $b^\top$ & Order\\
+\midrule
+$1$ & $(N,\Delta)$ & 2\\
+$1$ & $(p,\Delta)$ & 2\\
+$\Delta$ & $(q,m,m^2,z)$ & 4\\
+$\Delta$ & $(mz,z,m,m^2)$ & 4\\
+$\Delta$ & $(m^3,m^2,m)$ & 3\\
+$p$ & $(z,m,1)$ & 3\\
+$p$ & $(m^2,m,1)$ & 3\\
+\bottomrule
+\end{tabular}
+\end{center}
+Use a common functional on the span of all these entries and
+$(p,pm,pz,pq,pr,pF)$. This polynomial space has the following basis of size 19:
+\begin{align*}
+ &(p,pm,pz,pq,pr,pF,\ N^2,N\Delta,\Delta^2,p^2,p\Delta,\Delta q^2,\\
+ &\hspace{14mm}\Delta m^2q,\Delta qz,\Delta m^3,\Delta m^4,
+           \Delta m^2z,\Delta m^2z^2,pz^2).
+\end{align*}
+Expansion of monomial coefficients verifies both linear independence and
+that every required entry belongs to this span. Thus its functional values
+are ordinary finite affine decision variables; the polynomial features are
+not substituted nonlinearly into output coordinates. For direct implementation,
+Section~\ref{app:coefficients} lists every affine matrix entry in these
+19 coordinates; no polynomial elimination or choice of a Gram completion is
+left to the reader.
+
+\begin{theorem}[Complete fifth-order lift]\label{thm:five-lift}
+A point $y=(x,v)$ belongs to $\K_5$ if and only if its prefix satisfies the
+seven-block lift of Theorem~\ref{thm:lift}, and there are two functionals
+with the seven PSD matrices above such that
+\[
+ \ell_-(p)=\ell_+(p)=1,\qquad
+ \ell_-(px_i)=x_i,\quad\ell_+(px_i)=\bar x_i,
+\]
+\[
+ \ell_-(pF)\le v,\qquad \ell_+(pF)\le1/5-v.
+\]
+Each functional acts on its own copy of the formal polynomial variables;
+its coordinates are not required to be point evaluations at the output.
+The model has 34 auxiliary scalars, 21 PSD blocks of maximum order four,
+and two scalar inequalities, including all singular boundary points.
+\end{theorem}
+\begin{proof}
+If the output prefix is interior, set the reference in
+\eqref{eq:five-certificate} equal to that output and apply $\ell_-$. The
+normalization and output equations cancel its linear Taylor term. All eight
+squares lie in the seven displayed spaces and all reference weights are
+positive. Hence $\ell_-(pF)\ge F(x)$. The upper copy similarly yields the
+upper boundary in Lemma~\ref{lem:five-boundary}.
+
+For a feasible tuple with boundary prefix, mix the entire lifted tuple with
+the feasible point-evaluation tuple of the density $1/2$. Affinity preserves
+all constraints and places its prefix in $\operatorname{int}\K_4$ for any
+positive mixing weight. The preceding argument puts the mixed output in
+$\K_5$; compactness then puts the original output there. This proves
+sufficiency without assuming that an arbitrary spectrahedral projection is closed.
+
+For necessity let $y$ be physical and mix its density with $1/2$, obtaining
+$y_\epsilon$. Its prefix is $x_\epsilon=(1-\epsilon)x+\epsilon c$, where
+$c=(1/2,1/4,1/6,1/8)$ is the half-density center. For $\epsilon>0$, the functional
+$\ell_\epsilon(f)=f(x_\epsilon)/p(x_\epsilon)$ supplies positive multiples
+of rank-one matrices and the required inequalities. We show that its values
+on the displayed basis have finite limits, even when raw monomial values diverge.
+
+Extend a density by zero outside $[0,1]$ for the following variance comparison.
+If $m>0$ and $\Delta=0$, equality in the bounded-density variance bound
+$q-z^2/m\ge m^3/12$ forces a single interval of length $m$, centered at
+$z/m$. This follows by comparing the density with that interval under the
+weight $(t-z/m)^2-m^2/4$, whose sign agrees with the comparison outside
+and inside the interval. Equality forces equality of the densities almost
+everywhere. Its third moment gives $N=0$. The function
+$\kappa=\Delta/m=q-z^2/m-m^3/12$ is concave for $m>0$:
+its $(m,z)$ Hessian has negative first diagonal entry and determinant one,
+and its $q$ dependence is affine. At the center
+$c=(1/2,1/4,1/6,1/8)$, $\kappa(c)=1/32$. Thus, for sufficiently small
+$\epsilon>0$,
+\[
+ \kappa(x_\epsilon)\ge\epsilon/32,\qquad
+ \Delta(x_\epsilon)\ge m\epsilon/64,\qquad
+ N(x_\epsilon)=O(\epsilon),\qquad N(x_\epsilon)^2/p(x_\epsilon)=O(\epsilon).
+\]
+Here $m$ is the fixed boundary mass and $m_\epsilon\ge m/2$.
+In the displayed basis order, the normalized coordinates are
+\[
+ \begin{aligned}
+ &(1,m,z,q,r,F,\ N^2/p,N/m,\Delta/m,p,\Delta,q^2/m,\\
+ &\hspace{14mm}mq,qz/m,m^2,m^3,mz,mz^2,z^2),
+ \end{aligned}
+\]
+with all entries evaluated at $x_\epsilon$. The only singular quotient
+not controlled by the positive limiting mass is $N^2/p$, already bounded
+above. Thus all 19 coordinates have finite limits in this case.
+
+If $m=0$, the physical prefix is zero. On its central mixing path,
+$m,z,q,r=O(\epsilon)$, $N,\Delta=O(\epsilon^2)$, and $p$ has positive
+leading order $\epsilon^3$. The same seven normalized matrices and $F$
+are bounded: $m_\epsilon=\epsilon/2$, so $q^2/m$, $qz/m$, $N/m$ and
+$\Delta/m$ are $O(\epsilon)$, as are $H$ and $N^2/p$; the other nonconstant
+coordinates in the displayed tuple also tend to zero. Every selected
+basis element divided by $p(x_\epsilon)$ is therefore a bounded
+rational function of $\epsilon$, with a removable singularity. Its limit
+defines a finite functional; common polynomial relations persist by linearity.
+All PSD constraints and output inequalities persist as finite limits. The
+complementary copy is identical, and the prefix uses its finite atomic
+witness. This proves necessity at every boundary, not just closure existence.
+
+For clarity, the finite single-interval witness for $m>0,\Delta=0$,
+in the displayed 19-coordinate order, is
+\[
+ \begin{aligned}
+ \theta^*={}&(1,m,z,q,r,H,0,0,0,0,0,\ q^2/m,mq,qz/m,\\
+             &\hspace{24mm}m^2,m^3,mz,mz^2,z^2).
+ \end{aligned}
+\]
+The physical fifth moment is $v=H$; the first two blocks vanish and the
+last five are the weighted outer products above. This includes full density
+by setting $(m,z,q,r)=(1,1/2,1/3,1/4)$. At zero density the central path has
+$\Delta_\epsilon=N_\epsilon=\epsilon^2(4-\epsilon^2)/192$ and
+$p_\epsilon=\epsilon^3(4-\epsilon^2)/384$; its coordinate limit is
+$(1,0,\ldots,0)$. The last two blocks are then $\operatorname{diag}(0,0,1)$
+and the other blocks vanish. If $m>0,\Delta>0$, point evaluation itself
+has no singular denominator, even when the prefix is on another boundary.
+
+The first five values of each 19-dimensional functional are fixed by its
+normalization and prefix outputs. Hence there are $14+14+6=34$ auxiliaries.
+The two copies of seven blocks and the seven prefix blocks give the stated size.
+\end{proof}
+
+\begin{corollary}[A finite-SDP/non-SOCP separation]\label{cor:five-separation}
+The complete fifth-order body satisfies $3\le\sxdeg(\K_5)\le4$.
+It has a finite affine SDP lift but no lift over any finite product of Lorentz
+cones. The same is true of its affine-equivalent integrator reach set.
+\end{corollary}
+\begin{proof}
+Combine Theorem~\ref{thm:five-lift} with Theorem~\ref{thm:lower} below and
+the invertible map \eqref{eq:affine}. The exact minimum, three or four,
+is not determined here.
+\end{proof}
+
+\subsubsection{Explicit coefficient interface}\label{app:coefficients}
+Index the 19 basis polynomials in Section~\ref{sec:five} by $b_0,\ldots,b_{18}$
+in their displayed order and write $\theta_i=\ell(b_i)$. These are independent
+functional coordinates, not evaluations of $b_i$ at the output point.
+Define the four linear abbreviations
+\begin{align*}
+\gamma_{1}&=\theta_{3}-\theta_{8}-\theta_{15}/12,\\
+\gamma_{2}&=6(\theta_{4}-\theta_{13}-\theta_{7}),\\
+\gamma_{3}&=12(\theta_{12}-\theta_{10}-\theta_{18}),\\
+\gamma_{4}&=180(\theta_{5}-\theta_{6}-\theta_{11})-15\theta_{9}-60\theta_{17}.
+\end{align*}
+The seven pencils, in the feature-table order, are
+\begin{align*}
+M_{1}(\theta)&=\begin{pmatrix}
+\theta_{6}&\theta_{7}\\\theta_{7}&\theta_{8}
+\end{pmatrix},&
+M_{2}(\theta)&=\begin{pmatrix}
+\theta_{9}&\theta_{10}\\\theta_{10}&\theta_{8}
+\end{pmatrix},\\[2mm]
+M_{3}(\theta)&=\begin{pmatrix}
+\theta_{11}&\theta_{3}&\theta_{12}&\theta_{13}\\
+\theta_{3}&\theta_{1}&\theta_{14}&\theta_{2}\\
+\theta_{12}&\theta_{14}&\theta_{15}&\theta_{16}\\
+\theta_{13}&\theta_{2}&\theta_{16}&\gamma_{1}
+\end{pmatrix},&
+M_{4}(\theta)&=\begin{pmatrix}
+\theta_{17}&\theta_{18}&\theta_{16}&\gamma_{2}\\
+\theta_{18}&\gamma_{1}&\theta_{2}&\theta_{16}\\
+\theta_{16}&\theta_{2}&\theta_{1}&\theta_{14}\\
+\gamma_{2}&\theta_{16}&\theta_{14}&\theta_{15}
+\end{pmatrix},\\[2mm]
+M_{5}(\theta)&=\begin{pmatrix}
+\gamma_{4}&\gamma_{3}&\theta_{15}\\
+\gamma_{3}&\theta_{15}&\theta_{14}\\
+\theta_{15}&\theta_{14}&\theta_{1}
+\end{pmatrix},&
+M_{6}(\theta)&=\begin{pmatrix}
+\theta_{18}&\theta_{16}&\theta_{2}\\
+\theta_{16}&\theta_{14}&\theta_{1}\\
+\theta_{2}&\theta_{1}&\theta_{0}
+\end{pmatrix},\\[2mm]
+M_{7}(\theta)&=\begin{pmatrix}
+\gamma_{3}&\theta_{15}&\theta_{14}\\
+\theta_{15}&\theta_{14}&\theta_{1}\\
+\theta_{14}&\theta_{1}&\theta_{0}
+\end{pmatrix}.
+\end{align*}
+Require all seven matrices to be PSD. For the lower copy, set
+$(\theta_0,\ldots,\theta_4)=(1,m,z,q,r)$ and impose $\theta_5\le v$.
+The upper copy fixes these coordinates to
+$(1,1-m,1/2-z,1/3-q,1/4-r)$ and imposes $\theta_5\le1/5-v$.
+Each copy has its own $\theta_5,\ldots,\theta_{18}$. Add the seven-block
+four-moment prefix on $(m,z,q,r)$: this gives the complete 21-block model.
+For synthesis replace these fixed coordinates by the homogeneous values in
+Section~\ref{sec:five-synthesis}; the seven displayed pencils do not change.
+
+Substitution of the basis polynomials for the $\theta_i$ recovers each
+weighted outer product in the feature table exactly. In particular the
+four abbreviations are the polynomial relations for $\Delta z^2$,
+$\Delta m^3z$, $\Delta m^5$ and $\Delta m^6$, respectively. This checks
+the shared relations, rather than assigning separate variables to repeated
+entries. Exact coefficient rank 19 verifies that these values consistently
+define a functional on the required span. This is an executable
+description of Theorem~\ref{thm:five-lift}, not an additional result.
+
+\subsection{Necessary PSD block size}\label{sec:lower}
+Let $P_n([0,1])$ denote the coefficient cone of real polynomials of degree
+at most $n$ nonnegative on $[0,1]$.
+
+\begin{lemma}[Normal-cone transfer]\label{lem:transfer}
+If a nonempty convex set $C$ has an affine PSD lift with maximum block
+order $r$, then for every $v\in C$, its outward normal cone $N_C(v)$ has
+such a lift with maximum order at most $\max(r,1)$.
+\end{lemma}
+\begin{proof}
+Write $C=\{LX+c_0: AX=b,\ X\in Q\}$ for a product $Q$ of PSD cones.
+Any free scalar variables in the original affine lift can first be encoded
+as differences of two nonnegative scalars, adding only order-one blocks.
+Compress each block to the span of the ranges of all feasible block matrices.
+Finitely many feasible tuples span these spaces; their average is positive
+definite on each compressed space, since the kernel of a sum of PSD matrices
+is the intersection of their kernels. This produces a strictly feasible
+lift with no larger blocks, representing the same set. Zero blocks are
+discarded. This is the standard proper-face reduction underlying lift
+duality \cite{gpt}.
+
+For $\lambda\in N_C(v)$, maximize $\ip{L^*\lambda}{X}$ over the reduced
+lift. The value $\ip{\lambda}{v-c_0}$ is finite and attained. Strict primal
+feasibility gives an attained dual with equal value. Hence
+\begin{equation}\label{eq:normal-lift}
+ N_C(v)=\{\lambda:\exists\eta,
+ A^*\eta-L^*\lambda\in Q,\quad
+ b^\top\eta=\lambda^\top(v-c_0)\}.
+\end{equation}
+Conversely the displayed constraints imply
+$\lambda^\top(LX+c_0-v)=-\ip{A^*\eta-L^*\lambda}{X}\le0$
+for every feasible $X$. All constraints in \eqref{eq:normal-lift} are
+affine and use the same PSD block orders. Free variables may be represented
+by differences of order-one nonnegative variables.
+\end{proof}
+
+\begin{theorem}[Block-size obstruction]\label{thm:lower}
+For every $d\ge1$, $\sxdeg(\K_d)\ge\lceil d/2\rceil$.
+For $d\ge5$, $\K_d$ has no affine lift over any finite product of Lorentz
+cones, including cones of arbitrary finite dimension.
+\end{theorem}
+\begin{proof}
+At the saturated-density point $v_j=1/(j+1)$,
+\begin{equation}\label{eq:normal}
+ N_{\K_d}(v)=P_{d-1}([0,1]).
+\end{equation}
+Indeed a nonnegative polynomial $p_\lambda$ gives
+$\int p_\lambda(\rho-1)\le0$ for every admissible density. A negative
+value gives an interval of negative values; setting $\rho=0$ there and
+$\rho=1$ elsewhere violates the normal inequality.
+
+Set $k=\lfloor(d-1)/2\rfloor$. For $k\ge1$, we apply Averkov's polynomial
+neighborliness obstruction \cite[Theorem 2, author-version numbering]{averkov}.
+The theorem applies to a closed convex cone of bounded-degree polynomials
+nonnegative on a domain with nonempty interior.
+Suppose there are arbitrarily large finite sets $S$ in that domain.
+For every $k$-element subset $A\subset S$, suppose there is a polynomial in
+the cone that vanishes on $A$ and is strictly positive on $S\setminus A$.
+Then the extension degree is greater than $k$.
+Here $[0,1]$ has nonempty interior, and $P_{2k}([0,1])$ is closed and convex
+as an intersection of point-evaluation halfspaces. For any finite
+$S\subset(0,1)$ and any $k$-element subset $A\subset S$, the polynomial
+$\prod_{a\in A}(t-a)^2$ belongs to this cone, is zero on $A$ and is strictly
+positive on $S\setminus A$. Such sets $S$ can have arbitrarily large cardinality,
+so $\sxdeg(P_{2k}([0,1]))\ge k+1$. If $d-1=2k+1$, setting the highest coefficient
+to zero makes $P_{2k}$ a linear slice of $P_{d-1}$; otherwise it is the
+same cone. Equation~\eqref{eq:normal} and Lemma~\ref{lem:transfer} yield
+$\sxdeg(\K_d)\ge k+1$. The cases $d=1,2$ use the definitional lower bound
+one. The polynomial obstruction, rather than any finite numerical test,
+provides the universal quantifier in this argument.
+
+Every finite-dimensional Lorentz cone has a lift using finitely many
+three-dimensional Lorentz cones, by introducing successive partial
+Euclidean norms. The three-dimensional Lorentz cone is isomorphic to $\PSD^2$ by
+$(a,b,c)\mapsto\left(\begin{smallmatrix}a+b&c\\c&a-b\end{smallmatrix}\right)$.
+An SOC lift would therefore imply $\sxdeg(\K_d)\le2$, impossible for
+$d\ge5$.
+\end{proof}
+
+Combined with Theorem~\ref{thm:lift}, this gives
+$2\le\sxdeg(\K_4)\le3$, not an exact fourth-order classification.
+\begin{remark}[Normal-cone limitation]\label{rem:normal-limit}
+Changing the boundary point cannot strengthen the normal-cone argument to
+order three for $\K_4$. In fact, let $y\in\partial\K_d$ and let
+$a_1<\cdots<a_k$ be the genuine interior switches of its representing
+density. Every nonzero supporting polynomial has a unique maximizing
+density, namely its positive-sign indicator, since its zero set has measure
+zero. Choose $W(t)=\epsilon\prod_i(t-a_i)$ with that sign pattern. Then
+\[
+ N_{\K_d}(y)=\{\operatorname{coeff}(Wq):q\in P_{d-1-k}([0,1])\}.
+\]
+Indeed a normal polynomial has the required weak signs on every constant
+density interval, must vanish at each switch, and its quotient by $W$ is
+nonnegative by continuity. The converse follows by pointwise maximization.
+Multiplication by the fixed $W$ is a linear isomorphism onto this cone's span.
+For $d=4$, all residual degrees are at most three. The classical interval
+representation
+\[
+ q(t)=t(1,t)Q_0(1,t)^\top+(1-t)(1,t)Q_1(1,t)^\top,
+ \qquad Q_0,Q_1\in\PSD^2,
+\]
+represents $P_3([0,1])$; lower degrees are affine coefficient slices. Hence
+every ordinary normal cone of $\K_4$ is SOC representable. This is a limit
+of this proof method, not a construction of an SOC lift for $\K_4$.
+Conversely, the isolated homogeneous Hankel block $H$ is a known non-SOC
+slice \cite[Theorem 5]{fawzi},
+but no implication from that auxiliary cone to the
+projected body is available. Neither observation settles the gap.
+\end{remark}
+
+By \eqref{eq:affine}, the obstruction applies to full-state integrator
+reach sets with nondegenerate input intervals, not every partial observation
+or conditional slice.
+
+\subsection{Exact minimum-peak formulation}\label{sec:synthesis}
+\subsubsection{Fourth-order prefix model}
+First specialize the problem of Section~\ref{sec:control-problem} to
+fourth-order chains. This model supplies the homogeneous prefix used by
+the fifth-order construction; all times and physical rows remain fixed.
+
+Homogenize \eqref{eq:H}--\eqref{eq:Q} by replacing the upper-left constant
+one in $H,J_+,J_-$ with $J$, leaving all other entries affine in scaled
+moments $Y$ and auxiliaries $Z$. Denote these pencils by $\widehat M_k$.
+\begin{lemma}\label{lem:homogeneous}
+\[
+ \{(J,Y):J\ge0,\ \exists Z,\ \widehat M_k(J,Y,Z)\succeq0\ \forall k\}
+ =\{(J,Jy):J\ge0,\ y\in\K_4\}.
+\]
+\end{lemma}
+\begin{proof}
+For $J>0$, divide every pencil by $J$ and apply Theorem~\ref{thm:lift}.
+At $J=0$, the zero first diagonal of $H$ forces $m=a=0$, and its second
+row then forces $b=0$, while $c\ge0$. The zero first rows of $J_\pm$
+force $z=0$; $T_-$ then forces $d=0$. The last diagonals of $T_-$ and
+$T_+$ give $e-c/2\ge0$ and $-e-c/2\ge0$, so $c=e=0$.
+The last diagonal of $J_\pm$ gives $f\ge0$. Matrix $Q_-$ forces $q=0$;
+the two $Q$ last diagonals give $r-f/2\ge0$ and $-r-f/2\ge0$, so
+$f=r=0$. There are no nonzero apex directions. The zero tuple is feasible.
+\end{proof}
+
+Partition $[0,T]$ at the row times, obtaining $N$ segments $[l,r]$.
+On a segment of length $h$, set
+$Y_j=\int_0^1 s^j[u_a(l+hs)+J]/2\,ds$.
+Its signed input moments are $2Y_j-J/(j+1)$. Remove the known zero-input
+flow from each row and write the resulting target as $\beta_i$.
+The convolution kernel for derivative index $d=0,1,2,3$ is
+\[
+ k_{ia}(t)=\mathbf1_{t\le t_i}\sum_{d=0}^3
+       w_{i,a,d}\frac{(t_i-t)^{3-d}}{(3-d)!}.
+\]
+Expand $h k_{ia}(l+hs)=\sum_{j=0}^3c_{iaj}^{[l,r]}s^j$ on each segment.
+The row constraints are exactly
+\begin{equation}\label{eq:finite-rows}
+ \left|\sum_{a,[l,r],j}c_{iaj}^{[l,r]}
+       \left(2Y_{aj}^{[l,r]}-\frac{J}{j+1}\right)-\beta_i\right|
+       \le\epsilon_i.
+\end{equation}
+
+\begin{corollary}\label{cor:synthesis}
+Minimizing $J$ subject to $J\ge0$, the homogenized seven-block constraints
+on every axis/segment, and \eqref{eq:finite-rows}, is equivalent to the
+continuous-input problem \eqref{eq:waypoints}. There are $10AN+1$ scalar
+variables, $3AN$ PSD blocks of order three and $4AN$ of order two.
+\end{corollary}
+\begin{proof}
+Each feasible input gives feasible moments. Conversely Lemma~\ref{lem:homogeneous}
+gives a bounded measurable input on each segment; concatenate these inputs.
+Convolution gives a continuous state trajectory satisfying all rows.
+The peak-zero case follows from the apex argument. Thus the feasible peak
+sets and optimal values coincide. If feasible, a bounded minimizing sequence
+has a weak-star convergent subsequence and the finitely many kernel integrals
+pass to its limit, so the minimum is attained. No input mesh or prescribed
+switch count is introduced in the outer model.
+\end{proof}
+
+\subsubsection{Fifth-order model and the zero-peak apex}\label{sec:five-synthesis}
+Replace the fourth-order dynamics above by fifth-order chains. Homogenize
+the complete lift in Theorem~\ref{thm:five-lift}, using functional coordinates
+$(J,Y_0,Y_1,Y_2,Y_3,\zeta_-)$ on the lower side and
+$(J,J-Y_0,J/2-Y_1,J/3-Y_2,J/4-Y_3,\zeta_+)$ on the upper side,
+where each $\zeta$ has 14 entries. The prefix is the homogeneous four-moment
+lift; the last two scalar rows are
+$Y_4\ge\ell_-(pF)$ and $J/5-Y_4\ge\ell_+(pF)$.
+All entries are affine decision expressions.
+
+\begin{lemma}[Exact fifth-order homogenization]\label{lem:five-homogeneous}
+The output projection of these constraints with $J\ge0$ is precisely
+$\{(J,Jy):J\ge0,\ y\in\K_5\}$.
+\end{lemma}
+\begin{proof}
+For $J>0$ divide by $J$ and use Theorem~\ref{thm:five-lift}.
+At $J=0$, Lemma~\ref{lem:homogeneous} forces $Y_0=\cdots=Y_3=0$.
+The polynomial identity
+\begin{equation}\label{eq:five-apex}
+ pF=N^2+\Delta q^2+\frac{p^2}{12}
+       +\frac{\Delta(mz)^2}{3}+\frac{\Delta m^6}{180}
+\end{equation}
+expresses its functional value as a nonnegative combination of retained PSD
+diagonal entries. Thus both $\ell_\pm(pF)$ are nonnegative, even at the apex.
+The two scalar rows force $Y_4=0$. The all-zero lifted tuple is feasible;
+uniqueness of the auxiliary values is unnecessary.
+\end{proof}
+
+For fifth-order dynamics the physical kernel is
+\[
+ k_{ia}(t)=\mathbf1_{t\le t_i}\sum_{d=0}^4
+ w_{i,a,d}\frac{(t_i-t)^{4-d}}{(4-d)!}.
+\]
+Its local polynomial expansion uses five signed moments per axis/segment.
+Equation~\eqref{eq:finite-rows} therefore applies with $j=0,\ldots,4$.
+\begin{corollary}\label{cor:five-synthesis}
+The fifth-order continuous minimum-peak problem with constraints
+\eqref{eq:waypoints} is equivalent to a finite affine SDP with $39AN+1$
+variables, $21AN$ PSD blocks of maximum order four, $2AN$ scalar cone rows,
+and the physical waypoint rows. The outer formulation has no input-time mesh.
+\end{corollary}
+\begin{proof}
+Use Lemma~\ref{lem:five-homogeneous} on every axis/segment and concatenate
+the corresponding measurable inputs. The same convolution and weak-star
+compactness argument as for Corollary~\ref{cor:synthesis} gives identical
+feasible peak values and attainment for feasible tasks. This proves the
+zero-peak case as well; it is not a division-by-zero convention.
+\end{proof}
+
+\subsection{Shared certification and continuous-dual reference}\label{sec:certification}
+The representation and synthesis theorems allow the real data specified in
+Section~\ref{sec:control-problem}. The exact-rational implementation below
+instead certifies instances whose horizon, observation times, initial states,
+row coefficients, targets and tolerances are specified exactly as rationals.
+Its control amplitudes, breakpoints and checked dual multipliers are rational
+as well. Replacing real data by finite decimals certifies that rational
+instance, not the original real-data equalities; transferring the certificate
+would require a separate error enclosure. Rational input data do not guarantee
+success of the finite-budget recovery.
+
+Let $k_a(t)=\sum_i\lambda_i k_{ia}(t)$ for any vector $\lambda$ and define
+\[
+ I(\lambda)=\sum_a\int_0^T|k_a(t)|\,dt,\qquad
+ B(\lambda)=\lambda^\top\beta-\sum_i\epsilon_i|\lambda_i|.
+\]
+Every feasible input has $B(\lambda)\le JI(\lambda)$. Hence, if
+$\widehat I\ge I$ and $\widehat I>0$,
+\begin{equation}\label{eq:dualbound}
+ L=\max\{0,B(\lambda)/\widehat I\}\le J_*.
+\end{equation}
+If $I(\lambda)=0$, feasibility requires $B(\lambda)\le0$; such a vector
+provides no positive lower bound through \eqref{eq:dualbound}. A positive $B$ with zero $I$
+would instead certify infeasibility. The zero lower bound is always available
+for a feasible problem.
+The usual norm dual is $\sup\{B(\lambda):I(\lambda)\le1\}$.
+For completeness, let $Z$ be the compact image of the unit input ball in
+measurement space and $E=\prod_i[-\epsilon_i,\epsilon_i]$. The extended
+value function $f(\beta)=\inf\{J\ge0:\beta\in JZ+E\}$ is proper,
+convex and lower semicontinuous: its sublevels are the compact sets $cZ+E$.
+Its conjugate is $h_E(\lambda)$ when $h_Z(\lambda)\le1$ and infinity
+otherwise. Since $h_Z=I$, biconjugacy proves equality of the dual supremum
+and primal value. Dual attainment or numerical convergence is not assumed.
+
+The reference implementation integrates absolute cubic or quartic polynomials using
+their real roots and analytic antiderivatives, and solves this finite
+continuous dual numerically. It is not a coarse input-grid baseline.
+Both routes use identical postprocessing. On a rational subdivision of a
+segment, the degree-$n$ Bernstein coefficients $b_0,\ldots,b_n$, for
+$n=3$ or $4$, give
+\[
+ \int_l^r|p(t)|\,dt\le\frac{r-l}{n+1}\sum_{j=0}^n|b_j|.
+\]
+This supplies $\widehat I$ with rational arithmetic. An independent checker
+reconstructs kernels and Bernstein coefficients from endpoint values and
+derivatives and verifies complete interval coverage. For example, the quartic
+middle coefficient is $b_2=p(l)+(r-l)p'(l)/2+(r-l)^2p''(l)/12$;
+this independent endpoint formula is not the producer's power-basis conversion.
+
+For a primal upper bound, an inner LP proposes piecewise-constant controls.
+Rational correction satisfies selected active rows exactly; all rows are
+then checked by exact convolution, and the actual input peak $U$ is
+recomputed. No waypoint tolerance is enlarged. The resulting certificate is
+$L\le J_*\le U$. The earlier fourth-order suites use the target
+\begin{equation}\label{eq:tolerance}
+ U-L\le10^{-6}\max(1,U).
+\end{equation}
+The recovery is not a universal completeness theorem. It can reject a
+floating solution or stop before the requested gap is achieved. Such outcomes
+do not prove the continuous problem infeasible.
+
+\section{Numerical validation of the theoretical results}\label{sec:validation}
+The tests address three consequences of Section~\ref{sec:theory}:
+(i) the lift reproduces support values and admits exact boundary witnesses;
+(ii) homogeneous synthesis gives checkable bounds for fixed-time state rows;
+and (iii) block compression can be compared with another exact formulation.
+Recovery ablations and feedback replays identify implementation limits.
+Finite simulations do not prove the non-SOC theorem, replace boundary proofs,
+or turn model equivalence into a real-time guarantee.
+
+\subsection{Support functions and boundary witnesses}\label{sec:support-validation}
+The fixed-body model used for this support-function audit has 39 variables
+(five output coordinates and 34 auxiliaries), 21 PSD blocks, and two scalar
+inequalities. The synthesis model of Corollary~\ref{cor:five-synthesis}
+adds a shared peak variable, giving $39AN+1$ variables, or 40 for one axis
+and one segment. An exact coefficient implementation checks finite rational
+witnesses at zero, full, single-interval and multiple-switch densities, as well
+as all exact support maximizers in the following audit.
+
+Before solving, nine root families were fixed, each with both leading signs:
+the empty family; $(1/2)$; $(1/4,3/4)$; $(1/5,1/2,4/5)$;
+$(1/5,2/5,3/5,4/5)$; $(1/100,1/3,2/3,99/100)$; $(1/2,1/2)$;
+$(1/4,1/4,3/4,3/4)$; and $(49/100,51/100)$. Their polynomials give 18
+support directions. The empty family gives the constant polynomials $\pm1$.
+All directions are normalized by coefficient Euclidean norm. Exact rational
+integration of each positive part gives an independent optimum and maximizing
+density. A floating-point polynomial-root oracle is evaluated separately.
+
+One non-warm CLARABEL solve per direction used absolute/relative gap and
+feasibility tolerances $10^{-10}$, with at most 300 iterations and one thread.
+No retry or solver switching was used. All 18 cases met the predeclared
+$10^{-7}$ support-error and PSD/scalar-residual thresholds; the largest
+absolute normalized support error was $2.099\times10^{-8}$ (rounded upward).
+However, 16 cases returned precision warnings. These numerical checks do not
+certify that each floating-point optimizer output is an exactly feasible
+physical moment vector. The rational maximizing witnesses are separate
+evidence. This support audit alone gives no feedback or real-time guarantee;
+Section~\ref{sec:five-feedback} separately examines fifth-order feedback.
+The median SDP solve-call time was 3.646\,ms, versus 0.0984\,ms for the
+numerical root oracle. One-time model construction and canonicalization took
+0.2600\,s and 0.07228\,s; subsequent solve-call times reuse the compiled model.
+These measurements are not cold-start control-cycle costs and do not show
+an SDP speed advantage for a single support query.
+
+\subsubsection{Singular-limit and membership diagnostics}\label{sec:boundary-paths}
+A supplementary study with tasks and tolerances specified before solving
+examines the finite-witness argument directly. Six endpoint densities are the indicators
+of the empty set, $[0,1]$, $[0,2/5]$, $[3/5,1]$, $[1/4,3/4]$, and
+$[0,1/4]\cup[1/2,3/4]$. Each is mixed with density $1/2$ at
+$\epsilon\in\{1,10^{-1},10^{-2},10^{-4},10^{-6},10^{-8},10^{-10},0\}$.
+For all 48 points, rational evaluation of the 19 selected coordinates on
+both sides, with removable limits at zero, satisfies the affine PSD
+constraints in Sections~\ref{sec:four} and~\ref{app:coefficients}
+and all remaining scalar and prefix constraints of
+Theorem~\ref{thm:five-lift} exactly.
+The largest selected-coordinate infinity norm is one. At $\epsilon=10^{-10}$,
+the largest distance to the limiting coordinates is below $1.5\times10^{-10}$.
+This checks particular finite witnesses, not the general boundary proof.
+
+Separately, each fixed-output model minimizes the infinity norm of its 34
+auxiliaries, without a supplied witness or warm start. The CLARABEL settings
+are those of the preceding support audit. All 48 solves meet the fixed
+$10^{-7}$ output, PSD and scalar-residual thresholds, but all return
+\texttt{optimal\_inaccurate}. Numerical acceptance is not exact feasibility.
+To expose that distinction, use the moment vectors $y$ for the zero density,
+the full density and the indicator of $[1/4,3/4]$. Their respective supporting
+polynomials are $-1$, $1$ and $-(t-1/4)(t-3/4)$. For each polynomial's
+coefficient vector $c$ and
+$\eta\in\{10^{-3},10^{-6},10^{-9}\}$, compare the physical point
+$(1-\eta)y+\eta(v/2)$ with $y+\eta c/(c^\top c)$.
+The outside point $y+\eta c/(c^\top c)$ violates the original body's
+support inequality by exactly $\eta$.
+All nine inside points pass the numerical diagnostic. All six outside points
+at the two larger offsets are reported infeasible, whereas all three outside
+points at $10^{-9}$ are numerically accepted with precision warnings.
+These are tolerance-level false acceptances, not exact counterexamples to
+Theorem~\ref{thm:five-lift}. They explain why support comparisons and floating
+residuals cannot replace finite-witness and sufficiency proofs.
+
+
+\subsection{Fifth-order minimum-peak synthesis}\label{sec:five-pilot}
+Fifteen deterministic tasks were specified before any candidate solve: two
+zero-input ballistic tasks (one and two axes); integral anchors of peak
+$10^{-4}$ and $10^3$; three exact terminal-state anchors whose optimal inputs
+have four switches; and eight waypoint tasks from one/two axes, two fixed
+seeds, and intermediate tolerances zero/$1/200$. The waypoint tasks specify position
+and velocity rows at quarter times and full five-state terminal rows.
+Two-axis intermediate rows couple the axes. Anchor 0 uses switches
+$(1/5,2/5,3/5,4/5)$ at horizon one and peak one; anchor 1 uses the same
+switches at horizon one half and peak $3/2$. Anchor 2 uses switches
+$(1/100,1/3,2/3,99/100)$ at unit horizon and peak one.
+Known optimum values and generating inputs are used only in subsequent checks,
+not as inputs to either proposal or recovery algorithm. Scaled copies are
+not independent statistical samples.
+
+Each method makes one fresh candidate solve per task; the first method
+alternates by task. CLARABEL uses $10^{-10}$ gap/feasibility tolerances,
+300 iterations and one thread; the continuous quartic-root dual uses SLSQP,
+600 iterations, analytic gradients and $10^{-11}$ stopping tolerance.
+There is no cross-method warm start, retry or outcome-dependent case removal.
+Both feed only multipliers to the same recovery, limited to four LP iterations
+and 257 mesh nodes. SDP primal moments are not directly converted to inputs.
+Every final input must satisfy every original row in exact rational arithmetic.
+Initial dual bounds $L_0$ are saved separately because recovery LP multipliers
+can improve the final lower bound $L$.
+
+To avoid a fixed absolute tolerance hiding small-input errors, let $U_i$ be
+the one-interval quartic Bernstein upper bound on
+$\sum_a\int_0^{t_i}|k_{ia}(t)|\,dt$. Define the input-only scale
+\[
+ S=\max_{i:U_i>0}\frac{(|\beta_i|-\epsilon_i)_+}{U_i},
+ \qquad U-L\le10^{-5}S.
+\]
+When all numerators vanish, zero input is feasible and set $S=1$.
+For a feasible nonzero task $0<S\le J_*$, so the criterion is at least
+as strict as a $10^{-5}$ relative-to-optimum gap. The checker reconstructs
+$S$ from the task, without reading a known optimum or a proposed input.
+
+\paragraph{Results.}
+All 30 runs yield valid rational brackets, but only 14/15 SDP and 12/15
+continuous-dual runs satisfy the gap target. Table~\ref{tab:five-pilot}
+retains every task. A valid but wide bracket is not called converged.
+\begin{table}[htbp]
+\centering\small
+\caption{Every fifth-order task; target gap/$S\le10^{-5}$. Times include
+cold candidate construction, optimization, common recovery and final checking.
+Values are rounded only for display.}\label{tab:five-pilot}
+\begin{tabular}{lrrrr}
+\toprule
+Task & SDP gap/$S$ & Dual gap/$S$ & SDP (s) & Dual (s)\\
+\midrule
+Zero, one axis & 0 & 0 & 0.4800 & 0.0252\\
+Zero, two axes & 0 & 0 & 0.4987 & 0.0947\\
+Integral anchor, $J_*=10^{-4}$ & 0 & 0 & 0.0735 & 0.0059\\
+Integral anchor, $J_*=10^3$ & 0 & 0 & 0.1032 & 0.0066\\
+Terminal anchor 0 & $3.006\cdot10^{-6}$ & $1.062\cdot10^{-7}$ & 0.2855 & 0.2168\\
+Terminal anchor 1 & $5.696\cdot10^{-6}$ & $5.210\cdot10^{-9}$ & 0.2826 & 0.2222\\
+Terminal anchor 2 & $4.356\cdot10^{-6}$ & $1.123\cdot10^{-6}$ & 0.4229 & 0.2271\\
+1 axis, seed 1, exact & $2.574\cdot10^{-6}$ & $1.814\cdot10^{-3}$ & 0.8325 & 1.2885\\
+1 axis, seed 1, tolerance & $2.382\cdot10^{-7}$ & $1.763\cdot10^{-8}$ & 0.6951 & 0.3394\\
+1 axis, seed 2, exact & $1.440\cdot10^{-6}$ & $6.571\cdot10^{-7}$ & 0.9616 & 0.7040\\
+1 axis, seed 2, tolerance & $4.954\cdot10^{-6}$ & $3.277\cdot10^{-9}$ & 0.8353 & 0.4197\\
+2 axes, seed 1, exact & $4.106\cdot10^{-5}$ & $8.759\cdot10^{-4}$ & 4.2392 & 3.6691\\
+2 axes, seed 1, tolerance & $1.392\cdot10^{-7}$ & $4.016\cdot10^{-8}$ & 1.7162 & 1.0032\\
+2 axes, seed 2, exact & $6.239\cdot10^{-7}$ & $3.465\cdot10^{-4}$ & 1.8710 & 3.9292\\
+2 axes, seed 2, tolerance & $1.170\cdot10^{-7}$ & $2.985\cdot10^{-7}$ & 1.7066 & 0.8731\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Thirteen SDP runs have precision warnings. The dual has three non-success
+statuses: line-search failure on the $10^3$ anchor and iteration limits on
+both two-axis exact-waypoint tasks. The $10^3$ anchor nevertheless has an exact
+optimal certificate. Conversely, the one-axis seed-1 exact task reports
+dual solver success but fails the certified gap target. Solver status,
+certificate validity and requested accuracy are distinct quantities.
+The largest scaled gaps are $4.107\cdot10^{-5}$ and $1.814\cdot10^{-3}$,
+respectively (rounded upward). Recovery uses 19 and 21 LP calls, giving 70
+total optimization calls. All LP option-forwarding notices remain archived.
+
+In all 14 SDP successes, the initial bound $L_0$ and final upper bound already
+meet the target; recovery does not improve the lower bound. The dual's three
+failed gaps improve during recovery without closing. These observations test
+the implemented multiplier-to-certificate pipeline, not a universal recovery
+guarantee.
+
+On the 12 commonly converged tasks, the SDP is slower in every case; the
+median paired full-cost ratio is 1.9725. This conditional statistic is given
+together with all failures, not as a selected-only comparison. One run per
+task does not establish statistical timing or reliability superiority.
+Execution timing is examined separately in Section~\ref{sec:five-feedback}.
+
+\subsubsection{Separating the SDP proposal from recovery}\label{sec:five-attribution}
+The supplementary study re-solves all 15 tasks once with the unchanged SDP
+proposal. Direct binomial convolution of its returned homogeneous moments
+checks the original waypoint rows, separately from input recovery. All 15
+raw outputs meet the fixed floating diagnostic: row residuals at most
+$10^{-7}$ after scaling by the maximum of one, the adjusted target magnitude
+and row tolerance, and cone residuals at most $10^{-7}\max(1,|J|)$.
+The largest scaled row residual is below $2.185\times10^{-9}$; thirteen
+proposals carry precision warnings. These checks do not certify raw moments
+as exact physical inputs.
+
+Each proposal is followed by two runs of the same recovery: one seeded by
+its multipliers and one starting with zero multipliers, with order alternated
+by task. Both keep the original four-LP, 257-node budget and
+$10^{-5}S$ accuracy target. The zero-seed route can obtain new multipliers
+from its own LPs, so it is not a dual-free algorithm.
+Table~\ref{tab:five-attribution} reports all tasks. For all 14 successful
+SDP-seeded cases, the initial proposal lower bound $L_0$ and final input
+upper bound $U$ already meet the target; recovery does not improve $L_0$.
+The remaining SDP-seeded case is the same two-axis exact-waypoint task
+that misses the target in Table~\ref{tab:five-pilot}.
+\begin{table}[htbp]
+\centering\small
+\caption{Fresh fifth-order recovery attribution on the same 15 tasks.
+An initial-gap pass tests $U-L_0\le10^{-5}S$ using the final recovered $U$;
+it is not a pre-recovery primal certificate.}
+\label{tab:five-attribution}
+\begin{tabular}{lrrrr}
+\toprule
+Recovery seed & Valid & Initial-gap pass & Final-gap pass & LP calls\\
+\midrule
+SDP multipliers &15/15&14/15&14/15&19\\
+Zero multipliers &15/15&2/15&4/15&48\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Exact integration of each recovered control reconstructs its segment moments.
+For each recovery route, all 53 nonzero-peak segment bodies admit exact
+complete-lift witnesses, and both zero-peak tasks have zero homogeneous
+moments. This tests the physical-input-to-lift direction and the apex on
+actual outputs. The recovered moments need not equal the raw SDP moments:
+the largest absolute discrepancy in the SDP-seeded route is about $0.1625$.
+Nonunique controls can have different moments, and the recovery does not
+enforce their equality. Thus the experiment supports the value of the
+SDP-provided multipliers under this fixed budget, not direct reconstruction
+of every raw SDP optimizer or SDP-exclusive certification. It comprises
+15 fresh synthesis proposals and 67 recovery LPs; together with
+Section~\ref{sec:boundary-paths}, the completed supplementary run uses 81 SDP
+solves. No new timing superiority or feedback claim is made.
+
+\subsection{Fourth-order formulation-size comparison}\label{sec:matched}
+This tests whether the smaller lift in Theorem~\ref{thm:lift} reduces
+implementation cost relative to another exact formulation, rather than
+against an inexact input grid. Fourteen deterministic problems use the
+seven-block model (S), the generic polynomial-coordinate model (G), and
+the continuous root dual (D), with three cold repetitions each.
+A seeded permutation (20260928) and cyclic method order balance the 126
+queries; these are repeated timings, not independent random instances.
+
+The generic model is fully defined in Section~\ref{sec:four}, including its
+restriction to the seven-block system and its zero-peak output. The two
+exact models therefore share all physical rows, using
+$1+10AN$ versus $1+16AN$ variables. At $A=2,N=8$, canonicalization gives
+161/257 variables and 517/661 matrix rows, with 36 equalities in both.
+
+The base cases have $A\in\{1,2\}$, $N\in\{2,4,8\}$ and $T=S=1$,
+where $S$ is the generating input amplitude. Variants change horizon to
+$1/4,4$, amplitude to $10^{-4},10^3$, or use a single switch at
+$1-\varepsilon$ with $\varepsilon=10^{-1},\ldots,10^{-4}$ and known optimum
+one. Exact intermediate position/velocity rows and terminal full-state rows
+are generated from withheld controls; two-axis intermediate rows mix axes.
+The full deterministic generation rule and task records are included in
+the reproducibility archive described at the end of this section.
+
+The solver and recovery budgets are those of the other synthesis tests.
+The scaled acceptance criterion is
+\begin{equation}\label{eq:matched-tolerance}
+ (U-L)/\max(S,U)\le10^{-6}.
+\end{equation}
+Recovery receives tolerance $10^{-6}\min(1,S)$ against $\max(1,U)$,
+which is no looser than this test. Timings include cold construction,
+canonicalization, solution, recovery and independent checking; imports and
+one-time symbolic preparation (0.09637 seconds) are excluded.
+Raw physical rows are used, with single-thread settings and no competing
+benchmark job, rather than optimized warm-start implementations.
+
+All 126 certificates are valid. The target is met on 24/42 S, 24/42 G
+and 27/42 D queries, or 8/14, 8/14 and 9/14 problems; each problem's
+three repeated outcomes agree. Maximum scaled gaps are
+$1.694\cdot10^{-4}$, $1.241\cdot10^{-3}$ and $1.522\cdot10^{-2}$.
+S/G have 21/30 inaccurate statuses; D has 27 successful terminations,
+six iteration limits and nine line-search failures. There are 417 total
+optimizer calls, including 291 recovery LPs. Table~\ref{tab:matched}
+retains all problems and failures.
+\begin{table}[ht]
+\centering\small
+\caption{Matched experiment: median full-pipeline time over three repetitions.
+Y means all three satisfy \eqref{eq:matched-tolerance}; N means none does.
+Times for N entries are unsuccessful pipeline costs, not time to the requested
+accuracy. All entries have valid feasible trajectories and bounds.}
+\label{tab:matched}
+\begin{tabular}{@{}lcrrr@{}}
+\toprule
+Problem & Target S/G/D & S (s) & G (s) & D (s)\\
+\midrule
+1 axis, 2 segments & Y/Y/Y & 0.2281 & 0.2450 & 0.1815\\
+1 axis, 4 segments & Y/N/Y & 0.7257 & 1.3351 & 0.4363\\
+1 axis, 8 segments & Y/Y/Y & 1.1529 & 1.3101 & 1.3755\\
+2 axes, 2 segments & Y/Y/Y & 0.4609 & 0.5173 & 0.5645\\
+2 axes, 4 segments & Y/Y/N & 1.7214 & 1.7938 & 3.4921\\
+2 axes, 8 segments & N/N/N & 7.3479 & 7.6230 & 5.2169\\
+$T=1/4$ & Y/Y/N & 1.4623 & 1.5814 & 2.0611\\
+$T=4$ & Y/Y/Y & 3.1912 & 2.3725 & 2.1360\\
+$\varepsilon=10^{-1}$ & Y/Y/Y & 0.2472 & 0.3480 & 0.0569\\
+$\varepsilon=10^{-2}$ & N/N/N & 0.6307 & 0.6072 & 0.4065\\
+$\varepsilon=10^{-3}$ & N/N/Y & 0.6733 & 0.7252 & 0.1124\\
+$\varepsilon=10^{-4}$ & N/N/Y & 0.6247 & 0.7499 & 0.1182\\
+$S=10^{-4}$ & N/N/N & 2.5076 & 2.8292 & 2.4937\\
+$S=10^3$ & N/Y/Y & 2.7166 & 2.4570 & 2.4629\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+On the seven jointly successful S/G problems, S is faster in six
+(median ratio 0.9247003), but costs 34.5\% more at $T=4$.
+On the six jointly successful S/D problems, S is faster in two
+(median ratio 1.3753754). Neither comparison establishes general dominance.
+S/G median solve-call times are 0.00519/0.00669 seconds, compared with
+0.0891/0.1097 for construction, 0.1982/0.2520 for canonicalization and
+0.4829/0.6681 for recovery; component medians do not sum to a total median.
+
+All recovery LPs and attempted rational primal corrections succeed.
+For SDP saturation failures, lower bounds are within $3\cdot10^{-9}$ of
+the known optimum one: recovery upper bounds dominate the remaining gap.
+The largest case fails for all methods, with a dual iteration limit and
+recovery mesh caps. Small-amplitude failures under raw scaling do not exclude
+standard rescaling. These archived diagnostics distinguish model exactness
+from finite-budget accuracy without tuned replacement runs.
+
+
+\subsection{Fourth-order calibration and recovery ablation}\label{app:four-pilot}
+This supporting test separates the value of outer-solver multipliers from
+the shared recovery procedure. Eighteen predetermined tasks comprise six
+scaled rest-to-rest cases, eight one-/two-axis waypoint cases with exact or
+tolerant rows, two ballistic zero-peak cases and two total-input anchors
+($10^{-4},10^3$). Generating controls are withheld from the methods.
+The rest-to-rest optimum $384|d|/T^4$ has the unit-horizon switches
+$(1-1/\sqrt2)/2,1/2,(1+1/\sqrt2)/2$ and alternating signs; the terminal
+dual vector $(384,-192,40,-4)$ has $\int_0^1|k(t)|\,dt=1$, where $k$
+is its aggregate kernel as defined in Section~\ref{sec:certification}.
+
+The SDP and cubic-root dual use the same solver tolerances as the fifth-order
+suite. Shared recovery starts with four cells per segment and each method's
+own multiplier roots, then refines using LP multipliers and midpoints, with
+at most four LP calls and 257 knots. Two ablations instead supply zero
+multipliers: one stops after the initial LP and the other uses the full
+adaptive budget. Neither receives an optimum or another method's output.
+Acceptance uses \eqref{eq:tolerance}; Table~\ref{tab:pilot} reports all four
+pipelines.
+\begin{table}[ht]
+\centering\small
+\caption{Independently checked rational certificates. Normalized gap is
+$(U-L)/\max(1,U)$. All 18 problems are deterministic and related; the
+counts are not population success probabilities.}\label{tab:pilot}
+\begin{tabular}{@{}p{50mm}rrr@{}}
+\toprule
+Pipeline & Valid bounds & Target gap & Max. normalized gap\\
+\midrule
+SDP plus shared recovery &18/18&18/18&$4.729\cdot10^{-7}$\\
+Continuous dual plus recovery &18/18&16/18&$1.868\cdot10^{-4}$\\
+Quarter-segment LP only &18/18&4/18&$5.822\cdot10^{-1}$\\
+Zero-seed adaptive recovery &18/18&4/18&$7.714\cdot10^{-3}$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The two original routes require 36 outer solves and 40 recovery LPs;
+the ablations require 18 and 60 LPs. Their four successful tasks are the
+zero-peak and total-input anchors. The other 14 adaptive ablation gaps improve
+but miss the target. There are 11 inaccurate SDP statuses and, for the dual,
+two iteration limits and one line-search failure. The two failed dual gaps
+are exact two-axis tasks (about $6.359\cdot10^{-5}$ and
+$2.308\cdot10^{-4}$), whose next refinements exceed the knot cap.
+
+For the 16 jointly successful original pairs, SDP is faster in none;
+single-run cold medians are 0.1412 and 0.0966 seconds. Fixed execution order
+and related cases prevent a statistical speed or population reliability
+claim. The ablation supports informative multiplier initialization within
+this budget, not SDP-exclusive certification.
+
+
+\subsection{Feedback execution and timing limits}\label{sec:five-feedback}
+\subsubsection{Fifth-order deadline protocol}
+Four deterministic scenarios---one-axis nominal, two-axis nominal, two-axis
+finite pulse and two-axis alternating disturbance---are each run with both
+methods and two execution modes. Every episode has twelve half-second slots,
+a terminal-rest horizon of three seconds, a command cap of five, and actuator
+quantization with step $10^{-9}$ and ties rounded to even. Initial positions are $1/10$ and $-2/25$;
+all other initial derivatives vanish. The pulse is $(1/20,-1/25)$ on slots
+3--5. Persistent disturbance amplitudes are $1/30$ and $1/40$, with two positive
+then two negative slots and a one-slot phase shift on the second axis.
+The planner receives exact current state, not future disturbance values.
+Methods alternate order across scenario/mode pairs and retain the same
+fixed synthesis and recovery budgets. No missed-deadline trial is rerun
+with a larger deadline or different tolerances.
+
+In the ideal-instant reference, a new eligible plan acts immediately, and
+plant evolution deliberately ignores computation time. In the one-period
+mode, the old quantized queue acts during computation. Its known prefix
+and the exact current state predict the next sample's state; the new
+terminal-rest problem starts from that prediction. A valid certificate with
+peak at most five can replace the queue only at the next boundary and only
+if the measured service time is at most $0.5$ seconds. A wider optimality
+gap is recorded but does not by itself invalidate feasibility.
+
+A late result is discarded, but its worker remains occupied until its measured
+completion time. Sampling requests arriving while busy are skipped, rather
+than assuming free cancellation or applying the late result retroactively.
+Invalid or over-cap results leave the old queue unchanged. When no plan is
+available, or when the old plan is exhausted, the commanded input is zero;
+this fallback is not claimed to be safe.
+The cap bounds command, not command plus external disturbance.
+
+Service time includes prediction, fresh modeling, optimization, common recovery
+and final independent plan checking; it excludes archive serialization and
+offline instrumentation. Integer nanoseconds determine deadline comparisons.
+These are one-run, one-machine service-time replays, not worst-case execution
+time bounds or hard-real-time hardware experiments. Different methods evolve
+different states, so their subsequent queries are not identical-input timing
+pairs or independent random reliability trials.
+
+An independent rational checker reconstructs queue identities, absolute-time
+prefixes, problem data, deadline and busy decisions, inputs and every state
+transition. Producer propagation is sequential and checker propagation uses
+direct convolution. The local derivative-$j$ discrepancy from the intended
+prefix is bounded by $(|d_a|+q/2)\delta^{5-j}/(5-j)!$. For the delayed
+prediction, quantization is already included, leaving the bound
+$|d_a|\delta^{5-j}/(5-j)!$. These local bounds do not imply stability or
+recursive feasibility. In particular, a plan's nominal terminal equality
+does not become an equality for the disturbed plant.
+
+\subsubsection{Fifth-order outcomes}
+The 16 episodes contain 192 slots, 158 actual planning queries and 410
+optimization calls (158 candidates and 252 recovery LPs). All queried plans
+have valid rational brackets, but only 137 meet the input-scaled gap target.
+Table~\ref{tab:five-feedback-counts} distinguishes accuracy from activation.
+There are 56 SDP precision warnings and no discarded warning records.
+\begin{table}[htbp]
+\centering\small
+\caption{Each row spans four scenarios and 48 slots. ``Late'' in ideal mode
+is recorded but ignored by plant timing; ``Busy'' counts skipped slots, not
+failed solves. Six ideal SDP plans are feasible but wider than the gap target.}
+\label{tab:five-feedback-counts}
+\begin{tabular}{llrrrrrr}
+\toprule
+Mode & Route & Queries & Accurate & Used & Late & Busy & Warnings\\
+\midrule
+Ideal & SDP & 48 & 42 & 48 & 41 & 0 & 39\\
+Ideal & Dual & 48 & 48 & 48 & 7 & 0 & 0\\
+One period & SDP & 17 & 2 & 0 & 17 & 31 & 17\\
+One period & Dual & 45 & 45 & 42 & 3 & 3 & 0\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Most importantly, every SDP request in deadline mode is late, so no new
+plan is activated. Five of those 17 candidates also exceed the command cap;
+they are not clipped and relabeled feasible. The command stays zero throughout
+all four deadline-SDP episodes. Nominal positions therefore remain unchanged,
+and disturbances produce substantial drift. The dual activates 42 plans,
+retaining three late discards and three occupied-worker skips. These outcomes
+do not support a real-time advantage for the present SDP implementation;
+they do not show that every possible SDP implementation must fail.
+
+Table~\ref{tab:five-feedback-errors} reports every scenario and mode.
+Position RMS is computed from the exact continuous integral of squared
+position over all axes and six seconds, not only sampled positions. Full
+terminal errors in all five derivatives and sampled RMS are also archived.
+\begin{table}[htbp]
+\centering\small
+\caption{All fifth-order feedback outcomes, rounded for display. ``Delay''
+denotes the fixed one-period measured-service-time replay. Small final position
+does not imply that all higher derivatives have converged to zero.}
+\label{tab:five-feedback-errors}
+\begin{tabular}{llrrrr}
+\toprule
+Scenario & Mode & RMS, SDP & RMS, dual &
+\shortstack{Final $|p|_\infty$\\SDP} & \shortstack{Final $|p|_\infty$\\Dual}\\
+\midrule
+One axis nominal & Ideal & 0.0456432 & 0.0456432 & 0.00130867 & 0.00130830\\
+One axis nominal & Delay & 0.1000000 & 0.0539991 & 0.10000000 & 0.00327958\\
+Two axes nominal & Ideal & 0.0417026 & 0.0411113 & 0.00564300 & 0.00130828\\
+Two axes nominal & Delay & 0.0905539 & 0.0487769 & 0.10000000 & 0.00344047\\
+Two axes pulse & Ideal & 0.0417272 & 0.0411504 & 0.00487318 & 0.00487282\\
+Two axes pulse & Delay & 0.2215350 & 0.0496875 & 0.76761719 & 0.00072119\\
+Two axes alternating & Ideal & 0.0416444 & 0.0411858 & 0.00407946 & 0.00340274\\
+Two axes alternating & Delay & 0.2567869 & 0.0498793 & 0.97500000 & 0.02171400\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Ideal single-axis trajectories nearly coincide; two-axis paths can differ
+because minimum-peak inputs need not be unique. The largest service time
+is 1.752 seconds (rounded upward). Ideal execution does not make those
+plans available in real time.
+
+\subsubsection{Fourth-order instantaneous-planning comparison}\label{sec:four-feedback}
+The earlier fourth-order test has four analogous scenarios, two methods and
+20 replans per episode: eight episodes and 160 queries, with period $1/4$,
+horizon two, command cap five and quantization $q=10^{-9}$.
+Initial positions are $0.1,-0.08$, with other derivatives zero.
+The pulse is $(0.05,-0.04)$ at steps 4--7 (zero-based); alternating
+amplitudes are $1/30,1/40$, with four-step signs and a two-step axis offset.
+Each planner sees its current state but not future disturbances.
+Every eligible plan executes its full quantized prefix; absent eligibility,
+the specified zero input is not claimed safe.
+
+Unlike the fifth-order deadline mode, this simulation assumes instantaneous
+planning. An independent rational convolution checker verifies states and
+the local estimate
+\begin{equation}\label{eq:feedback-local}
+ |x^{\rm actual}_{a,d}(\delta)-x^{\rm nominal}_{a,d}(\delta)|
+ \le (|w_a|+q/2)\frac{\delta^{4-d}}{(4-d)!},
+\end{equation}
+for constant step disturbance $w_a$ and $d=0,1,2,3$.
+All 160 plans are eligible and meet \eqref{eq:tolerance}; maximum normalized
+gaps are $9.924\cdot10^{-7}$ and $5.987\cdot10^{-7}$.
+There are 337 optimizer calls, including 177 recovery LPs; SDP has 28
+inaccurate statuses, whereas all 80 dual calls report success.
+Table~\ref{tab:feedback} retains every scenario.
+\begin{table}[ht]
+\centering\small
+\caption{Offline feedback results. Position RMS averages the initial and 20
+step-end samples over all axes; final $|p|$ is the largest absolute axis
+position at five seconds. Timing includes proposal, recovery and plan checking.
+``Late'' means the measured planning time exceeds the simulated 0.25-second
+period; the plant simulation does not incorporate this delay.}\label{tab:feedback}
+\begin{tabular}{@{}llrrrr@{}}
+\toprule
+Scenario & Method & Pos. RMS & Final $|p|$ & Median s & Late/20\\
+\midrule
+Single nominal & SDP & 0.04319447 & 0.00264005 & 0.1279 & 0\\
+Single nominal & Dual & 0.04319448 & 0.00264004 & 0.1052 & 0\\
+Pair nominal & SDP & 0.03897921 & 0.00264002 & 0.2236 & 5\\
+Pair nominal & Dual & 0.03893507 & 0.00264004 & 0.1991 & 0\\
+Pair pulse & SDP & 0.03897522 & 0.00342167 & 0.2267 & 7\\
+Pair pulse & Dual & 0.03895618 & 0.00342169 & 0.1985 & 0\\
+Pair persistent & SDP & 0.03897294 & 0.00142946 & 0.2251 & 7\\
+Pair persistent & Dual & 0.03895790 & 0.00146956 & 0.1976 & 0\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Command peaks range from 2.39999750 to 2.40000187, and no fallback occurs.
+Nineteen of 80 SDP requests exceed the period, with maximum 0.667594 seconds;
+the dual has none in this run, with maximum 0.224051 seconds.
+Ignoring these delays prevents a real-time conclusion. Neither the local
+error estimate nor nominal terminal equalities imply stability, robust
+recursive feasibility or convergence of the disturbed plant.
+
+
+\subsection{Conclusions and limitations}\label{app:reproducibility}
+The explicit complete moment-body lift, its zero-peak homogenization and
+segment concatenation provide the finite minimum-peak formulation. The
+extension-degree bounds locate its representation class without asserting
+minimum block count or minimum auxiliary dimension.
+The exact outer model and its finite recovery algorithm must be distinguished:
+a certified wide bracket remains feasible but is not converged, while a late
+feasible plan remains unavailable at its deadline. The data support an
+auditable offline formulation, not a general speed, stability or safety claim.
+Both routes share certification, so their runtime ratio is not an isolated
+price of certification. The results do not settle the exact extension degree
+of $\K_5$, SOC representability of $\K_4$, or finite SDP representability
+in higher orders. Reducing model size or improving deadline performance
+requires further mathematical or computational evidence.
+
+The reproducibility archive (\path{ESM_1.zip}) supplies the experimental protocols,
+source code and recorded results, including warnings and failures. Its
+reproducibility guide maps the claims to executable checks of the displayed
+polynomial identities, rational certificates and feedback records. These
+checks supplement, rather than replace, the analytic proofs.
+
+\paragraph{Reproducibility materials.}
+Archive contents: Source code, numerical records,
+rational verification scripts and a reproducibility guide for the exact
+semidefinite formulation and its computational studies, including warnings,
+failed cases and boundary diagnostics.
+The archive (\path{ESM_1.zip}, version 2026-10-09) is available from the
+\href{https://github.com/moyuye77-code/Minimum-Peak-Control-of-Fifth-Order-Integrators-via-Exact-Semidefinite-Lifts/releases/tag/reproducibility-2026-10-09}{versioned GitHub release}.\footnote{Repository:
+\begingroup\def\UrlBreaks{\do\/\do-\do.}
+\url{https://github.com/moyuye77-code/Minimum-Peak-Control-of-Fifth-Order-Integrators-via-Exact-Semidefinite-Lifts}\endgroup.
+Release tag: \texttt{reproducibility-2026-10-09}.}
+
+\backmatter
+
+\begin{thebibliography}{11}
+\bibitem{averkov} Averkov, G.: Optimal Size of Linear Matrix Inequalities
+in Semidefinite Approaches to Polynomial Optimization.
+\emph{SIAM Journal on Applied Algebra and Geometry} \textbf{3}(1),
+128--151 (2019).
+\url{https://doi.org/10.1137/18M1201342}.
+Author version: \url{https://arxiv.org/abs/1806.08656v2}.
+\bibitem{fawzi} Fawzi, H.: On representing the positive semidefinite cone
+using the second-order cone. \emph{Mathematical Programming}
+\textbf{175}(1--2), 109--118 (2019).
+\url{https://doi.org/10.1007/s10107-018-1233-0}.
+\bibitem{gr} Gosse, L., Runborg, O.: Resolution of the finite Markov
+moment problem. \emph{Comptes Rendus Mathematique} \textbf{341}(12),
+775--780 (2005).
+\url{https://doi.org/10.1016/j.crma.2005.10.009}.
+Author version: \url{https://arxiv.org/abs/0910.5791v1}.
+\bibitem{gn} Gouveia, J., Netzer, T.: Positive Polynomials and
+Projections of Spectrahedra. \emph{SIAM Journal on Optimization}
+\textbf{21}(3), 960--976 (2011).
+\url{https://doi.org/10.1137/100801913}.
+Author version: \url{https://arxiv.org/abs/0911.2750v2}.
+\bibitem{gpt} Gouveia, J., Parrilo, P.A., Thomas, R.R.: Lifts of Convex
+Sets and Cone Factorizations. \emph{Mathematics of Operations Research}
+\textbf{38}(2), 248--264 (2013).
+\url{https://doi.org/10.1287/moor.1120.0575}.
+Author version: \url{https://arxiv.org/abs/1111.3164v2}.
+\bibitem{intersection} Haddad, S., Halder, A.: Certifying the Intersection
+of Reach Sets of Integrator Agents with Set-valued Input Uncertainties.
+\emph{IEEE Control Systems Letters} \textbf{6}, 2852--2857 (2022).
+\url{https://doi.org/10.1109/LCSYS.2022.3179666}.
+Author version: \url{https://arxiv.org/abs/2203.12007v4}.
+\bibitem{hh} Haddad, S., Halder, A.: The Curious Case of Integrator Reach
+Sets, Part I: Basic Theory. \emph{IEEE Transactions on Automatic Control}
+\textbf{68}(11), 6680--6695 (2023).
+\url{https://doi.org/10.1109/TAC.2023.3244694}.
+Author version: \url{https://arxiv.org/abs/2102.11423v2}.
+\bibitem{lasserredensity} Lasserre, J.B.: Borel measures with a density on a compact
+semi-algebraic set. \emph{Archiv der Mathematik} \textbf{101}(4),
+361--371 (2013).
+\url{https://doi.org/10.1007/s00013-013-0557-5}.
+Author version: \url{https://arxiv.org/abs/1304.1716v2}.
+\bibitem{mcclure} McClure, D.E.: Perfect spline solutions of $L_\infty$
+extremal problems by control methods. \emph{Journal of Approximation Theory}
+\textbf{15}(3), 226--242 (1975).
+\url{https://doi.org/10.1016/0021-9045(75)90105-7}.
+\bibitem{nie} Nie, J.: Polynomial Matrix Inequality and Semidefinite
+Representation. \emph{Mathematics of Operations Research}
+\textbf{36}(3), 398--415 (2011).
+\url{https://doi.org/10.1287/moor.1110.0498}.
+Author version: \url{https://arxiv.org/abs/0908.0364v2}.
+\bibitem{nierational} Nie, J.: First Order Conditions for Semidefinite
+Representations of Convex Sets Defined by Rational or Singular Polynomials.
+\emph{Mathematical Programming} \textbf{131}, 1--36 (2012).
+\url{https://doi.org/10.1007/s10107-009-0339-9}.
+Author versions: \url{https://arxiv.org/abs/0806.4721v1} and the
+July 2009 revision at
+\url{https://mathweb.ucsd.edu/~njw/PUBLICPAPERS/QmPoSdpR_mpa2.pdf}.
+\end{thebibliography}
+
+\section*{Statements and Declarations}
+\bmhead{Funding}
+This research was self-funded by the author. No external funding was received.
+
+\bmhead{Competing interests}
+The author declares no financial or non-financial competing interests
+relevant to this work.
+
+\bmhead{Use of artificial intelligence}
+The author determined the research direction and prepared preliminary
+derivations and text. OpenAI Codex assisted with checking boundary cases,
+refining mathematical arguments, developing simulation and verification
+code, analyzing results, and drafting and editing the manuscript. The
+resulting derivations, computational results and manuscript were
+subsequently reviewed by the author.
+
+\bmhead{Data and code availability}
+The source code, frozen numerical records and rational verification scripts
+supporting this study are publicly available in the
+\href{https://github.com/moyuye77-code/Minimum-Peak-Control-of-Fifth-Order-Integrators-via-Exact-Semidefinite-Lifts/releases/tag/reproducibility-2026-10-09}{GitHub reproducibility archive},
+version 2026-10-09 (\path{ESM_1.zip}).
+\end{document}

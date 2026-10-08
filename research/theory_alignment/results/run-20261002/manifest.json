@@ -1,0 +1,3072 @@
+{
+  "protocol_sha256": "6804038e1535f5b38f19d9f93c9f0fe898cf6278db29eaaaab43847289459594",
+  "sources": {
+    "research/classic_cone_audit/__init__.py": "86aca7544e07798ab406b7c7e79684cb34fe05b4f9deb0d77cc5f981e0a125d1",
+    "research/classic_cone_audit/check.py": "ff009364b0c7f8afc9507cd1b0a905b44ee2b95f9a0497684bd2566d1c2756fd",
+    "research/classic_cone_audit/compiler.py": "da258b6c39f557a6cbe95d7b03a6b59cb8e645dc9674f8706903e4ff25291b0d",
+    "research/classic_cone_audit/test_compiler.py": "1bf45a038110153c96ec9b32128ef1387ca9597cf26efe4d22eb2e06f497a0ec",
+    "research/classic_cone_audit/verify.py": "20327822f8d6acd9c8d3a15390e19a9158c152ea31a993a19ac552a11e737349",
+    "research/closed_five_lift/__init__.py": "3cc197fe15c6f0ad2046c9fbb8eaffcbd1e090630f8628dacc356acbd6eaca57",
+    "research/closed_five_lift/algebra.py": "d913c76819b020eb3f0b85923e8b7ed43dee2c297457114cfcd172f58c303d2d",
+    "research/closed_five_lift/cases.py": "63e6f60b9b2f697ba0db0856a1665505eda76ce2d44bb59e7f3cf49ea56fc606",
+    "research/closed_five_lift/experiment.py": "0385f9d3675368a9dfbee4e3a186d57dc473ebe4fbe6ef85a00e7d5a6d0d58f3",
+    "research/closed_five_lift/solver.py": "4a14d898e3f37072338bb0321fbac3e2ecbf28cfa9c38ec39b20eba226c6b286",
+    "research/closed_five_lift/test_closed.py": "a2900fd889de6a6bb1a6593f64649d249d6fdeea919815c3790116e1e8cf2442",
+    "research/closed_five_lift/verify.py": "82ad1a57d8c9b4252c2741b07d04c850aaec8155d3fc4e01fb9bbbd52025e75c",
+    "research/five_synthesis/__init__.py": "2f75d68e462549f9f6a1f19218712bda2d263c2dbb91b8cef01a5c806e4343ab",
+    "research/five_synthesis/certify.py": "d994f1e022d2f6c9beb86ee17d41b4f0471e23d1470673ec11e7d5847da3e6b9",
+    "research/five_synthesis/check.py": "4dcaf44a2a3265cd3d7f99da2c2ea2763b92e188ed32adc23424da3634242005",
+    "research/five_synthesis/experiment.py": "2e6b9ae88b5daba01d14a884826795d7c1b7369ef25671aca083a4c857a83c66",
+    "research/five_synthesis/model.py": "0447e86b8a53654dfa172dc2375d06443c6f90ee5e37c7402ffa8ab0591f2173",
+    "research/five_synthesis/proposals.py": "471147102d8cb874261dac53b5e0175ae38379629ca3de0423d4b12ad2c8afdc",
+    "research/five_synthesis/test_synthesis.py": "96da3fb958cc500595633bd738c6ee05d9ff30d1f88fadb7982d77a6f0e8def8",
+    "research/four_history_audit/__init__.py": "c1aa776ee603312225cec9fd84cdde545d077b04146e9b45bf9bc40367e260b5",
+    "research/four_history_audit/certify.py": "9eaa462c17289e2ee0f7c5fede4c36441bb09a1f9a9ef3c16986f022e6d6375f",
+    "research/four_history_audit/check.py": "2d3eb15618088ed92ed62973bcd85b6c1966ca39d14ea3e7eb148e6c7eea0072",
+    "research/four_history_audit/experiment.py": "44fb18568ced9a457150b151615ad5fb261666d5d76bcfc235b71374c005bb28",
+    "research/four_history_audit/model.py": "8fdffeb659c51144dfc5db9e0e6b048f16669dcb9fd01e139f2fd43202c488d6",
+    "research/four_history_audit/proposals.py": "28014b7f759bca4c7add6411b4ee58ba3648da1182239615c2f66fd1ef39237d",
+    "research/four_history_audit/test_history.py": "3e16e6c3796f635fdbface5731fdcb3f4125dd14e17e3aaa7c5ba6adb2367224",
+    "research/general_congruence_gate/__init__.py": "42307f18a220d95416f9ac2f3f28f1868e9106a8173720107ed0de085082146d",
+    "research/general_congruence_gate/algebra.py": "4fa04d8aa25e5ebcb2b98e368410893edfac91e1cf29a8043095ded02f9e248d",
+    "research/general_congruence_gate/test_gate.py": "98849b35f4b42e13aad59db8e864d431b2ce09079534c5188f707145e4658e6e",
+    "research/general_congruence_gate/verify.py": "13d33c76e0835c4cccc160d322b1fe9fee44c57003216cafac85df290485fecc",
+    "research/moment_four_lift/__init__.py": "5a393ded192e38690b603c0d5f73dc005980008e20704ff7cd20c50d867a0612",
+    "research/moment_four_lift/exact.py": "a8f43b140284636d80779c457f92dda6149c99c0a7c9216207a02ab28ec05917",
+    "research/moment_four_lift/solver.py": "87d599587ac22bc2988aad68169448838a9953d6cc60ddc4ea345fa930f0efe5",
+    "research/moment_four_lift/test_lift.py": "7f66ca4cdab1637b634f232710a3c684b293fb8db03841b2f88e4fe77423ac2a",
+    "research/moment_four_lift/verify.py": "5ee32b2bbc95274e177019d6e7a38a21482db277bf3550a00c9ebe8f009343de",
+    "research/moment_upper_gate/__init__.py": "9f9312ea1760e5e26b57430c1be084f24b0af257871145d7a37fe03e8b5b657a",
+    "research/moment_upper_gate/exact.py": "7c934bb14ebae33ddea684cb25a0f69f6e75fa2b38b6064560ab8bb242cef2fd",
+    "research/moment_upper_gate/test_gate.py": "34494d81277bf3a0e1b90d989ba67d31bd06fc9e078d59a3110e140242806399",
+    "research/moment_upper_gate/verify.py": "3b80529af922fdb4ef18ff19a1e0d97cccafa39ce951b8078272f3101bf48e00",
+    "research/paper/check_lift_coefficients.py": "d7b8fccc2a3a2f940dcdd39a3a9499ab5c36231fe30b5b2819692fb570c0fd67",
+    "research/peak_synthesis/__init__.py": "9130506a4db6bb42771409e45b6281d0cfc92bad222e26be1ef7c9710a7ff861",
+    "research/peak_synthesis/certify.py": "4b060085339fb76247595d7a459f450f451c9ba63f8492fa3c8166c1f9fdf0dc",
+    "research/peak_synthesis/check.py": "5d6ee485d4afdf37ff351ed984e232be1f2cfe55db9cf9b61fb20679cb500f98",
+    "research/peak_synthesis/experiment.py": "5f78a862bbd0383a2f801d034813d7aa8061b26c76786cfbfb87d60cc5fad5d4",
+    "research/peak_synthesis/model.py": "0591cbc37e012c3a7985cfafc42d1d4cc639e00a0c8eb633ff61b69821928127",
+    "research/peak_synthesis/proposals.py": "28bf934d94c57d6e7d6155b064eda1a85f6b8c8dfaf09c4388dbf22bf1317625",
+    "research/peak_synthesis/test_synthesis.py": "82396a0b0dcee9934256e6b1bc33e20a212562a6773874d7164e62aeb918caa0",
+    "research/schur_remainder_recursion/__init__.py": "2e32507e208f41b9179dae50debf22fe0bfc302c9c94b830bb8d238e8dbd1b2d",
+    "research/schur_remainder_recursion/algebra.py": "2d3d047f6caa95d16e3241fdfd0309e3b24ae843a473addd79f9186724c72847",
+    "research/schur_remainder_recursion/test_recursion.py": "37226e2778dae93007d2c1531c53c24128aa3deeace5c075ad257e52c1c0230b",
+    "research/schur_remainder_recursion/verify.py": "eef3262805eeeee1c2093026f4812d9084aae847378f225c92e1b5418c3dbb8a",
+    "research/schur_sparse_lift/__init__.py": "e1d9a432e8986374c6847471de8c86afc23a81b4b7d186c107f31c92ed3d9375",
+    "research/schur_sparse_lift/algebra.py": "0a661f415626fe19b6c259549b4e737789af02581e7220c6914dab0b8d239284",
+    "research/schur_sparse_lift/test_sparse.py": "21560d9175cdb9c91c3f939ea37f12e2f751e8050b33dbacfaa9fd8e6d03b164",
+    "research/schur_sparse_lift/verify.py": "abe54a77b769019df9bf3546e4c5fb67cdb51927881ccd42971a38377625fcb2",
+    "research/theory_alignment/__init__.py": "936bd4d241ff1998ad627c98552a20f6d68a5e69311ffa98dc794b0bd9bb97e0",
+    "research/theory_alignment/experiment.py": "262e84eeaf5dbd66aa3040edc3ec532ff847c6a4a537df1821a67c14906cd16d",
+    "research/theory_alignment/PROTOCOL.md": "6804038e1535f5b38f19d9f93c9f0fe898cf6278db29eaaaab43847289459594",
+    "research/theory_alignment/test_alignment.py": "3656b950bc6673eba4f45a4196721e237d06cde80b70ff7d68a995454d51f494",
+    "research/theory_alignment/verify.py": "d56e7ec8824db5c09e297a95af581a8020d58ac1263e9a9bc979b9dc0bbb4ecd"
+  },
+  "manuscript_sha256_at_start": "15124e707be088aef6fb89b110118ccb6c3fc89bffc92b19541e9d0b59cd537a",
+  "python": "3.13.1 (tags/v3.13.1:0671451, Dec  3 2024, 19:06:28) [MSC v.1942 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.22631-SP0",
+  "versions": {
+    "numpy": "2.3.5",
+    "scipy": "1.17.1",
+    "sympy": "1.14.0",
+    "cvxpy": "1.7.5",
+    "clarabel": "0.11.1"
+  },
+  "epsilons": [
+    "1",
+    "1/10",
+    "1/100",
+    "1/10000",
+    "1/1000000",
+    "1/100000000",
+    "1/10000000000",
+    "0"
+  ],
+  "endpoints": [
+    [
+      "zero",
+      [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    ],
+    [
+      "full",
+      [
+        "1",
+        "1/2",
+        "1/3",
+        "1/4",
+        "1/5"
+      ]
+    ],
+    [
+      "left",
+      [
+        "2/5",
+        "2/25",
+        "8/375",
+        "4/625",
+        "32/15625"
+      ]
+    ],
+    [
+      "right",
+      [
+        "2/5",
+        "8/25",
+        "98/375",
+        "136/625",
+        "2882/15625"
+      ]
+    ],
+    [
+      "central",
+      [
+        "1/2",
+        "1/4",
+        "13/96",
+        "5/64",
+        "121/2560"
+      ]
+    ],
+    [
+      "two_intervals",
+      [
+        "1/2",
+        "3/16",
+        "5/48",
+        "33/512",
+        "53/1280"
+      ]
+    ]
+  ],
+  "synthesis_tasks": [
+    {
+      "order": 5,
+      "label": "zero_a1",
+      "horizon": "1",
+      "initial": [
+        "-2/5",
+        "-1/5",
+        "0",
+        "1/5",
+        "2/5"
+      ],
+      "waypoints": [
+        {
+          "time": "1/2",
+          "weights": [
+            "1",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-95/192",
+          "error": "0"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "0",
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-1/6",
+          "error": "0"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "0",
+            "0",
+            "1",
+            "0",
+            "0"
+          ],
+          "value": "3/20",
+          "error": "0"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "value": "2/5",
+          "error": "0"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          "value": "2/5",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "1",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-11/20",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-1/30",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "1",
+            "0",
+            "0"
+          ],
+          "value": "2/5",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "value": "3/5",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          "value": "2/5",
+          "error": "0"
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "label": "zero_a2",
+      "horizon": "1",
+      "initial": [
+        "-2/5",
+        "-1/5",
+        "0",
+        "1/5",
+        "2/5",
+        "3/5",
+        "4/5",
+        "1",
+        "6/5",
+        "7/5"
+      ],
+      "waypoints": [
+        {
+          "time": "1/2",
+          "weights": [
+            "1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-95/192",
+          "error": "0"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "0",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-1/6",
+          "error": "0"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "0",
+            "0",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "3/20",
+          "error": "0"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "2/5",
+          "error": "0"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "2/5",
+          "error": "0"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "443/384",
+          "error": "0"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "71/48",
+          "error": "0"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1",
+            "0",
+            "0"
+          ],
+          "value": "71/40",
+          "error": "0"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "value": "19/10",
+          "error": "0"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          "value": "7/5",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-11/20",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-1/30",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "2/5",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "3/5",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "2/5",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "259/120",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "79/30",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1",
+            "0",
+            "0"
+          ],
+          "value": "29/10",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "value": "13/5",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          "value": "7/5",
+          "error": "0"
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "label": "total_J1/10000",
+      "horizon": "1",
+      "initial": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "waypoints": [
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          "value": "1/10000",
+          "error": "0"
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "label": "total_J1000",
+      "horizon": "1",
+      "initial": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "waypoints": [
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          "value": "1000",
+          "error": "0"
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "label": "anchor_0",
+      "horizon": "1",
+      "initial": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "waypoints": [
+        {
+          "time": "1",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "1501/3125",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "49/125",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "6",
+            "0",
+            "0"
+          ],
+          "value": "37/125",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "2",
+            "0"
+          ],
+          "value": "1/5",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          "value": "1/5",
+          "error": "0"
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "label": "anchor_1",
+      "horizon": "1/2",
+      "initial": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "waypoints": [
+        {
+          "time": "1/2",
+          "weights": [
+            "3840",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "4503/6250",
+          "error": "0"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "0",
+            "384",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "147/250",
+          "error": "0"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "0",
+            "0",
+            "48",
+            "0",
+            "0"
+          ],
+          "value": "111/250",
+          "error": "0"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "8",
+            "0"
+          ],
+          "value": "3/10",
+          "error": "0"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "2"
+          ],
+          "value": "3/10",
+          "error": "0"
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "label": "anchor_2",
+      "horizon": "1",
+      "initial": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "waypoints": [
+        {
+          "time": "1",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-392952910507/607500000000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-1859023/3375000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "6",
+            "0",
+            "0"
+          ],
+          "value": "-2849023/6750000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "2",
+            "0"
+          ],
+          "value": "-22/75",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          "value": "-22/75",
+          "error": "0"
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "label": "waypoints_a1_s1_e0",
+      "horizon": "1",
+      "initial": [
+        "-1/10",
+        "0",
+        "1/10",
+        "1/5",
+        "-1/5"
+      ],
+      "waypoints": [
+        {
+          "time": "1/4",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-49764431/4302592",
+          "error": "0"
+        },
+        {
+          "time": "1/4",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "2269849/3073280",
+          "error": "0"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-33783245353/3361400000",
+          "error": "0"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "41480323/24010000",
+          "error": "0"
+        },
+        {
+          "time": "3/4",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-49174747298119/6884147200000",
+          "error": "0"
+        },
+        {
+          "time": "3/4",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "72865847347/24586240000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-2510663503667/983449600000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "108444378467/24586240000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "6",
+            "0",
+            "0"
+          ],
+          "value": "19217917/12544000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "2",
+            "0"
+          ],
+          "value": "63283/313600",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          "value": "-19/160",
+          "error": "0"
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "label": "waypoints_a1_s1_e1/200",
+      "horizon": "1",
+      "initial": [
+        "-1/10",
+        "0",
+        "1/10",
+        "1/5",
+        "-1/5"
+      ],
+      "waypoints": [
+        {
+          "time": "1/4",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-49764431/4302592",
+          "error": "1/200"
+        },
+        {
+          "time": "1/4",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "2269849/3073280",
+          "error": "1/200"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-33783245353/3361400000",
+          "error": "1/200"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "41480323/24010000",
+          "error": "1/200"
+        },
+        {
+          "time": "3/4",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-49174747298119/6884147200000",
+          "error": "1/200"
+        },
+        {
+          "time": "3/4",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "72865847347/24586240000",
+          "error": "1/200"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-2510663503667/983449600000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "108444378467/24586240000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "6",
+            "0",
+            "0"
+          ],
+          "value": "19217917/12544000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "2",
+            "0"
+          ],
+          "value": "63283/313600",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          "value": "-19/160",
+          "error": "0"
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "label": "waypoints_a1_s2_e0",
+      "horizon": "1",
+      "initial": [
+        "0",
+        "1/10",
+        "1/5",
+        "-1/5",
+        "-1/10"
+      ],
+      "waypoints": [
+        {
+          "time": "1/4",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "4531557/1229312",
+          "error": "0"
+        },
+        {
+          "time": "1/4",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "1513129/439040",
+          "error": "0"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "4073070427/480200000",
+          "error": "0"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "893623/214375",
+          "error": "0"
+        },
+        {
+          "time": "3/4",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "3428104418549/245862400000",
+          "error": "0"
+        },
+        {
+          "time": "3/4",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "3947857063/878080000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "685794845657/35123200000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "3823195543/878080000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "6",
+            "0",
+            "0"
+          ],
+          "value": "-174007/448000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "2",
+            "0"
+          ],
+          "value": "-7513/11200",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          "value": "-1/8",
+          "error": "0"
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "label": "waypoints_a1_s2_e1/200",
+      "horizon": "1",
+      "initial": [
+        "0",
+        "1/10",
+        "1/5",
+        "-1/5",
+        "-1/10"
+      ],
+      "waypoints": [
+        {
+          "time": "1/4",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "4531557/1229312",
+          "error": "1/200"
+        },
+        {
+          "time": "1/4",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "1513129/439040",
+          "error": "1/200"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "4073070427/480200000",
+          "error": "1/200"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "893623/214375",
+          "error": "1/200"
+        },
+        {
+          "time": "3/4",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "3428104418549/245862400000",
+          "error": "1/200"
+        },
+        {
+          "time": "3/4",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "3947857063/878080000",
+          "error": "1/200"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "685794845657/35123200000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "3823195543/878080000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "6",
+            "0",
+            "0"
+          ],
+          "value": "-174007/448000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "2",
+            "0"
+          ],
+          "value": "-7513/11200",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          "value": "-1/8",
+          "error": "0"
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "label": "waypoints_a2_s1_e0",
+      "horizon": "1",
+      "initial": [
+        "-1/10",
+        "0",
+        "1/10",
+        "1/5",
+        "-1/5",
+        "-1/10",
+        "0",
+        "1/10",
+        "1/5",
+        "-1/5"
+      ],
+      "waypoints": [
+        {
+          "time": "1/4",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0",
+            "-60",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-12441595/2151296",
+          "error": "0"
+        },
+        {
+          "time": "1/4",
+          "weights": [
+            "60",
+            "0",
+            "0",
+            "0",
+            "0",
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-149289395/8605184",
+          "error": "0"
+        },
+        {
+          "time": "1/4",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0",
+            "0",
+            "-12",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "2264859/6146560",
+          "error": "0"
+        },
+        {
+          "time": "1/4",
+          "weights": [
+            "0",
+            "12",
+            "0",
+            "0",
+            "0",
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "6819527/6146560",
+          "error": "0"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0",
+            "-60",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-6757407989/1344560000",
+          "error": "0"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "60",
+            "0",
+            "0",
+            "0",
+            "0",
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-32429487/2151296",
+          "error": "0"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0",
+            "0",
+            "-12",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "4169937/4802000",
+          "error": "0"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "0",
+            "12",
+            "0",
+            "0",
+            "0",
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "992023/384160",
+          "error": "0"
+        },
+        {
+          "time": "3/4",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0",
+            "-60",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-4868023351561/1376829440000",
+          "error": "0"
+        },
+        {
+          "time": "3/4",
+          "weights": [
+            "60",
+            "0",
+            "0",
+            "0",
+            "0",
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-47524246227/4405854208",
+          "error": "0"
+        },
+        {
+          "time": "3/4",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0",
+            "0",
+            "-12",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "7621998493/4917248000",
+          "error": "0"
+        },
+        {
+          "time": "3/4",
+          "weights": [
+            "0",
+            "12",
+            "0",
+            "0",
+            "0",
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "339022827/78675968",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-2510663503667/983449600000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-104477154343/35123200000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "108444378467/24586240000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "3471963543/878080000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "6",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "19217917/12544000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "6",
+            "0",
+            "0"
+          ],
+          "value": "497993/448000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "2",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "63283/313600",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "2",
+            "0"
+          ],
+          "value": "-793/11200",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-19/160",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          "value": "-9/40",
+          "error": "0"
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "label": "waypoints_a2_s1_e1/200",
+      "horizon": "1",
+      "initial": [
+        "-1/10",
+        "0",
+        "1/10",
+        "1/5",
+        "-1/5",
+        "-1/10",
+        "0",
+        "1/10",
+        "1/5",
+        "-1/5"
+      ],
+      "waypoints": [
+        {
+          "time": "1/4",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0",
+            "-60",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-12441595/2151296",
+          "error": "1/200"
+        },
+        {
+          "time": "1/4",
+          "weights": [
+            "60",
+            "0",
+            "0",
+            "0",
+            "0",
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-149289395/8605184",
+          "error": "1/200"
+        },
+        {
+          "time": "1/4",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0",
+            "0",
+            "-12",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "2264859/6146560",
+          "error": "1/200"
+        },
+        {
+          "time": "1/4",
+          "weights": [
+            "0",
+            "12",
+            "0",
+            "0",
+            "0",
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "6819527/6146560",
+          "error": "1/200"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0",
+            "-60",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-6757407989/1344560000",
+          "error": "1/200"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "60",
+            "0",
+            "0",
+            "0",
+            "0",
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-32429487/2151296",
+          "error": "1/200"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0",
+            "0",
+            "-12",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "4169937/4802000",
+          "error": "1/200"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "0",
+            "12",
+            "0",
+            "0",
+            "0",
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "992023/384160",
+          "error": "1/200"
+        },
+        {
+          "time": "3/4",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0",
+            "-60",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-4868023351561/1376829440000",
+          "error": "1/200"
+        },
+        {
+          "time": "3/4",
+          "weights": [
+            "60",
+            "0",
+            "0",
+            "0",
+            "0",
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-47524246227/4405854208",
+          "error": "1/200"
+        },
+        {
+          "time": "3/4",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0",
+            "0",
+            "-12",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "7621998493/4917248000",
+          "error": "1/200"
+        },
+        {
+          "time": "3/4",
+          "weights": [
+            "0",
+            "12",
+            "0",
+            "0",
+            "0",
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "339022827/78675968",
+          "error": "1/200"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-2510663503667/983449600000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-104477154343/35123200000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "108444378467/24586240000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "3471963543/878080000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "6",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "19217917/12544000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "6",
+            "0",
+            "0"
+          ],
+          "value": "497993/448000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "2",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "63283/313600",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "2",
+            "0"
+          ],
+          "value": "-793/11200",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-19/160",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          "value": "-9/40",
+          "error": "0"
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "label": "waypoints_a2_s2_e0",
+      "horizon": "1",
+      "initial": [
+        "0",
+        "1/10",
+        "1/5",
+        "-1/5",
+        "-1/10",
+        "0",
+        "1/10",
+        "1/5",
+        "-1/5",
+        "-1/10"
+      ],
+      "waypoints": [
+        {
+          "time": "1/4",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0",
+            "60",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "761335433/137682944",
+          "error": "0"
+        },
+        {
+          "time": "1/4",
+          "weights": [
+            "-60",
+            "0",
+            "0",
+            "0",
+            "0",
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "126917453/68841472",
+          "error": "0"
+        },
+        {
+          "time": "1/4",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0",
+            "0",
+            "12",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "127127251/24586240",
+          "error": "0"
+        },
+        {
+          "time": "1/4",
+          "weights": [
+            "0",
+            "-12",
+            "0",
+            "0",
+            "0",
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "21208221/12293120",
+          "error": "0"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0",
+            "60",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "42795946029/3361400000",
+          "error": "0"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "-60",
+            "0",
+            "0",
+            "0",
+            "0",
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "28626319171/6722800000",
+          "error": "0"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0",
+            "0",
+            "12",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "301105897/48020000",
+          "error": "0"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "0",
+            "-12",
+            "0",
+            "0",
+            "0",
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "50891457/24010000",
+          "error": "0"
+        },
+        {
+          "time": "3/4",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0",
+            "60",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "144464045523667/6884147200000",
+          "error": "0"
+        },
+        {
+          "time": "3/4",
+          "weights": [
+            "-60",
+            "0",
+            "0",
+            "0",
+            "0",
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "6120097718613/860518400000",
+          "error": "0"
+        },
+        {
+          "time": "3/4",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0",
+            "0",
+            "12",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "168211026929/24586240000",
+          "error": "0"
+        },
+        {
+          "time": "3/4",
+          "weights": [
+            "0",
+            "-12",
+            "0",
+            "0",
+            "0",
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "7509007431/3073280000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "685794845657/35123200000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "13866155421409/688414720000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "3823195543/878080000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "12227216313/2458624000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "6",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-174007/448000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "6",
+            "0",
+            "0"
+          ],
+          "value": "1755601/8780800",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "2",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-7513/11200",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "2",
+            "0"
+          ],
+          "value": "-5879/31360",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-1/8",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          "value": "129/560",
+          "error": "0"
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "label": "waypoints_a2_s2_e1/200",
+      "horizon": "1",
+      "initial": [
+        "0",
+        "1/10",
+        "1/5",
+        "-1/5",
+        "-1/10",
+        "0",
+        "1/10",
+        "1/5",
+        "-1/5",
+        "-1/10"
+      ],
+      "waypoints": [
+        {
+          "time": "1/4",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0",
+            "60",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "761335433/137682944",
+          "error": "1/200"
+        },
+        {
+          "time": "1/4",
+          "weights": [
+            "-60",
+            "0",
+            "0",
+            "0",
+            "0",
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "126917453/68841472",
+          "error": "1/200"
+        },
+        {
+          "time": "1/4",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0",
+            "0",
+            "12",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "127127251/24586240",
+          "error": "1/200"
+        },
+        {
+          "time": "1/4",
+          "weights": [
+            "0",
+            "-12",
+            "0",
+            "0",
+            "0",
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "21208221/12293120",
+          "error": "1/200"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0",
+            "60",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "42795946029/3361400000",
+          "error": "1/200"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "-60",
+            "0",
+            "0",
+            "0",
+            "0",
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "28626319171/6722800000",
+          "error": "1/200"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0",
+            "0",
+            "12",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "301105897/48020000",
+          "error": "1/200"
+        },
+        {
+          "time": "1/2",
+          "weights": [
+            "0",
+            "-12",
+            "0",
+            "0",
+            "0",
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "50891457/24010000",
+          "error": "1/200"
+        },
+        {
+          "time": "3/4",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0",
+            "60",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "144464045523667/6884147200000",
+          "error": "1/200"
+        },
+        {
+          "time": "3/4",
+          "weights": [
+            "-60",
+            "0",
+            "0",
+            "0",
+            "0",
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "6120097718613/860518400000",
+          "error": "1/200"
+        },
+        {
+          "time": "3/4",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0",
+            "0",
+            "12",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "168211026929/24586240000",
+          "error": "1/200"
+        },
+        {
+          "time": "3/4",
+          "weights": [
+            "0",
+            "-12",
+            "0",
+            "0",
+            "0",
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "7509007431/3073280000",
+          "error": "1/200"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "120",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "685794845657/35123200000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "120",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "13866155421409/688414720000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "24",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "3823195543/878080000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "24",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "12227216313/2458624000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "6",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-174007/448000",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "6",
+            "0",
+            "0"
+          ],
+          "value": "1755601/8780800",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "2",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-7513/11200",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "2",
+            "0"
+          ],
+          "value": "-5879/31360",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "value": "-1/8",
+          "error": "0"
+        },
+        {
+          "time": "1",
+          "weights": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          "value": "129/560",
+          "error": "0"
+        }
+      ]
+    }
+  ]
+}

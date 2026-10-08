@@ -1,3 +1,2 @@
+* -text
 *.zip binary
-*.md text eol=lf
-SHA256SUMS.txt text eol=lf

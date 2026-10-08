@@ -1,0 +1,31 @@
+{
+  "name": "central",
+  "kind": "outside",
+  "eta": "1/1000000",
+  "point": [
+    "16281247/32562500",
+    "8140641/32562500",
+    "105827741/781500000",
+    "5/64",
+    "121/2560"
+  ],
+  "direction": [
+    "-3/16",
+    "1",
+    "-1",
+    "0",
+    "0"
+  ],
+  "support": "1/48",
+  "exact_violation": "1/1000000",
+  "numeric": {
+    "status": "infeasible",
+    "failure": null,
+    "warnings": [],
+    "candidate": null,
+    "residuals": {
+      "diagnostic_pass": false
+    },
+    "elapsed_seconds": 0.04802850000123726
+  }
+}

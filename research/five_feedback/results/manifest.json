@@ -1,0 +1,213 @@
+{
+  "schema": 1,
+  "sources": {
+    "five_synthesis\\__init__.py": "2f75d68e462549f9f6a1f19218712bda2d263c2dbb91b8cef01a5c806e4343ab",
+    "five_synthesis\\certify.py": "d994f1e022d2f6c9beb86ee17d41b4f0471e23d1470673ec11e7d5847da3e6b9",
+    "five_synthesis\\check.py": "4dcaf44a2a3265cd3d7f99da2c2ea2763b92e188ed32adc23424da3634242005",
+    "five_synthesis\\experiment.py": "2e6b9ae88b5daba01d14a884826795d7c1b7369ef25671aca083a4c857a83c66",
+    "five_synthesis\\model.py": "0447e86b8a53654dfa172dc2375d06443c6f90ee5e37c7402ffa8ab0591f2173",
+    "five_synthesis\\proposals.py": "471147102d8cb874261dac53b5e0175ae38379629ca3de0423d4b12ad2c8afdc",
+    "five_synthesis\\test_synthesis.py": "96da3fb958cc500595633bd738c6ee05d9ff30d1f88fadb7982d77a6f0e8def8",
+    "five_synthesis\\THEORY.md": "3a17967693eeae57b406d0afbeb8b547afbd249460a5323d33708f77d6e8da68",
+    "five_synthesis\\PROTOCOL.md": "33d8275640ad385c7a8ddf82e731eb3ddf2dc35f8d485761a3cacaba3028280c",
+    "closed_five_lift\\algebra.py": "d913c76819b020eb3f0b85923e8b7ed43dee2c297457114cfcd172f58c303d2d",
+    "closed_five_lift\\THEORY.md": "96baf4d886147d73f957a7c076e58800367f0414091e8dd7e71ec2249170f242",
+    "closed_five_lift\\results\\verification.json": "ad064aa5b9c2e06955f0bc95136fee5d8786177d348babe50747fa9f4c1ae705",
+    "schur_sparse_lift\\algebra.py": "0a661f415626fe19b6c259549b4e737789af02581e7220c6914dab0b8d239284",
+    "schur_remainder_recursion\\algebra.py": "2d3d047f6caa95d16e3241fdfd0309e3b24ae843a473addd79f9186724c72847",
+    "general_congruence_gate\\algebra.py": "4fa04d8aa25e5ebcb2b98e368410893edfac91e1cf29a8043095ded02f9e248d",
+    "moment_four_lift\\exact.py": "a8f43b140284636d80779c457f92dda6149c99c0a7c9216207a02ab28ec05917",
+    "moment_upper_gate\\exact.py": "7c934bb14ebae33ddea684cb25a0f69f6e75fa2b38b6064560ab8bb242cef2fd",
+    "peak_synthesis\\model.py": "0591cbc37e012c3a7985cfafc42d1d4cc639e00a0c8eb633ff61b69821928127",
+    "peak_synthesis\\certify.py": "4b060085339fb76247595d7a459f450f451c9ba63f8492fa3c8166c1f9fdf0dc",
+    "four_history_audit\\proposals.py": "28014b7f759bca4c7add6411b4ee58ba3648da1182239615c2f66fd1ef39237d",
+    "four_history_audit\\model.py": "8fdffeb659c51144dfc5db9e0e6b048f16669dcb9fd01e139f2fd43202c488d6",
+    "classic_cone_audit\\compiler.py": "da258b6c39f557a6cbe95d7b03a6b59cb8e645dc9674f8706903e4ff25291b0d",
+    "five_feedback\\__init__.py": "564a22ed2215a8bb3b83c4bcd2323cdeffff6d08d4d0442215a82a5f24d2c754",
+    "five_feedback\\check.py": "993ed1790e8fb8912305c596e8748f91b7d2cf80c8e99a32f1ca7810c41ef957",
+    "five_feedback\\experiment.py": "8f263a3c0d9e6720b13a0fff5372a246ba66c3e8d8d0ee524fa20372eea01841",
+    "five_feedback\\protocol.py": "49ce35c420d7ede206ea8f9a246c0935fb1456f7d0223b2ca85b1180d894f71b",
+    "five_feedback\\test_feedback.py": "48dfb8be355bd704dbcd1a12c20a772b7909219f596a9106ec750473531279de",
+    "five_feedback\\PROTOCOL.md": "364474b36e4e2f7e0b8357e7463f14ba811adac1ad253c9b8aaba7d2745ca45a",
+    "five_feedback\\THEORY.md": "4b9cc53e3a03a66061272ad3c60a1f1e062412b31bae4dde46da3929949b1a79",
+    "five_synthesis\\results\\verification.json": "e459fc4b0c75923d6a82a379462f9425287ba5589bf2eade9dc1fc3ce315ed36"
+  },
+  "scenarios": [
+    {
+      "label": "single_nominal",
+      "initial": [
+        "1/10",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "disturbance": "none",
+      "horizon": "3",
+      "period": "1/2",
+      "steps": 12,
+      "cap": "5",
+      "quantum": "1/1000000000",
+      "exact_state": true,
+      "order": 5
+    },
+    {
+      "label": "pair_nominal",
+      "initial": [
+        "1/10",
+        "0",
+        "0",
+        "0",
+        "0",
+        "-2/25",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "disturbance": "none",
+      "horizon": "3",
+      "period": "1/2",
+      "steps": 12,
+      "cap": "5",
+      "quantum": "1/1000000000",
+      "exact_state": true,
+      "order": 5
+    },
+    {
+      "label": "pair_pulse",
+      "initial": [
+        "1/10",
+        "0",
+        "0",
+        "0",
+        "0",
+        "-2/25",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "disturbance": "pulse",
+      "horizon": "3",
+      "period": "1/2",
+      "steps": 12,
+      "cap": "5",
+      "quantum": "1/1000000000",
+      "exact_state": true,
+      "order": 5
+    },
+    {
+      "label": "pair_persistent",
+      "initial": [
+        "1/10",
+        "0",
+        "0",
+        "0",
+        "0",
+        "-2/25",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "disturbance": "persistent",
+      "horizon": "3",
+      "period": "1/2",
+      "steps": 12,
+      "cap": "5",
+      "quantum": "1/1000000000",
+      "exact_state": true,
+      "order": 5
+    }
+  ],
+  "schedule": [
+    [
+      0,
+      "ideal_instant",
+      "closed_five_sdp"
+    ],
+    [
+      0,
+      "ideal_instant",
+      "continuous_root_dual"
+    ],
+    [
+      0,
+      "one_period_deadline",
+      "continuous_root_dual"
+    ],
+    [
+      0,
+      "one_period_deadline",
+      "closed_five_sdp"
+    ],
+    [
+      1,
+      "ideal_instant",
+      "continuous_root_dual"
+    ],
+    [
+      1,
+      "ideal_instant",
+      "closed_five_sdp"
+    ],
+    [
+      1,
+      "one_period_deadline",
+      "closed_five_sdp"
+    ],
+    [
+      1,
+      "one_period_deadline",
+      "continuous_root_dual"
+    ],
+    [
+      2,
+      "ideal_instant",
+      "closed_five_sdp"
+    ],
+    [
+      2,
+      "ideal_instant",
+      "continuous_root_dual"
+    ],
+    [
+      2,
+      "one_period_deadline",
+      "continuous_root_dual"
+    ],
+    [
+      2,
+      "one_period_deadline",
+      "closed_five_sdp"
+    ],
+    [
+      3,
+      "ideal_instant",
+      "continuous_root_dual"
+    ],
+    [
+      3,
+      "ideal_instant",
+      "closed_five_sdp"
+    ],
+    [
+      3,
+      "one_period_deadline",
+      "closed_five_sdp"
+    ],
+    [
+      3,
+      "one_period_deadline",
+      "continuous_root_dual"
+    ]
+  ],
+  "versions": {
+    "numpy": "2.3.5",
+    "scipy": "1.17.1",
+    "sympy": "1.14.0",
+    "cvxpy": "1.7.5",
+    "clarabel": "0.11.1"
+  }
+}

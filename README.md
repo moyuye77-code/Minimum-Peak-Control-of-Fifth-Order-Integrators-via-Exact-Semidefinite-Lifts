@@ -1,58 +1,94 @@
-# Minimum-Peak Control of Fifth-Order Integrators via Exact Semidefinite Lifts
+# Reproducibility archive
 
-Reproducibility materials accompanying the manuscript by **Zihan Yang**,
-University of Electronic Science and Technology of China.
-Contact: **768216265@qq.com**.
+Article: Minimum-Peak Control of Fifth-Order Integrators via Exact Semidefinite Lifts
 
-## Download
+Intended journal: Applied Mathematics & Optimization (no acceptance or publication claim)
 
-- [Versioned release: 2026-10-09](https://github.com/moyuye77-code/Minimum-Peak-Control-of-Fifth-Order-Integrators-via-Exact-Semidefinite-Lifts/releases/tag/reproducibility-2026-10-09)
-- [Download ESM_1.zip](https://github.com/moyuye77-code/Minimum-Peak-Control-of-Fifth-Order-Integrators-via-Exact-Semidefinite-Lifts/releases/download/reproducibility-2026-10-09/ESM_1.zip)
-- [Archive checksum](SHA256SUMS.txt)
+Author and corresponding author: Zihan Yang
 
-The same archive is also available as `ESM_1.zip` in this repository. Extract
-it to a new directory and read `README.pdf` or `README.md` inside it.
-The historical filename is retained for compatibility: the archive is hosted
-here, not supplied as a journal-uploaded "Online Resource 1".
+Affiliation: School of Information and Communication Engineering, University of
+Electronic Science and Technology of China, Chengdu, China
 
-The archive contains the matching manuscript PDF and LaTeX source, mathematical
-verification scripts, experimental code, frozen numerical records, rational
-certificates, and a detailed claim-to-file guide. Its internal manifest lists
-726 payload files with sizes, SHA256 checksums, and article identification.
-Warnings, failed cases, and an interrupted experiment are retained.
+Correspondence: 768216265@qq.com
 
-## Verify the extracted archive
+Archive file: ESM_1.zip. Version: 2026-10-09.
 
-From the **extracted archive directory**, run:
+Repository: https://github.com/moyuye77-code/Minimum-Peak-Control-of-Fifth-Order-Integrators-via-Exact-Semidefinite-Lifts
+
+Versioned release: https://github.com/moyuye77-code/Minimum-Peak-Control-of-Fifth-Order-Integrators-via-Exact-Semidefinite-Lifts/releases/tag/reproducibility-2026-10-09
+
+These supporting materials are distributed through the public repository, not
+as a journal-uploaded supplement. The legacy filename `ESM_1.zip` and metadata
+path `research/paper/ONLINE_RESOURCE_1.json` are retained for compatibility;
+they do not assert that a journal hosts or has published this archive.
+
+Caption: Source code, numerical records, rational verification scripts
+and a reproducibility guide for the exact semidefinite formulation and its
+computational studies, including warnings, failed cases and boundary diagnostics.
+
+Start with `README.pdf` for a printable package guide. The inventory
+`bundle-manifest.json` records the article and author identification both at
+package level and for each listed file. This metadata is kept separate from
+the frozen scientific files so that their contents and hashes remain intact.
+
+This is a scientific subset of the research archive for Minimum-Peak Control
+of Fifth-Order Integrators via Exact Semidefinite Lifts. The manuscript is at
+`output/pdf/representability-review.pdf`; its source and official template
+files are under `research/paper/`.
+
+## Start without a solver installation
+
+Extract the ZIP to a NEW directory. From that directory:
 
 ```text
 python -B -S research/paper/review_checks.py
 ```
 
-This standard-library-only command checks the inventory, manuscript structure,
-reference metadata, and stored rational certificates.
+This verifies every file against the bundled SHA256 inventory, checks manuscript
+structure and registered reference metadata, and replays historical fifth-order
+synthesis certificates and feedback records with rational arithmetic.
+No NumPy, SciPy, SymPy, CVXPY or solver is required for this command.
+Expected fifth-order results: 30 valid certificates, accuracy 14/15 versus 12/15,
+12 jointly accurate pairs with SDP slower in all of them, 16 feedback episodes,
+192 slots, and zero SDP activations under the recorded half-second deadline.
 
-For the extended algebra and regression checks, use the dependencies in
-`requirements-numerical.txt`, then run:
+## Extended checks with existing numerical libraries
+
+With the versions in `requirements-numerical.txt` available:
 
 ```text
 python -B research/paper/review_checks.py --numerical
 ```
 
-These are read-only replays, not fresh optimization experiments or timing
-benchmarks. Do not use `-O`, `PYTHONOPTIMIZE`, or experiment-creation flags on
-the distributed records. See `research/paper/REPRODUCIBILITY.md` for details.
+The extended checks reconstruct the current manuscript's matrix identities,
+boundary witnesses, fourth-order comparisons and recovery ablation, and the
+October 2 theory-aligned experiment. They run the targeted regression tests.
+The wrapper blocks CVXPY solve and SciPy optimization entry points during
+replay. These commands do not regenerate experimental solver outputs or timings.
+Run without `-O` or `PYTHONOPTIMIZE` because frozen scientific checkers use assertions.
+The wrapper refuses optimized mode and rechecks the file inventory at the end.
 
-## Scope
+The supplementary study includes 48 exact boundary witnesses, 18 membership
+diagnostics and 15 recovery-attribution tasks. All three outside points at
+violation 1e-9 were numerically accepted; 48 boundary solves warned about
+precision. These limitations and the interrupted first attempt are retained.
+Consult `research/theory_alignment/README.md` and the protocol for details.
 
-The manuscript presents an explicit exact finite semidefinite lift for the
-fifth-order bounded-density moment body and its minimum-peak synthesis
-formulation. The construction has 34 auxiliary scalars and 21 PSD blocks of
-order at most four. It does not establish real-time superiority or determine
-the exact fifth-order semidefinite extension degree (currently bounded by 3
-and 4). The recorded SDP route is slower on all 12 jointly accurate comparison
-tasks and activates no plans under the recorded half-second deadline.
+## What these checks do not establish
 
-Public availability is not journal acceptance, peer-review certification, or a
-formal proof. The manuscript retains its actual AI-use disclosure. Existing
-third-party notices in the archive remain applicable.
+This is evidence replay and algebra checking, not a formal proof,
+universal novelty search, new timing benchmark or clean-install test.
+Numerical libraries are not included. Historical solver source files are unchanged;
+some contain original local path hints or old research claims. The current
+manuscript and its explicit limitations take precedence.
+
+The bibliographic metadata checker compares the eleven references with the saved
+DOI-registry responses; it does not assess the mathematical relevance of a
+citation. The stored symbolic-check results are cross-checked, not silently
+rerun over the originals.
+
+The inventory checks consistency within this distribution, not an independently
+timestamped origin. It deliberately omits itself from its file list. No full-text
+third-party papers, credentials, Git history, installed packages, private author
+worksheets or unrelated early UAV experiments are included. Do not run creation
+flags such as `--create`, `--run` or `--write` on the frozen records.

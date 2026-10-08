@@ -1,0 +1,31 @@
+{
+  "name": "zero",
+  "kind": "outside",
+  "eta": "1/1000",
+  "point": [
+    "-1/1000",
+    "0",
+    "0",
+    "0",
+    "0"
+  ],
+  "direction": [
+    "-1",
+    "0",
+    "0",
+    "0",
+    "0"
+  ],
+  "support": "0",
+  "exact_violation": "1/1000",
+  "numeric": {
+    "status": "infeasible",
+    "failure": null,
+    "warnings": [],
+    "candidate": null,
+    "residuals": {
+      "diagnostic_pass": false
+    },
+    "elapsed_seconds": 0.11879279999993742
+  }
+}

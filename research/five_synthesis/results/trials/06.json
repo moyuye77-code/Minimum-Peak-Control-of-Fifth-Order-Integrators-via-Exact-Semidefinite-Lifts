@@ -1,0 +1,153 @@
+{
+  "index": 3,
+  "case": {
+    "order": 5,
+    "label": "total_J1000",
+    "horizon": "1",
+    "initial": [
+      "0",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    "waypoints": [
+      {
+        "time": "1",
+        "weights": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "1"
+        ],
+        "value": "1000",
+        "error": "0"
+      }
+    ]
+  },
+  "known_peak": "1000",
+  "proposal": {
+    "method": "continuous_root_dual",
+    "status": "Positive directional derivative for linesearch",
+    "success": false,
+    "value": 1000.0006725623285,
+    "lam": [
+      1.0000006725623285
+    ],
+    "iterations": 12,
+    "numeric_dual_norm": 1.0000006725623285,
+    "optimization_calls": 1,
+    "warnings": [],
+    "construction_seconds": 0.00024930000654421747,
+    "canonicalization_seconds": 0.0,
+    "solve_call_seconds": 0.0019380000012461096,
+    "elapsed_seconds": 0.002187300007790327
+  },
+  "recovery": {
+    "certificate": {
+      "case": {
+        "order": 5,
+        "label": "total_J1000",
+        "horizon": "1",
+        "initial": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "waypoints": [
+          {
+            "time": "1",
+            "weights": [
+              "0",
+              "0",
+              "0",
+              "0",
+              "1"
+            ],
+            "value": "1000",
+            "error": "0"
+          }
+        ]
+      },
+      "mesh": [
+        "0",
+        "1/4",
+        "1/2",
+        "3/4",
+        "1"
+      ],
+      "controls": [
+        "1000",
+        "1000",
+        "1000",
+        "1000"
+      ],
+      "upper": "1000",
+      "certified": true,
+      "tolerance": "1/100000",
+      "scale": "1000",
+      "dual": {
+        "lam": [
+          "1"
+        ],
+        "leaves": [
+          [
+            0,
+            "0",
+            "1",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        ],
+        "numerator": "1000",
+        "norm_upper": "1",
+        "lower": "1000"
+      },
+      "lower": "1000",
+      "gap": "0",
+      "converged": true
+    },
+    "initial_dual": {
+      "lam": [
+        "1"
+      ],
+      "leaves": [
+        [
+          0,
+          "0",
+          "1",
+          "1",
+          "0",
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "numerator": "1000",
+      "norm_upper": "1",
+      "lower": "1000"
+    },
+    "attempts": [
+      {
+        "iteration": 0,
+        "cells": 4,
+        "status": 0,
+        "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+        "warnings": [
+          "Unrecognized options detected: {'threads': 1}. These will be passed to HiGHS verbatim."
+        ],
+        "primal_recovered": true,
+        "gap": "0"
+      }
+    ],
+    "repair_lp_calls": 1,
+    "elapsed_seconds": 0.003725299990037456
+  },
+  "elapsed_seconds": 0.006606600014492869
+}

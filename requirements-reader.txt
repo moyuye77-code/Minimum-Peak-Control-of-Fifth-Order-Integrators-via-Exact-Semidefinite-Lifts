@@ -1,0 +1,2 @@
+# Optional symbolic checks; the default -S certificate replay needs none of these.
+sympy==1.14.0

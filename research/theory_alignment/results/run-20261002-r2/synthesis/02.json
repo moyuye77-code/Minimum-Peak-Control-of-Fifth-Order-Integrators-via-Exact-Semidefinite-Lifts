@@ -1,0 +1,384 @@
+{
+  "case": {
+    "order": 5,
+    "label": "total_J1/10000",
+    "horizon": "1",
+    "initial": [
+      "0",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    "waypoints": [
+      {
+        "time": "1",
+        "weights": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "1"
+        ],
+        "value": "1/10000",
+        "error": "0"
+      }
+    ]
+  },
+  "known_peak": "1/10000",
+  "proposal": {
+    "method": "closed_five_sdp",
+    "status": "optimal",
+    "failure": null,
+    "warnings": [],
+    "optimization_calls": 1,
+    "construction_seconds": 0.013144600001396611,
+    "canonicalization_seconds": 0.047360199998365715,
+    "solve_call_seconds": 0.003109600002062507,
+    "elapsed_seconds": 0.06361440000182483,
+    "variables": 40,
+    "PSD_blocks": [
+      3,
+      3,
+      3,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      4,
+      4,
+      3,
+      3,
+      3,
+      2,
+      2,
+      4,
+      4,
+      3,
+      3,
+      3
+    ],
+    "value": 9.999999994022263e-05,
+    "lam": [
+      0.999999998634617
+    ],
+    "moments": [
+      [
+        9.999999996972926e-05,
+        4.999999996890654e-05,
+        3.3333333301544405e-05,
+        2.4999999965843953e-05,
+        1.9999999959861665e-05
+      ]
+    ],
+    "auxiliaries": [
+      [
+        9.999999989353669e-05,
+        9.999999988953337e-05,
+        9.99999997404517e-05,
+        4.999999993555877e-05,
+        4.9999999930378e-05,
+        2.499999997996887e-05,
+        2.000000001494513e-05,
+        1.0330171568818604e-14,
+        7.936098216515375e-15,
+        1.4894108418733833e-14,
+        3.094316757388548e-13,
+        -3.7945842893881556e-14,
+        1.1111111079681202e-05,
+        3.333333325686944e-05,
+        1.6666666649875618e-05,
+        9.999999996788687e-05,
+        9.999999999369529e-05,
+        4.999999992604849e-05,
+        2.4999999956121502e-05,
+        2.499999999748803e-05,
+        8.322187645060487e-14,
+        8.990849155577295e-15,
+        -5.601852504930436e-15,
+        2.557542464225308e-15,
+        3.445729862422891e-13,
+        -5.3900601424050036e-14,
+        -4.510417909282893e-15,
+        3.2111331539992514e-14,
+        4.4363106024054945e-15,
+        8.7358528816859e-15,
+        2.3344696754226713e-13,
+        -1.7554177185897663e-14,
+        1.7642690343942177e-14,
+        7.727456177919183e-15
+      ]
+    ],
+    "minimum_eigenvalue": -2.8801762212752885e-13,
+    "minimum_scalar_slack": -5.5083463967398397e-14
+  },
+  "raw": {
+    "minimum_eigenvalue": -2.8801762212752885e-13,
+    "minimum_scalar_slack": -5.5083463967398397e-14,
+    "maximum_scaled_row_error": 7.641185861134714e-16,
+    "cone_tolerance": 1e-07,
+    "diagnostic_pass": true
+  },
+  "recovery": {
+    "sdp_seed": {
+      "certificate": {
+        "case": {
+          "order": 5,
+          "label": "total_J1/10000",
+          "horizon": "1",
+          "initial": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "waypoints": [
+            {
+              "time": "1",
+              "weights": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "1"
+              ],
+              "value": "1/10000",
+              "error": "0"
+            }
+          ]
+        },
+        "mesh": [
+          "0",
+          "1/4",
+          "1/2",
+          "3/4",
+          "1"
+        ],
+        "controls": [
+          "1/10000",
+          "1/10000",
+          "1/10000",
+          "1/10000"
+        ],
+        "upper": "1/10000",
+        "certified": true,
+        "tolerance": "1/100000",
+        "scale": "1/10000",
+        "dual": {
+          "lam": [
+            "1"
+          ],
+          "leaves": [
+            [
+              0,
+              "0",
+              "1",
+              "1",
+              "0",
+              "0",
+              "0",
+              "0"
+            ]
+          ],
+          "numerator": "1/10000",
+          "norm_upper": "1",
+          "lower": "1/10000"
+        },
+        "lower": "1/10000",
+        "gap": "0",
+        "converged": true
+      },
+      "initial_dual": {
+        "lam": [
+          "1"
+        ],
+        "leaves": [
+          [
+            0,
+            "0",
+            "1",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        ],
+        "numerator": "1/10000",
+        "norm_upper": "1",
+        "lower": "1/10000"
+      },
+      "attempts": [
+        {
+          "iteration": 0,
+          "cells": 4,
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "warnings": [
+            "Unrecognized options detected: {'threads': 1}. These will be passed to HiGHS verbatim."
+          ],
+          "primal_recovered": true,
+          "gap": "0"
+        }
+      ],
+      "repair_lp_calls": 1,
+      "elapsed_seconds": 0.004193200002191588
+    },
+    "zero_seed": {
+      "certificate": {
+        "case": {
+          "order": 5,
+          "label": "total_J1/10000",
+          "horizon": "1",
+          "initial": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "waypoints": [
+            {
+              "time": "1",
+              "weights": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "1"
+              ],
+              "value": "1/10000",
+              "error": "0"
+            }
+          ]
+        },
+        "mesh": [
+          "0",
+          "1/4",
+          "1/2",
+          "3/4",
+          "1"
+        ],
+        "controls": [
+          "1/10000",
+          "1/10000",
+          "1/10000",
+          "1/10000"
+        ],
+        "upper": "1/10000",
+        "certified": true,
+        "tolerance": "1/100000",
+        "scale": "1/10000",
+        "dual": {
+          "lam": [
+            "1"
+          ],
+          "leaves": [
+            [
+              0,
+              "0",
+              "1",
+              "1",
+              "0",
+              "0",
+              "0",
+              "0"
+            ]
+          ],
+          "numerator": "1/10000",
+          "norm_upper": "1",
+          "lower": "1/10000"
+        },
+        "lower": "1/10000",
+        "gap": "0",
+        "converged": true
+      },
+      "initial_dual": {
+        "lam": [
+          "0"
+        ],
+        "leaves": [
+          [
+            0,
+            "0",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        ],
+        "numerator": "0",
+        "norm_upper": "0",
+        "lower": "0"
+      },
+      "attempts": [
+        {
+          "iteration": 0,
+          "cells": 4,
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "warnings": [
+            "Unrecognized options detected: {'threads': 1}. These will be passed to HiGHS verbatim."
+          ],
+          "primal_recovered": true,
+          "gap": "0"
+        }
+      ],
+      "repair_lp_calls": 1,
+      "elapsed_seconds": 0.004262499998731073
+    }
+  },
+  "attribution": {
+    "sdp_seed": {
+      "initial_lower": "1/10000",
+      "certified": true,
+      "converged": true,
+      "lower": "1/10000",
+      "upper": "1/10000",
+      "lower_improvement": "0",
+      "initial_gap_scaled": "0",
+      "final_gap_scaled": "0",
+      "initial_gap_pass": true,
+      "homogeneous_moments": [
+        [
+          "1/10000",
+          "1/20000",
+          "1/30000",
+          "1/40000",
+          "1/50000"
+        ]
+      ],
+      "recovered_lift_checks": 1,
+      "recovered_zero_apex": false,
+      "raw_to_recovered_moment_distance": 4.0138336719012374e-14
+    },
+    "zero_seed": {
+      "initial_lower": "0",
+      "certified": true,
+      "converged": true,
+      "lower": "1/10000",
+      "upper": "1/10000",
+      "lower_improvement": "1/10000",
+      "initial_gap_scaled": "1",
+      "final_gap_scaled": "0",
+      "initial_gap_pass": false,
+      "homogeneous_moments": [
+        [
+          "1/10000",
+          "1/20000",
+          "1/30000",
+          "1/40000",
+          "1/50000"
+        ]
+      ],
+      "recovered_lift_checks": 1,
+      "recovered_zero_apex": false,
+      "raw_to_recovered_moment_distance": 4.0138336719012374e-14
+    }
+  }
+}

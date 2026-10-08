@@ -1,0 +1,109 @@
+{
+  "evidence": {
+    "schema": 1,
+    "exact_residuals": {
+      "schur_split": "0",
+      "domain_invariance": "0",
+      "numerator_translation": "0",
+      "boundary_translation": "0",
+      "reduced_certificate": "0",
+      "full_joint_certificate": "0"
+    },
+    "denominator": "m*(-m**4/12 + m*q - z**2)",
+    "terms": [
+      {
+        "coefficient": "1",
+        "x_generator": "1",
+        "u_generator": "1",
+        "square": "M*((-M**4/12 + M*Q - Z**2)*(-m**3*z/6 + m*r - q*z) - (-m**4/12 + m*q - z**2)*(-M**3*Z/6 + M*R - Q*Z))",
+        "degree_x": 8
+      },
+      {
+        "coefficient": "1",
+        "x_generator": "-m**4/12 + m*q - z**2",
+        "u_generator": "1",
+        "square": "-(M*z - Z*m)*(-M**3*Z/6 + M*R - Q*Z) + (-M**4/12 + M*Q - Z**2)*(M**2*m*(-M + m)/12 + M*q - Q*m)",
+        "degree_x": 8
+      },
+      {
+        "coefficient": "1/6",
+        "x_generator": "m*(-m**4/12 + m*q - z**2)",
+        "u_generator": "M",
+        "square": "-M*(-M + m)*(-M**3*Z/6 + M*R - Q*Z) + (M*z + Z*(-2*M + m))*(-M**4/12 + M*Q - Z**2)",
+        "degree_x": 7
+      },
+      {
+        "coefficient": "1/12",
+        "x_generator": "-m**4/12 + m*q - z**2",
+        "u_generator": "1",
+        "square": "M*(-m*(-M + m)*(-M**3*Z/6 + M*R - Q*Z) + (-Z*m + z*(-M + 2*m))*(-M**4/12 + M*Q - Z**2))",
+        "degree_x": 8
+      },
+      {
+        "coefficient": "1/12",
+        "x_generator": "1",
+        "u_generator": "1",
+        "square": "M*(-M + m)*(-M**4/12 + M*Q - Z**2)*(-m**4/12 + m*q - z**2)",
+        "degree_x": 10
+      },
+      {
+        "coefficient": "1/6",
+        "x_generator": "m*(-m**4/12 + m*q - z**2)",
+        "u_generator": "M*(-M**4/12 + M*Q - Z**2)",
+        "square": "(-M + m)*(-M**4/12 + M*Q - Z**2)",
+        "degree_x": 7
+      },
+      {
+        "coefficient": "1/120",
+        "x_generator": "m*(-m**4/12 + m*q - z**2)",
+        "u_generator": "M",
+        "square": "M*(-M + m)**2*(-M**4/12 + M*Q - Z**2)",
+        "degree_x": 9
+      },
+      {
+        "coefficient": "1/180",
+        "x_generator": "-m**4/12 + m*q - z**2",
+        "u_generator": "1",
+        "square": "M*m*(-M + m)**2*(-M**4/12 + M*Q - Z**2)",
+        "degree_x": 10
+      }
+    ],
+    "pL_degree": 10,
+    "rank_reduction_calibrations": [
+      {
+        "n": "1",
+        "sigma": "y0",
+        "eta": "0",
+        "reduced": "y0**3/12"
+      },
+      {
+        "n": "2",
+        "sigma": "-(y0**4 - 12*y0*y2 + 12*y1**2)/(12*y0)",
+        "eta": "y1*(y0**3 + 6*y2)/(6*y0)",
+        "reduced": "-(y0**6 - 60*y0**3*y2 - 180*y0**2*y1**2 - 720*y2**2)/(720*y0)"
+      },
+      {
+        "n": "3",
+        "sigma": "(y0**9 - 72*y0**6*y2 + 72*y0**5*y1**2 + 720*y0**4*y4 - 2880*y0**3*y1*y3 + 4320*y0**2*y1**2*y2 - 2160*y0*y1**4 - 8640*y0*y2*y4 + 8640*y0*y3**2 + 8640*y1**2*y4 - 17280*y1*y2*y3 + 8640*y2**3)/(720*(y0**4 - 12*y0*y2 + 12*y1**2))",
+        "eta": "-(y0**8*y1 - 16*y0**6*y3 - 24*y0**5*y1*y2 + 40*y0**4*y1**3 - 480*y0**3*y1*y4 - 480*y0**3*y2*y3 + 1440*y0**2*y1*y2**2 - 480*y0*y1**3*y2 + 2880*y0*y3*y4 - 240*y1**5 - 2880*y1*y2*y4 - 2880*y1*y3**2 + 2880*y2**2*y3)/(240*(y0**4 - 12*y0*y2 + 12*y1**2))",
+        "reduced": "(y0**11 - 180*y0**8*y2 - 1080*y0**7*y1**2 + 5040*y0**6*y4 + 20160*y0**5*y1*y3 - 25200*y0**3*y1**4 + 302400*y0**3*y2*y4 + 100800*y0**3*y3**2 + 302400*y0**2*y1**2*y4 - 604800*y0**2*y1*y2*y3 - 302400*y0**2*y2**3 - 1209600*y0*y4**2 + 302400*y1**4*y2 + 2419200*y1*y3*y4 - 1209600*y2*y3**2)/(100800*(y0**4 - 12*y0*y2 + 12*y1**2))"
+      }
+    ],
+    "general_induction_proved": false,
+    "priority_cleared": false,
+    "optimization_calls": 0,
+    "new_closed_loops": 0
+  },
+  "sources": {
+    "schur_remainder_recursion\\__init__.py": "2e32507e208f41b9179dae50debf22fe0bfc302c9c94b830bb8d238e8dbd1b2d",
+    "schur_remainder_recursion\\algebra.py": "2d3d047f6caa95d16e3241fdfd0309e3b24ae843a473addd79f9186724c72847",
+    "schur_remainder_recursion\\test_recursion.py": "37226e2778dae93007d2c1531c53c24128aa3deeace5c075ad257e52c1c0230b",
+    "schur_remainder_recursion\\verify.py": "eef3262805eeeee1c2093026f4812d9084aae847378f225c92e1b5418c3dbb8a",
+    "schur_remainder_recursion\\THEORY.md": "82a51c1485229295cef2ceec72012e3d3f4b293d04b32a7dcb7d45d402940ba8",
+    "schur_remainder_recursion\\PRIOR_ART.md": "fc2c9bb7b713816427a8a885910945d6e4ea6ea01190303a09dfbe4e8978f120",
+    "general_congruence_gate\\algebra.py": "4fa04d8aa25e5ebcb2b98e368410893edfac91e1cf29a8043095ded02f9e248d",
+    "general_congruence_gate\\THEORY.md": "688df6aaefaac2a6b8e1f4c148329890389bf6b4bab74ece441c3d24d3506a01",
+    "moment_four_lift\\THEORY.md": "9112d11b7b76f5997d9bfb5b1e68db83c6f432c458f34a8ca2d2572823a563ae",
+    "moment_lift_obstruction\\THEORY.md": "e35809f97958ee170a018eb9c65c6d5970b5141d1d7a5a67ca331433fca7e9bd"
+  }
+}

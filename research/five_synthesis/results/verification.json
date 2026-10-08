@@ -1,0 +1,94 @@
+{
+  "schema": 1,
+  "summary": {
+    "closed_five_sdp": {
+      "cases": 15,
+      "certified": 15,
+      "converged": 14,
+      "warning_cases": 13,
+      "recovery_lp_calls": 19,
+      "nonconverged": [
+        "waypoints_a2_s1_e0"
+      ],
+      "maximum_scaled_gap": 4.106084822012754e-05
+    },
+    "continuous_root_dual": {
+      "cases": 15,
+      "certified": 15,
+      "converged": 12,
+      "warning_cases": 0,
+      "recovery_lp_calls": 21,
+      "nonconverged": [
+        "waypoints_a1_s1_e0",
+        "waypoints_a2_s1_e0",
+        "waypoints_a2_s2_e0"
+      ],
+      "maximum_scaled_gap": 0.0018135963655256978
+    },
+    "paired_timing": {
+      "common_converged": 12,
+      "sdp_faster": 0,
+      "median_sdp_to_dual_ratio": 1.9725072402900503,
+      "scope": "one alternating-order run per case; full proposal+recovery+check; not iid"
+    },
+    "optimization_calls": 70,
+    "new_closed_loops": 0
+  },
+  "sources": {
+    "five_synthesis\\__init__.py": "2f75d68e462549f9f6a1f19218712bda2d263c2dbb91b8cef01a5c806e4343ab",
+    "five_synthesis\\certify.py": "d994f1e022d2f6c9beb86ee17d41b4f0471e23d1470673ec11e7d5847da3e6b9",
+    "five_synthesis\\check.py": "4dcaf44a2a3265cd3d7f99da2c2ea2763b92e188ed32adc23424da3634242005",
+    "five_synthesis\\experiment.py": "2e6b9ae88b5daba01d14a884826795d7c1b7369ef25671aca083a4c857a83c66",
+    "five_synthesis\\model.py": "0447e86b8a53654dfa172dc2375d06443c6f90ee5e37c7402ffa8ab0591f2173",
+    "five_synthesis\\proposals.py": "471147102d8cb874261dac53b5e0175ae38379629ca3de0423d4b12ad2c8afdc",
+    "five_synthesis\\test_synthesis.py": "96da3fb958cc500595633bd738c6ee05d9ff30d1f88fadb7982d77a6f0e8def8",
+    "five_synthesis\\THEORY.md": "3a17967693eeae57b406d0afbeb8b547afbd249460a5323d33708f77d6e8da68",
+    "five_synthesis\\PROTOCOL.md": "33d8275640ad385c7a8ddf82e731eb3ddf2dc35f8d485761a3cacaba3028280c",
+    "closed_five_lift\\algebra.py": "d913c76819b020eb3f0b85923e8b7ed43dee2c297457114cfcd172f58c303d2d",
+    "closed_five_lift\\THEORY.md": "96baf4d886147d73f957a7c076e58800367f0414091e8dd7e71ec2249170f242",
+    "closed_five_lift\\results\\verification.json": "ad064aa5b9c2e06955f0bc95136fee5d8786177d348babe50747fa9f4c1ae705",
+    "schur_sparse_lift\\algebra.py": "0a661f415626fe19b6c259549b4e737789af02581e7220c6914dab0b8d239284",
+    "schur_remainder_recursion\\algebra.py": "2d3d047f6caa95d16e3241fdfd0309e3b24ae843a473addd79f9186724c72847",
+    "general_congruence_gate\\algebra.py": "4fa04d8aa25e5ebcb2b98e368410893edfac91e1cf29a8043095ded02f9e248d",
+    "moment_four_lift\\exact.py": "a8f43b140284636d80779c457f92dda6149c99c0a7c9216207a02ab28ec05917",
+    "moment_upper_gate\\exact.py": "7c934bb14ebae33ddea684cb25a0f69f6e75fa2b38b6064560ab8bb242cef2fd",
+    "peak_synthesis\\model.py": "0591cbc37e012c3a7985cfafc42d1d4cc639e00a0c8eb633ff61b69821928127",
+    "peak_synthesis\\certify.py": "4b060085339fb76247595d7a459f450f451c9ba63f8492fa3c8166c1f9fdf0dc",
+    "four_history_audit\\proposals.py": "28014b7f759bca4c7add6411b4ee58ba3648da1182239615c2f66fd1ef39237d",
+    "four_history_audit\\model.py": "8fdffeb659c51144dfc5db9e0e6b048f16669dcb9fd01e139f2fd43202c488d6",
+    "classic_cone_audit\\compiler.py": "da258b6c39f557a6cbe95d7b03a6b59cb8e645dc9674f8706903e4ff25291b0d"
+  },
+  "trial_hashes": {
+    "00.json": "b3bfbd52cd1bb5b4e46fba6d41afc128544a4d45ad6b1df3ce84a22b4b8010ab",
+    "01.json": "60ba15f166d0d4b932b3efd2bc7d2543db7f0a4d64fa19f91fe098c8b3bcc9b4",
+    "02.json": "f3ab5b30549761caa54c9814fc8d357cf72fb135887ee4eacc76e5c6f37b8694",
+    "03.json": "e81d24070522f1f43d7a8bf9f1d423f8fdb311dd800479e650d874a5462f7a84",
+    "04.json": "7cdb1bad4d8bb2b89e2ac4f8e6a2ea7b84119281b805c37010b8b0385d768dd8",
+    "05.json": "69fb18b9c4b39885ab4d488ae0d74708395848fb06a29cb35418ed52af65da22",
+    "06.json": "2cb8d146db67547885927a1245814a6df38353c76a09c53e93c0af690b32d99f",
+    "07.json": "1e2e68dbfa5eadf1e7d569644ab7e9c1e55dbac038e42a8917c1ce6f428832a4",
+    "08.json": "1ec97036c30b349297b812cbd5f4f4072f17a06b52a6617c73a8132c03a92fe6",
+    "09.json": "7f407aff61618302bbddcfd7f2fd26c52423a77c32b314b94933beb0edf46fa9",
+    "10.json": "c0bf8dece408c2ee0a28677f139948e95f3e9112034bb4992a17377978587e68",
+    "11.json": "f1c1c879dd32916471521d69ab90ed04c5694105899e6457fc79898d39219100",
+    "12.json": "3fb57416909c5186978683b28dce9a8f8b98926c6a62c06aae51a5dd127c256b",
+    "13.json": "e40f4592e8924138008d04d53f102c71dccfa8868961363f9f7c56c888ba17a7",
+    "14.json": "c2f5a7f5bccc54439229b3f8f38fbd3773f9222577173e80e26d21ffc8963e6f",
+    "15.json": "bf6e988ce13e2f047aa730f9778a25eef3864333cb6662ea545c3c8dadb24f32",
+    "16.json": "28a522a35b2c964813bfe5cfbb9a41859814d242782be8226b00a20511acaa6b",
+    "17.json": "ee84810a9b6c16d5a5496fa439655d743c4de091f774774f84e781dbd80aff38",
+    "18.json": "33b03c5da2e55f42a4d001d643e1434fb7e5222b02a7729ace9ec2c835835c09",
+    "19.json": "6c2e02c76f798698f32cbcc3f19208762eaa78b41951399630172f79506e92ee",
+    "20.json": "ebd76c774deb1e895160deac0bb813cfef9476c9ab1bc579f47bdcb6619665f7",
+    "21.json": "8cf293ab4cfd92b8e86c57d3ab9c7657f301d9c087cd70ad33c08fedb24d4910",
+    "22.json": "80e71a5d84f4914a765a0025422a5a662663500bdfa1d8355d778dfa20f8e999",
+    "23.json": "562b03f53a5287d00c825592bd9d8ede5fe7cfec1202d9aa7b46a62c564271f8",
+    "24.json": "3d9786c0da6177340e420ae085c5e74130b992f2295f18d6cb4e8a4c2dfaa5e1",
+    "25.json": "c49c149d5b3eb0d4054876bbcba967ea2c72ae9e7ed32bd6b0ed9aceef78655d",
+    "26.json": "e63e3d8ef155b0f8cb7750a608e869e27b404c4aac6a2ad76dcb2c524e1dc32b",
+    "27.json": "3df18414030908cc53b13a0e60f2df8d9ee6a465eebe7ee0dc55a243d50af033",
+    "28.json": "68755d1f7b06c22ad3a87cdaaee9a679d2cc458dd9108bf01bdf9d78e4060c01",
+    "29.json": "e46d3af2fd47e4500591a0e7b2966ba5ed557e784ac4c53fcc16f30c91d7400b"
+  },
+  "manifest_sha256": "ed730a44fbf7be335933a0cd6b6833841539994df230e67cae3f8e53d5c3fdbe"
+}
